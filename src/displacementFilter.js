@@ -7,9 +7,9 @@ function initFilter(
   let raf, canvas;
 
   // Application
-  const app = new PIXI.Application({
-    width: window.innerWidth / 2.8,
-    height: window.innerWidth / 2.8,
+  let app = new PIXI.Application({
+    width: window.innerWidth / 2.5,
+    height: window.innerWidth / 2.5,
     transparent: true
   });
   const wrapperElement = document.getElementById(wrapperId);
@@ -55,7 +55,7 @@ function initFilter(
       if (displacementFilter.scale.x < 10) {
         displacementFilter.scale.x += 0.2;
         displacementFilter.scale.y += 0.2;
-        console.log("hey");
+        // console.log("hey");
       }
       displacementSprite.x += 1.2;
       if (displacementSprite.x > displacementSprite.width) {
@@ -72,6 +72,7 @@ function initFilter(
       container.removeChildren();
       container.destroy(true);
       wrapperElement.removeChild(canvas);
+      app = null;
     }
   };
 }
