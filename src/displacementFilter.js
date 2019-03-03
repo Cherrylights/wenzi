@@ -1,9 +1,6 @@
 import * as PIXI from "pixi.js";
 
-function initFilter(
-  productImage = "/images/1.jpg",
-  wrapperId = "product-hero"
-) {
+function initFilter(productImage = "/images/1.jpg", wrapperId = "canvas-1") {
   let raf, canvas;
 
   // Application
@@ -30,6 +27,7 @@ function initFilter(
   container.addChild(background);
   background.x = 0;
   background.y = 0;
+  background.scale.set(0.5, 0.5);
 
   // Filter
   const displacementSprite = new PIXI.Sprite.from("/images/displacement.png");

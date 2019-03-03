@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { prevProject, nextProject } from "../actions/index";
+import { prevProduct, nextProduct } from "../actions";
 
-class Home extends Component {
+class HomePage extends Component {
   render() {
     const currentProductId = Object.keys(this.props.products)[
       this.props.currentIndex
@@ -11,15 +11,15 @@ class Home extends Component {
     return (
       <div className="transition-item">
         <div className="carousel">
-          <Link to={`/work/${this.currentProductId}`}>
+          <Link to={`/work/${currentProductId}`}>
             <img
               src={this.props.products[currentProductId].image}
               alt="scarf"
             />
           </Link>
         </div>
-        <button onClick={this.props.prevProject}>Prev</button>
-        <button onClick={this.props.nextProject}>Next</button>
+        <button onClick={this.props.prevProduct}>Prev</button>
+        <button onClick={this.props.nextProduct}>Next</button>
       </div>
     );
   }
@@ -34,5 +34,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { prevProject, nextProject }
-)(Home);
+  { prevProduct, nextProduct }
+)(HomePage);

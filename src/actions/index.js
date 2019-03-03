@@ -1,9 +1,18 @@
-import { PREV_PROJECT, NEXT_PROJECT } from "../constants/actionTypes";
+import {
+  PREV_PRODUCT,
+  NEXT_PRODUCT,
+  LOAD_PRODUCT
+} from "../constants/actionTypes";
 
-export const prevProject = () => ({
-  type: PREV_PROJECT
+export const prevProduct = () => ({
+  type: PREV_PRODUCT
 });
 
-export const nextProject = () => ({
-  type: NEXT_PROJECT
+export const nextProduct = () => ({
+  type: NEXT_PRODUCT
+});
+
+export const loadProduct = productId => ({
+  type: LOAD_PRODUCT,
+  payload: productId
 });

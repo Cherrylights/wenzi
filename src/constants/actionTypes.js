@@ -1,2 +1,3 @@
-export const PREV_PROJECT = "PREV_PROJECT";
-export const NEXT_PROJECT = "NEXT_PROJECT";
+export const PREV_PRODUCT = "PREV_PRODUCT";
+export const NEXT_PRODUCT = "NEXT_PRODUCT";
+export const LOAD_PRODUCT = "LOAD_PRODUCT";

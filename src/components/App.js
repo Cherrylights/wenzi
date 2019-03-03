@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import PageTransition from "react-router-page-transition";
 import Nav from "./Nav";
-import Home from "./Home";
-import Product from "./Product";
-import Collections from "./Collections";
+import HomePage from "./HomePage";
+import ProductPage from "./ProductPage";
+import CollectionsPage from "./CollectionsPage";
 
 class App extends Component {
   render() {
@@ -17,9 +17,9 @@ class App extends Component {
           {/* <PageTransition timeout={5000}> */}
           {/* <Switch location={location}> */}
           <Switch>
-            <Route exact path="/" render={() => <Home />} />
-            <Route path="/work/:productId" render={() => <Product />} />
-            <Route exact path="/collections" render={() => <Collections />} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/work/:productId" component={ProductPage} />
+            <Route exact path="/collections" component={CollectionsPage} />
           </Switch>
           {/* </PageTransition> */}
         </React.Fragment>
