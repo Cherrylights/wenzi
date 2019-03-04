@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { loadProducts } from "../actions/index";
 // import PageTransition from "react-router-page-transition";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
@@ -8,6 +10,9 @@ import CollectionsPage from "./CollectionsPage";
 import Checkout from "./Checkout";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.loadProducts();
+  }
   render() {
     return (
       <BrowserRouter>
@@ -32,4 +37,9 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  {
+    loadProducts
+  }
+)(App);

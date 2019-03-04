@@ -1,24 +1,28 @@
 import {
+  LOAD_PRODUCTS,
+  LOAD_FEATURED_PRODUCTS,
   PREV_PRODUCT,
   NEXT_PRODUCT,
-  LOAD_PRODUCT,
-  LOAD_FEATURED_PRODUCTS
+  LOAD_PRODUCT
 } from "../constants/actionTypes";
 
 import client from "../api/client";
 
-export const prevProduct = () => ({
-  type: PREV_PRODUCT
-});
+export const loadProducts = () => {
+  // return a thunk
+  return (dispatch, getState) => {
+    client.product.fetchAll().then(products => {
+      dispatch(setProducts(products));
+    });
+  };
+};
 
-export const nextProduct = () => ({
-  type: NEXT_PRODUCT
-});
-
-export const loadProduct = productId => ({
-  type: LOAD_PRODUCT,
-  payload: productId
-});
+function setProducts(data) {
+  return {
+    type: LOAD_PRODUCTS,
+    payload: data
+  };
+}
 
 export const loadFeaturedProducts = () => {
   // return a thunk
@@ -36,3 +40,16 @@ function setFeaturedProducts(data) {
     payload: data
   };
 }
+
+export const prevProduct = () => ({
+  type: PREV_PRODUCT
+});
+
+export const nextProduct = () => ({
+  type: NEXT_PRODUCT
+});
+
+export const loadProduct = productId => ({
+  type: LOAD_PRODUCT,
+  payload: productId
+});
