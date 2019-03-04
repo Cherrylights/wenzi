@@ -1,25 +1,41 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { prevProduct, nextProduct } from "../actions";
+import { prevProduct, nextProduct, loadFeaturedProducts } from "../actions";
+import FeaturedProduct from "./FeaturedProduct";
 
 class HomePage extends Component {
+  componentDidMount() {
+    this.props.loadFeaturedProducts();
+  }
+
   render() {
-    const currentProductId = Object.keys(this.props.products)[
-      this.props.currentIndex
-    ];
+    console.log(this.props.featuredProducts);
+    const {
+      featuredProducts,
+      currentIndex,
+      prevProduct,
+      nextProduct
+    } = this.props;
+    if (featuredProducts[currentIndex.toString()]) {
+      console.log(featuredProducts[currentIndex.toString()].images[0].src);
+    }
+
     return (
       <div className="transition-item">
-        <div className="carousel">
-          <Link to={`/work/${currentProductId}`}>
-            <img
-              src={this.props.products[currentProductId].image}
-              alt="scarf"
-            />
-          </Link>
-        </div>
-        <button onClick={this.props.prevProduct}>Prev</button>
-        <button onClick={this.props.nextProduct}>Next</button>
+        <FeaturedProduct
+          handle={
+            featuredProducts[currentIndex.toString()]
+              ? featuredProducts[currentIndex.toString()].handle
+              : "longevity"
+          }
+          src={
+            featuredProducts[currentIndex.toString()]
+              ? featuredProducts[currentIndex.toString()].images[0].src
+              : "/images/product-placeholder.jpg"
+          }
+        />
+        <button onClick={prevProduct}>Prev</button>
+        <button onClick={nextProduct}>Next</button>
       </div>
     );
   }
@@ -27,12 +43,12 @@ class HomePage extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products,
+    featuredProducts: state.featuredProducts,
     currentIndex: state.currentIndex
   };
 }
 
 export default connect(
   mapStateToProps,
-  { prevProduct, nextProduct }
+  { prevProduct, nextProduct, loadFeaturedProducts }
 )(HomePage);

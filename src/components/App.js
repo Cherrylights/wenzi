@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
+import Checkout from "./Checkout";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route path="/work/:productId" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
           </Switch>
+          {/* <Checkout /> */}
           {/* </PageTransition> */}
         </React.Fragment>
         {/* )}

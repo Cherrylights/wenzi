@@ -4,8 +4,7 @@ import TextureDisplacement from "./TextureDisplacement";
 import { loadProduct } from "../actions";
 
 class ProductPage extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     this.props.loadProduct(this.props.match.params.productId);
   }
 
