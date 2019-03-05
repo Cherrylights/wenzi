@@ -9,28 +9,24 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.props.featuredProducts);
     const {
       featuredProducts,
       currentIndex,
       prevProduct,
       nextProduct
     } = this.props;
-    if (featuredProducts[currentIndex.toString()]) {
-      console.log(featuredProducts[currentIndex.toString()].images[0].src);
-    }
 
     return (
       <div className="transition-item">
         <FeaturedProduct
           handle={
-            featuredProducts[currentIndex.toString()]
-              ? featuredProducts[currentIndex.toString()].handle
+            featuredProducts[currentIndex]
+              ? featuredProducts[currentIndex].handle
               : "longevity"
           }
           src={
-            featuredProducts[currentIndex.toString()]
-              ? featuredProducts[currentIndex.toString()].images[0].src
+            featuredProducts[currentIndex]
+              ? featuredProducts[currentIndex].images[0].src
               : "/images/product-placeholder.jpg"
           }
         />

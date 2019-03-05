@@ -24,7 +24,7 @@ class App extends Component {
           {/* <Switch location={location}> */}
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/work/:productId" component={ProductPage} />
+            <Route path="/work/:handle" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
           </Switch>
           {/* <Checkout /> */}

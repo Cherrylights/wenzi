@@ -1,6 +1,6 @@
 import { LOAD_PRODUCTS } from "../constants/actionTypes";
 
-function productsReducer(state = [], action) {
+function products(state = [], action) {
   switch (action.type) {
     case LOAD_PRODUCTS:
       return [...action.payload];
@@ -9,4 +9,4 @@ function productsReducer(state = [], action) {
   }
 }
 
-export default productsReducer;
+export default products;

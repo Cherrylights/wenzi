@@ -3,7 +3,8 @@ import {
   LOAD_FEATURED_PRODUCTS,
   PREV_PRODUCT,
   NEXT_PRODUCT,
-  LOAD_PRODUCT
+  LOAD_PRODUCT,
+  UNLOAD_PRODUCT
 } from "../constants/actionTypes";
 
 import client from "../api/client";
@@ -49,7 +50,23 @@ export const nextProduct = () => ({
   type: NEXT_PRODUCT
 });
 
-export const loadProduct = productId => ({
-  type: LOAD_PRODUCT,
-  payload: productId
+export const loadProduct = handle => {
+  // return a thunk
+  return (dispatch, getState) => {
+    client.product.fetchAll().then(products => {
+      const product = products.filter(product => product.handle === handle)[0];
+      dispatch(setProduct(product));
+    });
+  };
+};
+
+function setProduct(data) {
+  return {
+    type: LOAD_PRODUCT,
+    payload: data
+  };
+}
+
+export const unloadProduct = () => ({
+  type: UNLOAD_PRODUCT
 });

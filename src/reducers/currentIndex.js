@@ -1,7 +1,7 @@
 import products from "../api/products";
 import { PREV_PRODUCT, NEXT_PRODUCT } from "../constants/actionTypes";
 
-function currentIndexReducer(state = 0, action) {
+function currentIndex(state = 0, action) {
   switch (action.type) {
     case PREV_PRODUCT: {
       if (state === 0) {
@@ -22,4 +22,4 @@ function currentIndexReducer(state = 0, action) {
   }
 }
 
-export default currentIndexReducer;
+export default currentIndex;

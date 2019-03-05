@@ -1,33 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { loadProduct, unloadProduct } from "../actions/index";
 import TextureDisplacement from "./TextureDisplacement";
-import { loadProduct } from "../actions";
 
 class ProductPage extends Component {
-  componentWillMount() {
-    this.props.loadProduct(this.props.match.params.productId);
+  componentDidMount() {
+    this.props.loadProduct(this.props.match.params.handle);
   }
 
   render() {
-    const { name, index, image } = this.props.currentProduct;
+    const { product } = this.props;
+    console.log(product);
+    if (product.hasOwnProperty("images")) {
+      console.log(product.images[0].src);
+    }
     return (
       <div className="transition-item">
-        <TextureDisplacement image={image} name={name} />
-        <p>{name}</p>
-        <p>{index}</p>
-        <p>{image}</p>
+        {product.hasOwnProperty("images") ? (
+          <React.Fragment>
+            <TextureDisplacement
+              image={product.images[0].src}
+              handle={product.handle}
+            />
+            <p>{product.title}</p>
+            <p>{product.images[0].src}</p>
+          </React.Fragment>
+        ) : (
+          <img src="/images/product-placeholder.jpg" alt="placeholder" />
+        )}
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    this.props.unloadProduct();
   }
 }
 
 function mapStateToProps(state) {
   return {
-    currentProduct: state.currentProduct
+    product: state.product
   };
 }
 
 export default connect(
   mapStateToProps,
-  { loadProduct }
+  { loadProduct, unloadProduct }
 )(ProductPage);
