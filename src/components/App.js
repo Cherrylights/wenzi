@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { loadProducts, createCheckout } from "../actions/actions";
+import {
+  loadProducts,
+  createCheckout,
+  fetchCheckout
+} from "../actions/actions";
 // import PageTransition from "react-router-page-transition";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
@@ -13,7 +17,12 @@ class App extends Component {
   componentDidMount() {
     // Load products and create an empty checkout
     this.props.loadProducts();
-    this.props.createCheckout();
+    const checkoutId = localStorage.getItem("checkoutId");
+    if (checkoutId) {
+      this.props.fetchCheckout(checkoutId);
+    } else {
+      this.props.createCheckout();
+    }
   }
   render() {
     return (
@@ -43,6 +52,7 @@ export default connect(
   null,
   {
     loadProducts,
-    createCheckout
+    createCheckout,
+    fetchCheckout
   }
 )(App);

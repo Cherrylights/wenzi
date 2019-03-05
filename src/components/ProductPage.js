@@ -10,10 +10,6 @@ class ProductPage extends Component {
 
   render() {
     const { product, checkout } = this.props;
-    console.log(product);
-    if (product.hasOwnProperty("images")) {
-      console.log(product.images[0].src);
-    }
     return (
       <div className="transition-item">
         {product.hasOwnProperty("images") ? (

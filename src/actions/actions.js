@@ -1,6 +1,7 @@
 import {
   LOAD_PRODUCTS,
   CREATE_CHECKOUT,
+  FETCH_CHECKOUT,
   LOAD_FEATURED_PRODUCTS,
   UPDATE_INDEX,
   LOAD_PRODUCT,
@@ -33,14 +34,32 @@ export const createCheckout = () => {
   return (dispatch, getState) => {
     // Create an empty checkout
     client.checkout.create().then(checkout => {
-      dispatch(setCheckout(checkout));
+      dispatch(setNewCheckout(checkout));
     });
   };
 };
 
-function setCheckout(data) {
+function setNewCheckout(data) {
   return {
     type: CREATE_CHECKOUT,
+    payload: data
+  };
+}
+
+// *******  FETCH CHECKOUT  *******
+export const fetchCheckout = checkoutId => {
+  // return a thunk
+  return (dispatch, getState) => {
+    // Fetch an existing checkout
+    client.checkout.fetch(checkoutId).then(checkout => {
+      dispatch(setExistingCheckout(checkout));
+    });
+  };
+};
+
+function setExistingCheckout(data) {
+  return {
+    type: FETCH_CHECKOUT,
     payload: data
   };
 }
