@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class FeaturedProduct extends Component {
+class ProductImageWithLink extends Component {
   render() {
     const { handle, src } = this.props;
     return (
@@ -14,10 +14,4 @@ class FeaturedProduct extends Component {
   }
 }
 
-export default FeaturedProduct;
-
-// Specifies the default values for props:
-FeaturedProduct.defaultProps = {
-  src: "/images/product-placeholder.jpg",
-  id: "#"
-};
+export default ProductImageWithLink;

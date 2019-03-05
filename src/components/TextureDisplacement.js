@@ -11,15 +11,6 @@ class TextureDisplacement extends Component {
   componentDidMount() {
     this.initFilter = initFilter(this.props.image, this.wrapperId);
     this.initFilter.startAnimation();
-    // const delayer = new Promise((resolve, reject) => {
-    //   setTimeout(function() {
-    //     resolve(true);
-    //   }, 0);
-    // });
-    // delayer.then(() => {
-    //   this.initFilter = initFilter(this.props.image, this.wrapperId);
-    //   this.initFilter.startAnimation();
-    // });
   }
 
   componentWillUnmount() {

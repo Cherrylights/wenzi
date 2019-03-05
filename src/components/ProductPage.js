@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadProduct, unloadProduct } from "../actions/index";
+import { loadProduct, unloadProduct } from "../actions/actions";
 import TextureDisplacement from "./TextureDisplacement";
 
 class ProductPage extends Component {

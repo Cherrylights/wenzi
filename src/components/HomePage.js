@@ -1,24 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { prevProduct, nextProduct, loadFeaturedProducts } from "../actions";
-import FeaturedProduct from "./FeaturedProduct";
+import { loadFeaturedProducts, updateIndex } from "../actions/actions";
+import ProductImageWithLink from "./ProductImageWithLink";
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.prevProduct = this.prevProduct.bind(this);
+    this.nextProduct = this.nextProduct.bind(this);
+    this.state = {
+      currentIndex: 0
+    };
+  }
+
   componentDidMount() {
     this.props.loadFeaturedProducts();
   }
 
   render() {
-    const {
-      featuredProducts,
-      currentIndex,
-      prevProduct,
-      nextProduct
-    } = this.props;
+    const { featuredProducts, currentIndex } = this.props;
 
     return (
       <div className="transition-item">
-        <FeaturedProduct
+        <ProductImageWithLink
           handle={
             featuredProducts[currentIndex]
               ? featuredProducts[currentIndex].handle
@@ -30,10 +34,38 @@ class HomePage extends Component {
               : "/images/product-placeholder.jpg"
           }
         />
-        <button onClick={prevProduct}>Prev</button>
-        <button onClick={nextProduct}>Next</button>
+        <button onClick={this.prevProduct}>Prev</button>
+        <button onClick={this.nextProduct}>Next</button>
       </div>
     );
+  }
+
+  prevProduct() {
+    if (this.props.featuredProducts[this.props.currentIndex]) {
+      const { updateIndex, featuredProducts, currentIndex } = this.props;
+      const total = featuredProducts.length - 1;
+      if (currentIndex === 0) {
+        updateIndex(total);
+      } else {
+        updateIndex(currentIndex - 1);
+      }
+    } else {
+      return;
+    }
+  }
+
+  nextProduct() {
+    if (this.props.featuredProducts[this.props.currentIndex]) {
+      const { updateIndex, featuredProducts, currentIndex } = this.props;
+      const total = featuredProducts.length - 1;
+      if (currentIndex === total) {
+        updateIndex(0);
+      } else {
+        updateIndex(currentIndex + 1);
+      }
+    } else {
+      return;
+    }
   }
 }
 
@@ -46,5 +78,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { prevProduct, nextProduct, loadFeaturedProducts }
+  { updateIndex, loadFeaturedProducts }
 )(HomePage);

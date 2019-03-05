@@ -3,10 +3,12 @@ import products from "./products";
 import featuredProducts from "./featuredProducts";
 import currentIndex from "./currentIndex";
 import product from "./product";
+import collections from "./collections";
 
 export default combineReducers({
   products,
   featuredProducts,
   currentIndex,
-  product
+  product,
+  collections
 });

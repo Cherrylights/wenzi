@@ -1,14 +1,14 @@
 import {
   LOAD_PRODUCTS,
   LOAD_FEATURED_PRODUCTS,
-  PREV_PRODUCT,
-  NEXT_PRODUCT,
+  UPDATE_INDEX,
   LOAD_PRODUCT,
-  UNLOAD_PRODUCT
+  UNLOAD_PRODUCT,
+  LOAD_COLLECTIONS
 } from "../constants/actionTypes";
-
 import client from "../api/client";
 
+// *******  LOAD PRODUCTS  *******
 export const loadProducts = () => {
   // return a thunk
   return (dispatch, getState) => {
@@ -25,6 +25,7 @@ function setProducts(data) {
   };
 }
 
+// *******  LOAD FEATURED PRODUCTS  *******
 export const loadFeaturedProducts = () => {
   // return a thunk
   return (dispatch, getState) => {
@@ -42,18 +43,18 @@ function setFeaturedProducts(data) {
   };
 }
 
-export const prevProduct = () => ({
-  type: PREV_PRODUCT
+// *******  UPDATE INDEX  *******
+export const updateIndex = data => ({
+  type: UPDATE_INDEX,
+  payload: data
 });
 
-export const nextProduct = () => ({
-  type: NEXT_PRODUCT
-});
-
+// *******  LOAD SINGLE PRODUCT  *******
 export const loadProduct = handle => {
   // return a thunk
   return (dispatch, getState) => {
     client.product.fetchAll().then(products => {
+      // 'filter' method returns an array so it needs to get the first element
       const product = products.filter(product => product.handle === handle)[0];
       dispatch(setProduct(product));
     });
@@ -67,6 +68,24 @@ function setProduct(data) {
   };
 }
 
+// *******  UNLOAD SINGLE PRODUCT  *******
 export const unloadProduct = () => ({
   type: UNLOAD_PRODUCT
 });
+
+// *******  LOAD COLLECTIONS  *******
+export const loadCollections = () => {
+  // return a thunk
+  return (dispatch, getState) => {
+    client.collection.fetchAllWithProducts().then(collections => {
+      dispatch(setCollections(collections));
+    });
+  };
+};
+
+function setCollections(data) {
+  return {
+    type: LOAD_COLLECTIONS,
+    payload: data
+  };
+}

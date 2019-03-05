@@ -1,48 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { loadCollections } from "../actions/actions";
 import TextureDisplacement from "./TextureDisplacement";
 
 class CollectionsPage extends Component {
+  componentDidMount() {
+    this.props.loadCollections();
+  }
   render() {
-    const { products } = this.props;
+    const { collections } = this.props;
+    const filteredCollections = collections.filter(
+      collection => collection.handle !== "frontpage"
+    );
+    console.log(filteredCollections);
     return (
       <div className="transition-item">
-        <h1>Collection A</h1>
-        {Object.keys(products)
-          .filter(productId => products[productId].collection === "collection1")
-          .map(productId => {
-            const { name, image } = products[productId];
-            return (
-              <div key={name}>
-                <TextureDisplacement image={image} name={name} />
-                <p>{name}</p>
-              </div>
-            );
-          })}
-        <h1>Collection B</h1>
-        {Object.keys(products)
-          .filter(productId => products[productId].collection === "collection2")
-          .map(productId => {
-            const { name, image } = products[productId];
-            return (
-              <div key={name}>
-                <TextureDisplacement image={image} name={name} />
-                <p>{name}</p>
-              </div>
-            );
-          })}
-        <h1>Collection C</h1>
-        {Object.keys(products)
-          .filter(productId => products[productId].collection === "collection3")
-          .map(productId => {
-            const { name, image } = products[productId];
-            return (
-              <div key={name}>
-                <TextureDisplacement image={image} name={name} />
-                <p>{name}</p>
-              </div>
-            );
-          })}
+        {filteredCollections.map(collection => (
+          <div key={collection.id}>
+            <h1>{collection.title}</h1>
+            <div>
+              {collection.products.map(product => (
+                <div key={product.id}>
+                  <Link to={`/work/${product.handle}`}>
+                    <TextureDisplacement
+                      image={product.images[0].src}
+                      handle={product.handle}
+                    />
+                    {/* <img src={product.images[0].src} alt="scarf" /> */}
+                  </Link>
+                  <p>{product.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -50,11 +42,11 @@ class CollectionsPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products
+    collections: state.collections
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
+  { loadCollections }
 )(CollectionsPage);

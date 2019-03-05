@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { loadProducts } from "../actions/index";
+import { loadProducts } from "../actions/actions";
 // import PageTransition from "react-router-page-transition";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
