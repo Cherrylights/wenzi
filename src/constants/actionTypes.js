@@ -5,3 +5,4 @@ export const UPDATE_INDEX = "UPDATE_INDEX";
 export const LOAD_PRODUCT = "LOAD_PRODUCT";
 export const UNLOAD_PRODUCT = "UNLOAD_PRODUCT";
 export const LOAD_COLLECTIONS = "LOAD_COLLECTIONS";
+export const ADD_TO_CART = "ADD_TO_CART";

@@ -5,7 +5,8 @@ import {
   UPDATE_INDEX,
   LOAD_PRODUCT,
   UNLOAD_PRODUCT,
-  LOAD_COLLECTIONS
+  LOAD_COLLECTIONS,
+  ADD_TO_CART
 } from "../constants/actionTypes";
 import client from "../api/client";
 
@@ -105,6 +106,24 @@ export const loadCollections = () => {
 function setCollections(data) {
   return {
     type: LOAD_COLLECTIONS,
+    payload: data
+  };
+}
+
+// *******  ADD TO CART  *******
+export const addToCart = (variantId, quantity = 1, checkoutId) => {
+  const itemToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
+  // return a thunk
+  return (dispatch, getState) => {
+    client.checkout.addLineItems(checkoutId, itemToAdd).then(checkout => {
+      dispatch(addItemToCart(checkout));
+    });
+  };
+};
+
+function addItemToCart(data) {
+  return {
+    type: ADD_TO_CART,
     payload: data
   };
 }

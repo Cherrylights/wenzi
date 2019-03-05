@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadProduct, unloadProduct } from "../actions/actions";
+import { loadProduct, unloadProduct, addToCart } from "../actions/actions";
 import TextureDisplacement from "./TextureDisplacement";
 
 class ProductPage extends Component {
@@ -9,7 +9,7 @@ class ProductPage extends Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, checkout } = this.props;
     console.log(product);
     if (product.hasOwnProperty("images")) {
       console.log(product.images[0].src);
@@ -28,7 +28,14 @@ class ProductPage extends Component {
         ) : (
           <img src="/images/product-placeholder.jpg" alt="placeholder" />
         )}
-        <button>Add to Cart</button>
+        <button
+          onClick={() => {
+            // console.log(product.variants[0].id, checkout.id);
+            this.props.addToCart(product.variants[0].id, 1, checkout.id);
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     );
   }
@@ -40,11 +47,12 @@ class ProductPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    product: state.product
+    product: state.product,
+    checkout: state.checkout
   };
 }
 
 export default connect(
   mapStateToProps,
-  { loadProduct, unloadProduct }
+  { loadProduct, unloadProduct, addToCart }
 )(ProductPage);
