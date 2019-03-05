@@ -28,6 +28,7 @@ class ProductPage extends Component {
         ) : (
           <img src="/images/product-placeholder.jpg" alt="placeholder" />
         )}
+        <button>Add to Cart</button>
       </div>
     );
   }

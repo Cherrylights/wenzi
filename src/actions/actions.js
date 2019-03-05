@@ -1,5 +1,6 @@
 import {
   LOAD_PRODUCTS,
+  CREATE_CHECKOUT,
   LOAD_FEATURED_PRODUCTS,
   UPDATE_INDEX,
   LOAD_PRODUCT,
@@ -21,6 +22,24 @@ export const loadProducts = () => {
 function setProducts(data) {
   return {
     type: LOAD_PRODUCTS,
+    payload: data
+  };
+}
+
+// *******  CREATE CHECKOUT  *******
+export const createCheckout = () => {
+  // return a thunk
+  return (dispatch, getState) => {
+    // Create an empty checkout
+    client.checkout.create().then(checkout => {
+      dispatch(setCheckout(checkout));
+    });
+  };
+};
+
+function setCheckout(data) {
+  return {
+    type: CREATE_CHECKOUT,
     payload: data
   };
 }

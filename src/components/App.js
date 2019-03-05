@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { loadProducts } from "../actions/actions";
+import { loadProducts, createCheckout } from "../actions/actions";
 // import PageTransition from "react-router-page-transition";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
@@ -11,7 +11,9 @@ import Checkout from "./Checkout";
 
 class App extends Component {
   componentDidMount() {
+    // Load products and create an empty checkout
     this.props.loadProducts();
+    this.props.createCheckout();
   }
   render() {
     return (
@@ -40,6 +42,7 @@ class App extends Component {
 export default connect(
   null,
   {
-    loadProducts
+    loadProducts,
+    createCheckout
   }
 )(App);
