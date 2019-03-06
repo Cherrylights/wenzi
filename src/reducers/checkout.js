@@ -1,8 +1,4 @@
-import {
-  CREATE_CHECKOUT,
-  FETCH_CHECKOUT,
-  ADD_TO_CART
-} from "../constants/actionTypes";
+import { CREATE_CHECKOUT, UPDATE_CHECKOUT } from "../constants/actionTypes";
 
 function checkout(state = { lineItems: [] }, action) {
   switch (action.type) {
@@ -11,9 +7,7 @@ function checkout(state = { lineItems: [] }, action) {
       return { ...action.payload };
     }
 
-    case FETCH_CHECKOUT:
-      return { ...action.payload };
-    case ADD_TO_CART:
+    case UPDATE_CHECKOUT:
       return { ...action.payload };
 
     default:

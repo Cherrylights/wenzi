@@ -37,8 +37,9 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/work/:handle" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
-          {/* <Checkout /> */}
+
           {/* </PageTransition> */}
         </React.Fragment>
         {/* )}

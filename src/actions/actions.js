@@ -1,13 +1,12 @@
 import {
   LOAD_PRODUCTS,
   CREATE_CHECKOUT,
-  FETCH_CHECKOUT,
+  UPDATE_CHECKOUT,
   LOAD_FEATURED_PRODUCTS,
   UPDATE_INDEX,
   LOAD_PRODUCT,
   UNLOAD_PRODUCT,
-  LOAD_COLLECTIONS,
-  ADD_TO_CART
+  LOAD_COLLECTIONS
 } from "../constants/actionTypes";
 import client from "../api/client";
 
@@ -34,12 +33,12 @@ export const createCheckout = () => {
   return (dispatch, getState) => {
     // Create an empty checkout
     client.checkout.create().then(checkout => {
-      dispatch(setNewCheckout(checkout));
+      dispatch(setCheckout(checkout));
     });
   };
 };
 
-function setNewCheckout(data) {
+function setCheckout(data) {
   return {
     type: CREATE_CHECKOUT,
     payload: data
@@ -52,14 +51,14 @@ export const fetchCheckout = checkoutId => {
   return (dispatch, getState) => {
     // Fetch an existing checkout
     client.checkout.fetch(checkoutId).then(checkout => {
-      dispatch(setExistingCheckout(checkout));
+      dispatch(updateCheckout(checkout));
     });
   };
 };
 
-function setExistingCheckout(data) {
+function updateCheckout(data) {
   return {
-    type: FETCH_CHECKOUT,
+    type: UPDATE_CHECKOUT,
     payload: data
   };
 }
@@ -135,14 +134,37 @@ export const addToCart = (variantId, quantity = 1, checkoutId) => {
   // return a thunk
   return (dispatch, getState) => {
     client.checkout.addLineItems(checkoutId, itemToAdd).then(checkout => {
-      dispatch(addItemToCart(checkout));
+      dispatch(updateCheckout(checkout));
     });
   };
 };
 
-function addItemToCart(data) {
-  return {
-    type: ADD_TO_CART,
-    payload: data
+// *******  UPDATE LINE ITEMS  *******
+export const updateLineItems = (productId, quantity = 1, checkoutId) => {
+  const lineItemsToUpdate = [
+    { id: productId, quantity: parseInt(quantity, 10) }
+  ];
+  console.log(lineItemsToUpdate);
+  // return a thunk
+  return (dispatch, getState) => {
+    client.checkout
+      .updateLineItems(checkoutId, lineItemsToUpdate)
+      .then(checkout => {
+        dispatch(updateCheckout(checkout));
+      });
   };
-}
+};
+
+// *******  REMOVE LINE ITEMS  *******
+
+export const removeLineItems = (productId, checkoutId) => {
+  const lineItemIdsToRemove = [productId];
+  // return a thunk
+  return (dispatch, getState) => {
+    client.checkout
+      .removeLineItems(checkoutId, lineItemIdsToRemove)
+      .then(checkout => {
+        dispatch(updateCheckout(checkout));
+      });
+  };
+};

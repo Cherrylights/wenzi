@@ -12,7 +12,9 @@ class Nav extends Component {
           <li>
             <Link to="/">Wenzi</Link>
           </li>
-          <li>Cart</li>
+          <li>
+            <Link to="/checkout">Checkout</Link>
+          </li>
         </ul>
       </div>
     );
