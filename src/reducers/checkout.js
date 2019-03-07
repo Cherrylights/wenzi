@@ -7,8 +7,9 @@ function checkout(state = { lineItems: [] }, action) {
       return { ...action.payload };
     }
 
-    case UPDATE_CHECKOUT:
+    case UPDATE_CHECKOUT: {
       return { ...action.payload };
+    }
 
     default:
       return state;

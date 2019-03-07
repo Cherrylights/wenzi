@@ -15,8 +15,8 @@ import Checkout from "./Checkout";
 
 class App extends Component {
   componentDidMount() {
-    // Load products and create an empty checkout
     this.props.loadProducts();
+    // Check if the visitor is a new customer without any cart info in the cache
     const checkoutId = localStorage.getItem("checkoutId");
     if (checkoutId) {
       this.props.fetchCheckout(checkoutId);

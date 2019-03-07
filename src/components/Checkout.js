@@ -7,6 +7,7 @@ class Checkout extends Component {
     super(props);
     this.openCheckout = this.openCheckout.bind(this);
   }
+
   openCheckout() {
     window.open(this.props.checkout.webUrl);
   }

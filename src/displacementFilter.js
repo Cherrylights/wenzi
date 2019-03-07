@@ -25,8 +25,8 @@ function initFilter(productImage = "/images/1.jpg", wrapperId = "canvas-1") {
 
   const background = new PIXI.Sprite.from(productImage);
   container.addChild(background);
-  background.x = 0;
-  background.y = 0;
+  background.x = 10;
+  background.y = 10;
   background.scale.set(0.5, 0.5);
 
   // Filter

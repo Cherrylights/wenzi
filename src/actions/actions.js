@@ -49,9 +49,18 @@ function setCheckout(data) {
 export const fetchCheckout = checkoutId => {
   // return a thunk
   return (dispatch, getState) => {
-    // Fetch an existing checkout
+    // Fetch an existing checkout and check if it's been checked out
     client.checkout.fetch(checkoutId).then(checkout => {
-      dispatch(updateCheckout(checkout));
+      if (checkout.completedAt === null) {
+        // if the cart hasn't been checked out yet, fetch it
+        dispatch(updateCheckout(checkout));
+      } else {
+        // if it's been checked out, then clear it and create a new one
+        localStorage.removeItem("checkoutId");
+        client.checkout.create().then(checkout => {
+          dispatch(setCheckout(checkout));
+        });
+      }
     });
   };
 };
