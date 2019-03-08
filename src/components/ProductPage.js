@@ -24,14 +24,29 @@ class ProductPage extends Component {
         ) : (
           <img src="/images/product-placeholder.jpg" alt="placeholder" />
         )}
-        <button
-          onClick={() => {
-            // console.log(product.variants[0].id, checkout.id);
-            this.props.addToCart(product.variants[0].id, 1, checkout.id);
-          }}
-        >
-          Add to Cart
-        </button>
+        {product.hasOwnProperty("images") ? (
+          <React.Fragment>
+            <div className="Product-info">
+              <TextureDisplacement
+                image={product.images[0].src}
+                handle={product.handle}
+                size="small"
+              />
+              <h2 className="Product-info__title">{product.title}</h2>
+              <p className="Product-info__description">{product.description}</p>
+            </div>
+            <button
+              onClick={() => {
+                // console.log(product.variants[0].id, checkout.id);
+                this.props.addToCart(product.variants[0].id, 1, checkout.id);
+              }}
+            >
+              Add to Cart
+            </button>
+          </React.Fragment>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

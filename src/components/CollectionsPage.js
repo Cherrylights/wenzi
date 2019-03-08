@@ -10,10 +10,11 @@ class CollectionsPage extends Component {
   }
   render() {
     const { collections } = this.props;
+    // filter out the featured collections
     const filteredCollections = collections.filter(
       collection => collection.handle !== "frontpage"
     );
-    console.log(filteredCollections);
+    // console.log(filteredCollections);
     return (
       <div className="transition-item">
         {filteredCollections.map(collection => (

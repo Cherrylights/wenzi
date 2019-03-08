@@ -13,13 +13,24 @@ code {
     monospace;
 }
 
+.nav {
+  a {
+    text-decoration: none;
+  }
+}
+
+button {
+  margin: 1rem;
+}
+
 .carousel {
   width: 35%;
   height: 35%;
-  margin: auto;
-  position: relative;
-  top: 50vh;
-  transform: translateY(-50%);
+  margin: 10px 0 0 10px;
+  // margin: auto;
+  // position: relative;
+  // top: 50vh;
+  // transform: translateY(-50%);
 }
 
 .carousel img {
@@ -29,8 +40,8 @@ code {
 .product-hero {
   width: 35%;
   height: 35%;
-  margin: auto;
-  position: relative;
-  top: 50vh;
-  transform: translateY(-50%);
+  // margin: auto;
+  // position: relative;
+  // top: 50vh;
+  // transform: translateY(-50%);
 }

@@ -49,7 +49,7 @@ function setCheckout(data) {
 export const fetchCheckout = checkoutId => {
   // return a thunk
   return (dispatch, getState) => {
-    // Fetch an existing checkout and check if it's been checked out
+    // Fetch the cart info and see if it's been checked out
     client.checkout.fetch(checkoutId).then(checkout => {
       if (checkout.completedAt === null) {
         // if the cart hasn't been checked out yet, fetch it

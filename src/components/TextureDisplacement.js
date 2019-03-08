@@ -5,7 +5,11 @@ class TextureDisplacement extends Component {
   constructor(props) {
     super(props);
     this.initFilter = null;
-    this.wrapperId = `canvas-${this.props.handle}`;
+    if (this.props.size === "default") {
+      this.wrapperId = `canvas-${this.props.handle}`;
+    } else {
+      this.wrapperId = `canvas-${this.props.handle}-small`;
+    }
   }
 
   componentDidMount() {
@@ -22,3 +26,9 @@ class TextureDisplacement extends Component {
 }
 
 export default TextureDisplacement;
+
+TextureDisplacement.defaultProps = {
+  image: "/images/product-placeholder.jpg",
+  handle: "default",
+  size: "default"
+};
