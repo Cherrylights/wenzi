@@ -1,12 +1,16 @@
 import * as PIXI from "pixi.js";
 
-function initFilter(productImage = "/images/1.jpg", wrapperId = "canvas-1") {
+function initFilter(
+  productImage = "/assets/images/1.jpg",
+  wrapperId = "canvas-default"
+) {
   let raf, canvas;
 
   // Application
   let app = new PIXI.Application({
     width: window.innerWidth / 2.5,
     height: window.innerWidth / 2.5,
+    antialias: true,
     transparent: true
   });
   const wrapperElement = document.getElementById(wrapperId);
@@ -25,12 +29,24 @@ function initFilter(productImage = "/images/1.jpg", wrapperId = "canvas-1") {
 
   const background = new PIXI.Sprite.from(productImage);
   container.addChild(background);
-  background.x = 10;
-  background.y = 10;
+  background.x = 5;
+  background.y = 5;
   background.scale.set(0.5, 0.5);
+  background.width = app.renderer.width - 10;
+  background.height = app.renderer.height - 10;
+
+  // setTimeout(() => {
+  //   const loader = new PIXI.Loader();
+  //   loader.add("img", "/images/product-placeholder.jpg");
+  //   loader.load(() => {
+  //     background.texture = PIXI.utils.TextureCache["img"];
+  //   });
+  // }, 5000);
 
   // Filter
-  const displacementSprite = new PIXI.Sprite.from("/images/displacement.png");
+  const displacementSprite = new PIXI.Sprite.from(
+    "/assets/images/displacement.png"
+  );
   // const displacementSprite = PIXI.Sprite.fromImage(
   //   "http://i.imgur.com/2yYayZk.png"
   // );

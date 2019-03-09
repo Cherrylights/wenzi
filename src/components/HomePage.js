@@ -31,7 +31,7 @@ class HomePage extends Component {
           src={
             featuredProducts[currentIndex]
               ? featuredProducts[currentIndex].images[0].src
-              : "/images/product-placeholder.jpg"
+              : "/assets/images/product-placeholder.jpg"
           }
         />
         <button onClick={this.prevProduct}>Prev</button>

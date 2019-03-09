@@ -12,6 +12,7 @@ import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
 import Checkout from "./Checkout";
+import AllWorkPage from "./AllWorkPage";
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends Component {
             <Route path="/work/:handle" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
             <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/allwork" component={AllWorkPage} />
           </Switch>
 
           {/* </PageTransition> */}

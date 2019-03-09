@@ -31,6 +31,9 @@ class Nav extends Component {
               Checkout <span>{cartQuantity}</span>
             </Link>
           </li>
+          <li>
+            <Link to="/allwork">All Work</Link>
+          </li>
         </ul>
       </div>
     );

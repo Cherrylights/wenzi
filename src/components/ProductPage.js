@@ -22,7 +22,7 @@ class ProductPage extends Component {
             <p>{product.images[0].src}</p>
           </React.Fragment>
         ) : (
-          <img src="/images/product-placeholder.jpg" alt="placeholder" />
+          <img src="/assets/images/product-placeholder.jpg" alt="placeholder" />
         )}
         {product.hasOwnProperty("images") ? (
           <React.Fragment>

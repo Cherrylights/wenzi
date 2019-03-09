@@ -28,7 +28,7 @@ class TextureDisplacement extends Component {
 export default TextureDisplacement;
 
 TextureDisplacement.defaultProps = {
-  image: "/images/product-placeholder.jpg",
+  image: "/assets/images/product-placeholder.jpg",
   handle: "default",
   size: "default"
 };
