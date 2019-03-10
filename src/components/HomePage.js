@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadFeaturedProducts, updateIndex } from "../actions/actions";
-import ProductImageWithLink from "./ProductImageWithLink";
-import FilterDisplacement from "./FilterDisplacement";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+import { loadFeaturedProducts, updateIndex } from "../actions/actions";
+import FilterDisplacement from "./FilterDisplacement";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
     this.prevProduct = this.prevProduct.bind(this);
     this.nextProduct = this.nextProduct.bind(this);
-    this.state = {
-      currentIndex: 0
-    };
   }
 
   componentDidMount() {
@@ -22,43 +19,63 @@ class HomePage extends Component {
   render() {
     const { featuredProducts, currentIndex } = this.props;
     const currentProduct = featuredProducts[currentIndex];
+    let currentProductMaterial,
+      currentProductSize,
+      currentProductPrice,
+      currentProductAspectRatio;
+    if (currentProduct) {
+      currentProductMaterial = currentProduct.variants[0].selectedOptions.filter(
+        option => option.name === "Material"
+      )[0].value;
+      currentProductSize = currentProduct.variants[0].selectedOptions.filter(
+        option => option.name === "Size"
+      )[0].value;
+      currentProductPrice = currentProduct.variants[0].price;
+      currentProductAspectRatio = parseInt(
+        currentProduct.variants[0].selectedOptions.filter(
+          option => option.name === "Aspect Ratio"
+        )[0].value,
+        10
+      );
+    }
+
     return (
-      <div className="transition-item">
-        <h1>{currentProduct ? currentProduct.title : ""}</h1>
-        {/* <ProductImageWithLink
-          handle={currentProduct ? currentProduct.handle : "longevity"}
-          src={
-            currentProduct
-              ? currentProduct.images[0].src
-              : "/assets/images/product-placeholder.jpg"
-          }
-        /> */}
-        {currentProduct ? (
-          <Link to={`/work/${currentProduct.handle}`}>
-            <FilterDisplacement
-              image={currentProduct.images[0].src}
-              handle={currentProduct ? currentProduct.handle : "longevity"}
-            />
-          </Link>
-        ) : (
-          <img
-            src="/assets/images/product-placeholder.jpg"
-            alt="place-holder"
-          />
-        )}
-        <div>
-          {currentProduct ? (
-            <React.Fragment>
-              <span>{currentProduct.variants[0].title.split("/")[0]}</span>
-              <span>{currentProduct.variants[0].title.split("/")[1]}</span>
-              <span>$ {currentProduct.variants[0].price}</span>
-            </React.Fragment>
-          ) : (
-            ""
-          )}
+      <div className={`homepage transition-item ${isMobile ? "mobile" : ""}`}>
+        <div className="FeaturedProducts FeaturedProducts--alignCenter">
+          <h1 className="FeaturedProducts__title">
+            {currentProduct ? currentProduct.title : ""}
+          </h1>
+          <div className="FeaturedProducts__image">
+            {currentProduct ? (
+              <Link to={`/work/${currentProduct.handle}`}>
+                <FilterDisplacement
+                  image={currentProduct.images[0].src}
+                  handle={currentProduct.handle}
+                  aspectRatio={currentProductAspectRatio}
+                />
+              </Link>
+            ) : (
+              <img
+                src="/assets/images/product-placeholder.jpg"
+                className="placeholder-img"
+                alt="place-holder"
+              />
+            )}
+          </div>
+          <div className="FeaturedProducts__desc">
+            {currentProduct ? (
+              <React.Fragment>
+                <span>{currentProductMaterial}</span>
+                <span>{currentProductSize}</span>
+                <span>${currentProductPrice}</span>
+              </React.Fragment>
+            ) : (
+              ""
+            )}
+          </div>
+          <button onClick={this.prevProduct}>Prev</button>
+          <button onClick={this.nextProduct}>Next</button>
         </div>
-        <button onClick={this.prevProduct}>Prev</button>
-        <button onClick={this.nextProduct}>Next</button>
       </div>
     );
   }

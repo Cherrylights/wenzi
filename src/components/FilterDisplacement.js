@@ -13,7 +13,11 @@ class FilterDisplacement extends Component {
   }
 
   componentDidMount() {
-    this.initFilter = initFilter(this.props.image, this.wrapperId);
+    this.initFilter = initFilter(
+      this.props.image,
+      this.wrapperId,
+      this.props.aspectRatio
+    );
   }
 
   componentDidUpdate() {

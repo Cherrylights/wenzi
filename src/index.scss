@@ -1,3 +1,13 @@
+/*************** Variables ***************/
+$navbar-height: 50px;
+
+/*************** Extends ***************/
+%display-grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+/*************** Fonts ***************/
 @font-face {
   font-family: "Helvetica Neue";
   font-weight: 400;
@@ -11,11 +21,12 @@
 }
 
 @font-face {
-  font-family: "Murmur";
-  font-weight: 500;
+  font-family: "Murmur Medium";
+  font-weight: 400;
   src: url("/assets/fonts/Murmur-Md.woff") format("woff");
 }
 
+/*************** General ***************/
 body {
   margin: 0;
   padding: 0;
@@ -24,19 +35,46 @@ body {
     sans-serif;
   font-size: 15px;
   color: #1a1a1a;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: #1a1a1a;
+}
+h1 {
+  font-family: "Murmur Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1a1a1a;
+  letter-spacing: 0.26rem;
+  text-transform: uppercase;
 }
 
 p,
 span {
   letter-spacing: 0.5px;
-  line-height: 1.5;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  margin: 1rem;
+}
+
+/*************** Utils ***************/
+.placeholder-img {
+  width: 100%;
 }
 
 .nav {
@@ -45,8 +83,29 @@ code {
   }
 }
 
-button {
-  margin: 1rem;
+/*************** Layout: HomePage ***************/
+
+.homepage {
+  @extend %display-grid;
+  text-align: center;
+  height: calc(100vh - #{$navbar-height});
+  overflow: hidden;
+}
+
+/*************** Component: FeaturedProducts ***************/
+
+.FeaturedProducts--alignCenter {
+  align-self: center;
+}
+
+.FeaturedProducts__desc {
+  span {
+    margin-right: 20px;
+  }
+
+  span:last-child {
+    margin-right: 0;
+  }
 }
 
 .carousel {
@@ -70,4 +129,33 @@ button {
   // position: relative;
   // top: 50vh;
   // transform: translateY(-50%);
+}
+
+// Media Queries for Phone
+@media only screen and (max-device-width: 667px) {
+  body {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 1.2rem;
+  }
+
+  /****** HomePage *****/
+  .FeaturedProducts {
+    width: 100%;
+  }
+  .FeaturedProducts__title {
+    margin-bottom: 2rem;
+  }
+  .FeaturedProducts__image {
+    width: 80%;
+    max-width: 74vh;
+    margin: auto;
+  }
+  .FeaturedProducts__desc {
+    margin-top: 1rem;
+  }
 }

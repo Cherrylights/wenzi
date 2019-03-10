@@ -18,7 +18,7 @@ class Nav extends Component {
     }
 
     return (
-      <div>
+      <nav>
         <ul className="nav">
           <li>
             <Link to="/collections">Collections</Link>
@@ -35,7 +35,7 @@ class Nav extends Component {
             <Link to="/allwork">All Work</Link>
           </li>
         </ul>
-      </div>
+      </nav>
     );
   }
 }

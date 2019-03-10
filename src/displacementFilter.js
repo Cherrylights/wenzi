@@ -2,14 +2,15 @@ import * as PIXI from "pixi.js";
 
 function initFilter(
   productImage = "/assets/images/1.jpg",
-  wrapperId = "canvas-default"
+  wrapperId = "canvas-default",
+  aspectRatio = 1
 ) {
   let raf, canvas;
 
   // Application
   let app = new PIXI.Application({
-    width: window.innerWidth / 2.5,
-    height: window.innerWidth / 2.5,
+    width: document.getElementById(wrapperId).offsetWidth,
+    height: document.getElementById(wrapperId).offsetWidth / aspectRatio,
     antialias: true,
     transparent: true
   });
@@ -31,7 +32,7 @@ function initFilter(
   container.addChild(background);
   background.x = 5;
   background.y = 5;
-  background.scale.set(0.5, 0.5);
+  background.scale.set(1, 1);
   background.width = app.renderer.width - 10;
   background.height = app.renderer.height - 10;
 

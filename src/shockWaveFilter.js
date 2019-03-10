@@ -4,13 +4,14 @@ import { ShockwaveFilter } from "@pixi/filter-shockwave";
 
 function initFilter(
   productImage = "/assets/images/1.jpg",
-  wrapperId = "canvas-default"
+  wrapperId = "canvas-default",
+  aspectRatio = 1
 ) {
   let canvas;
   // Application
   let app = new PIXI.Application({
-    width: window.innerWidth / 2.5,
-    height: window.innerWidth / 2.5,
+    width: document.getElementById(wrapperId).offsetWidth,
+    height: document.getElementById(wrapperId).offsetWidth / aspectRatio,
     antialias: true,
     transparent: true
   });
@@ -29,7 +30,7 @@ function initFilter(
   container.addChild(image);
   image.x = 5;
   image.y = 5;
-  image.scale.set(0.5, 0.5);
+  image.scale.set(1, 1);
   image.width = app.renderer.width - 10;
   image.height = app.renderer.height - 10;
 
