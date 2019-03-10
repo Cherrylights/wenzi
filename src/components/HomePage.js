@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadFeaturedProducts, updateIndex } from "../actions/actions";
 import ProductImageWithLink from "./ProductImageWithLink";
+import FilterDisplacement from "./FilterDisplacement";
+import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   constructor(props) {
@@ -19,21 +21,42 @@ class HomePage extends Component {
 
   render() {
     const { featuredProducts, currentIndex } = this.props;
-
+    const currentProduct = featuredProducts[currentIndex];
     return (
       <div className="transition-item">
-        <ProductImageWithLink
-          handle={
-            featuredProducts[currentIndex]
-              ? featuredProducts[currentIndex].handle
-              : "longevity"
-          }
+        <h1>{currentProduct ? currentProduct.title : ""}</h1>
+        {/* <ProductImageWithLink
+          handle={currentProduct ? currentProduct.handle : "longevity"}
           src={
-            featuredProducts[currentIndex]
-              ? featuredProducts[currentIndex].images[0].src
+            currentProduct
+              ? currentProduct.images[0].src
               : "/assets/images/product-placeholder.jpg"
           }
-        />
+        /> */}
+        {currentProduct ? (
+          <Link to={`/work/${currentProduct.handle}`}>
+            <FilterDisplacement
+              image={currentProduct.images[0].src}
+              handle={currentProduct ? currentProduct.handle : "longevity"}
+            />
+          </Link>
+        ) : (
+          <img
+            src="/assets/images/product-placeholder.jpg"
+            alt="place-holder"
+          />
+        )}
+        <div>
+          {currentProduct ? (
+            <React.Fragment>
+              <span>{currentProduct.variants[0].title.split("/")[0]}</span>
+              <span>{currentProduct.variants[0].title.split("/")[1]}</span>
+              <span>$ {currentProduct.variants[0].price}</span>
+            </React.Fragment>
+          ) : (
+            ""
+          )}
+        </div>
         <button onClick={this.prevProduct}>Prev</button>
         <button onClick={this.nextProduct}>Next</button>
       </div>
