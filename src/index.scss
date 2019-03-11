@@ -85,7 +85,7 @@ button {
 
 /*************** Layout: HomePage ***************/
 
-.homepage {
+.home-page {
   @extend %display-grid;
   text-align: center;
   height: calc(100vh - #{$navbar-height});
@@ -108,27 +108,31 @@ button {
   }
 }
 
-.carousel {
-  width: 35%;
-  height: 35%;
-  margin: 10px 0 0 10px;
-  // margin: auto;
-  // position: relative;
-  // top: 50vh;
-  // transform: translateY(-50%);
+/*************** Layout: AllWorkPage ***************/
+
+/*************** Component: AvailableProducts ***************/
+
+.AvailableProducts__title {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.carousel img {
+.AvailableProducts__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  height: auto;
+}
+
+.AvailableProducts__image {
   width: 100%;
+  width: 90%;
+  display: block;
+  margin: auto;
 }
 
-.product-hero {
-  width: 35%;
-  height: 35%;
-  // margin: auto;
-  // position: relative;
-  // top: 50vh;
-  // transform: translateY(-50%);
+.AvailableProducts__name {
+  margin: 1.5rem 0 2rem 0;
+  text-align: center;
 }
 
 // Media Queries for Phone

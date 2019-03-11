@@ -31,6 +31,12 @@ class ProductPage extends Component {
                 image={product.images[0].src}
                 handle={product.handle}
                 size="small"
+                aspectRatio={parseInt(
+                  product.variants[0].selectedOptions.filter(
+                    option => option.name === "Aspect Ratio"
+                  )[0].value,
+                  10
+                )}
               />
               <h2 className="Product-info__title">{product.title}</h2>
               <p className="Product-info__description">{product.description}</p>

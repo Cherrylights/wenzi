@@ -6,7 +6,8 @@ import {
   UPDATE_INDEX,
   LOAD_PRODUCT,
   UNLOAD_PRODUCT,
-  LOAD_COLLECTIONS
+  LOAD_COLLECTIONS,
+  LOAD_AVAILABLE_PRODUCTS
 } from "../constants/actionTypes";
 import client from "../api/client";
 
@@ -133,6 +134,24 @@ export const loadCollections = () => {
 function setCollections(data) {
   return {
     type: LOAD_COLLECTIONS,
+    payload: data
+  };
+}
+
+// *******  LOAD AVAILABLE PRODUCTS  *******
+export const loadAvailableProducts = () => {
+  // return a thunk
+  return (dispatch, getState) => {
+    const collectionId = "Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzg0NTUyNTgxMTkx";
+    client.collection.fetchWithProducts(collectionId).then(collection => {
+      dispatch(setAvailableProducts(collection.products));
+    });
+  };
+};
+
+function setAvailableProducts(data) {
+  return {
+    type: LOAD_AVAILABLE_PRODUCTS,
     payload: data
   };
 }

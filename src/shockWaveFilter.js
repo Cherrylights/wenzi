@@ -37,22 +37,6 @@ function initFilter(
   // Find Canvas Element
   canvas = wrapperElement.querySelector("canvas");
 
-  // TweenMax.to(shockwaveFilter, 2, {
-  //   time: 0,
-  //   repeat: -1,
-  //   ease: "Power2.easeInOut"
-  // });
-
-  // const dispSprite = PIXI.Sprite.from("/assets/images/displacement.jpg");
-  // dispSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
-  // const dispFilter = new PIXI.filters.DisplacementFilter(dispSprite);
-  // dispFilter.padding = 2;
-  // dispFilter.scale.x = 10;
-  // dispFilter.scale.y = 10;
-  // dispFilter.position = image.position;
-  // image.filters = [dispFilter];
-  // app.stage.addChild(dispSprite);
-
   return {
     startAnimation: function startAnimation(productImage, title) {
       // loader.add(`image-${title}`, image);
@@ -84,26 +68,6 @@ function initFilter(
         wavelength: 280,
         ease: "Power1.easeOut"
       });
-
-      // tl.to(
-      //   dispFilter.scale,
-      //   0.65,
-      //   {
-      //     x: 70,
-      //     y: 70,
-      //     ease: "Power2.easeInOut"
-      //   },
-      //   0
-      // ).to(
-      //   dispFilter.scale,
-      //   0.65,
-      //   {
-      //     x: 0,
-      //     y: 0,
-      //     ease: "Power2.easeInOut"
-      //   },
-      //   0.65
-      // );
     },
 
     removeScene: function removeScene() {

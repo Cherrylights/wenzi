@@ -40,7 +40,7 @@ class HomePage extends Component {
     }
 
     return (
-      <div className={`homepage transition-item ${isMobile ? "mobile" : ""}`}>
+      <div className={`home-page transition-item ${isMobile ? "mobile" : ""}`}>
         <div className="FeaturedProducts FeaturedProducts--alignCenter">
           <h1 className="FeaturedProducts__title">
             {currentProduct ? currentProduct.title : ""}

@@ -3,10 +3,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   loadProducts,
+  loadAvailableProducts,
+  loadCollections,
   createCheckout,
   fetchCheckout
 } from "../actions/actions";
 // import PageTransition from "react-router-page-transition";
+import Menu from "./Menu";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
@@ -16,7 +19,6 @@ import AllWorkPage from "./AllWorkPage";
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadProducts();
     // Check if the visitor is a new customer without any cart info in the cache
     const checkoutId = localStorage.getItem("checkoutId");
     if (checkoutId) {
@@ -24,6 +26,9 @@ class App extends Component {
     } else {
       this.props.createCheckout();
     }
+    this.props.loadProducts();
+    this.props.loadAvailableProducts();
+    this.props.loadCollections();
   }
   render() {
     return (
@@ -41,7 +46,7 @@ class App extends Component {
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/allwork" component={AllWorkPage} />
           </Switch>
-
+          <Menu />
           {/* </PageTransition> */}
         </React.Fragment>
         {/* )}
@@ -55,6 +60,8 @@ export default connect(
   null,
   {
     loadProducts,
+    loadAvailableProducts,
+    loadCollections,
     createCheckout,
     fetchCheckout
   }

@@ -5,6 +5,7 @@ import featuredProducts from "./featuredProducts";
 import currentIndex from "./currentIndex";
 import product from "./product";
 import collections from "./collections";
+import availableProducts from "./availableProducts";
 
 export default combineReducers({
   products,
@@ -12,5 +13,6 @@ export default combineReducers({
   featuredProducts,
   currentIndex,
   product,
-  collections
+  collections,
+  availableProducts
 });
