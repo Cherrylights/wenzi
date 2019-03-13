@@ -38,6 +38,16 @@ class LineItem extends Component {
 
   render() {
     const { lineItem } = this.props;
+    let lineItemMaterial, lineItemSize;
+    if (lineItem.hasOwnProperty("variant")) {
+      lineItemMaterial = lineItem.variant.selectedOptions.filter(
+        option => option.name === "Material"
+      )[0].value;
+      lineItemSize = lineItem.variant.selectedOptions.filter(
+        option => option.name === "Size"
+      )[0].value;
+    }
+
     return (
       <li className="Line-item">
         <div className="Line-item__img">
@@ -50,36 +60,38 @@ class LineItem extends Component {
         </div>
         <div className="Line-item__content">
           <div className="Line-item__content-row">
-            <div className="Line-item__variant-title">
-              {lineItem.variant.title}
-            </div>
-            <span className="Line-item__title">{lineItem.title}</span>
-          </div>
-          <div className="Line-item__content-row">
-            <div className="Line-item__quantity-container">
-              <button
-                className="Line-item__quantity-update"
-                onClick={this.decrementQuantity}
-              >
-                -
-              </button>
-              <span className="Line-item__quantity">{lineItem.quantity}</span>
-              <button
-                className="Line-item__quantity-update"
-                onClick={this.incrementQuantity}
-              >
-                +
-              </button>
-            </div>
-            <span className="Line-item__price">
-              $ {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
-            </span>
-            <button
+            <p className="Line-item__title">{lineItem.title}</p>
+            <span
               className="Line-item__remove"
               onClick={this.removeLineItemInCart}
             >
               ×
-            </button>
+            </span>
+          </div>
+          <div className="Line-item__content-row">
+            <div className="Line-item__variant-title">
+              <span>{lineItemMaterial}</span> <span>{lineItemSize}</span>
+            </div>
+          </div>
+          <div className="Line-item__content-row">
+            <div className="Line-item__quantity-container">
+              <span
+                className="Line-item__quantity-update"
+                onClick={this.decrementQuantity}
+              >
+                -
+              </span>
+              <span className="Line-item__quantity">{lineItem.quantity}</span>
+              <span
+                className="Line-item__quantity-update"
+                onClick={this.incrementQuantity}
+              >
+                +
+              </span>
+            </div>
+            <span className="Line-item__price">
+              $ {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
+            </span>
           </div>
         </div>
       </li>

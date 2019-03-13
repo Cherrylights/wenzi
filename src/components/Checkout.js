@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LineItem from "./LineItem";
+import { isMobile } from "react-device-detect";
 
 class Checkout extends Component {
   constructor(props) {
@@ -21,22 +22,33 @@ class Checkout extends Component {
       />
     ));
     return (
-      <div className={`Cart ${this.props.isCartOpen ? "Cart--open" : ""}`}>
-        <header className="Cart__header">
-          <h2>Your cart</h2>
-          <button onClick={this.props.handleCartClose} className="Cart__close">
-            ×
-          </button>
-        </header>
-        <ul className="Cart__line-items">{lineItems}</ul>
+      <div
+        className={`Cart Cart--open ${
+          this.props.isCartOpen ? "Cart--open" : ""
+        }`}
+      >
+        {isMobile ? (
+          <header className="Cart__header">
+            <span onClick={this.props.handleCartClose} className="Cart__close">
+              ×
+            </span>
+            <p className="Cart__titleText">Your cart</p>
+          </header>
+        ) : (
+          ""
+        )}
+
+        <ul className={`Cart__line-items ${isMobile ? "mobile" : ""}`}>
+          {lineItems}
+        </ul>
         <footer className="Cart__footer">
           <div className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Subtotal</div>
+            <div className="Cart-info__total">Subtotal</div>
             <div className="Cart-info__pricing">
-              <span className="pricing">$ {checkout.subtotalPrice}</span>
+              <span className="pricing">${checkout.subtotalPrice}</span>
             </div>
           </div>
-          <div className="Cart-info clearfix">
+          {/* <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Taxes</div>
             <div className="Cart-info__pricing">
               <span className="pricing">$ {checkout.totalTax}</span>
@@ -47,10 +59,21 @@ class Checkout extends Component {
             <div className="Cart-info__pricing">
               <span className="pricing">$ {checkout.totalPrice}</span>
             </div>
-          </div>
-          <button className="Cart__checkout button" onClick={this.openCheckout}>
+          </div> */}
+          <p className="h6 grey">Excluding tax + shipping</p>
+          <button className="Cart__checkoutButton" onClick={this.openCheckout}>
             Checkout
           </button>
+          {isMobile ? (
+            <button
+              className="Cart__continueButton"
+              onClick={this.openCheckout}
+            >
+              Continue Shopping
+            </button>
+          ) : (
+            ""
+          )}
         </footer>
       </div>
     );

@@ -54,19 +54,19 @@ function initFilter(
 
       // Filter
       const shockwaveFilter = new ShockwaveFilter(
-        [newImage.width / 2, newImage.height / 2],
+        [-image.width / 2, -image.height / 6],
         {
-          amplitude: 1.5,
-          wavelength: 230,
+          amplitude: 2.5,
+          wavelength: 400,
           time: 0
         }
       );
       app.stage.filters = [shockwaveFilter];
-      TweenMax.to(shockwaveFilter, 2, {
-        time: 1,
-        amplitude: 1,
-        wavelength: 280,
-        ease: "Power1.easeOut"
+      TweenMax.to(shockwaveFilter, 4, {
+        time: 1.27,
+        amplitude: 3.3,
+        wavelength: 100,
+        ease: "Power3.easeOut"
       });
     },
 

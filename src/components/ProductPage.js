@@ -10,46 +10,64 @@ class ProductPage extends Component {
 
   render() {
     const { product, checkout } = this.props;
+    let productMaterial, productSize, productPrice, productAspectRatio;
+
+    if (product.hasOwnProperty("images")) {
+      productMaterial = product.variants[0].selectedOptions.filter(
+        option => option.name === "Material"
+      )[0].value;
+      productSize = product.variants[0].selectedOptions.filter(
+        option => option.name === "Size"
+      )[0].value;
+      productPrice = product.variants[0].price;
+      productAspectRatio = parseInt(
+        product.variants[0].selectedOptions.filter(
+          option => option.name === "Aspect Ratio"
+        )[0].value,
+        10
+      );
+    }
     return (
-      <div className="transition-item">
-        {product.hasOwnProperty("images") ? (
-          <React.Fragment>
-            <TextureDisplacement
-              image={product.images[0].src}
-              handle={product.handle}
-            />
-            <p>{product.title}</p>
-            <p>{product.images[0].src}</p>
-          </React.Fragment>
-        ) : (
-          <img src="/assets/images/product-placeholder.jpg" alt="placeholder" />
-        )}
-        {product.hasOwnProperty("images") ? (
-          <React.Fragment>
-            <div className="Product-info">
+      <div className="product-page transition-item">
+        <div className="Product-hero Product-hero--alignCenter">
+          {product.hasOwnProperty("images") ? (
+            <div className="Product-hero__image">
               <TextureDisplacement
                 image={product.images[0].src}
                 handle={product.handle}
-                size="small"
-                aspectRatio={parseInt(
-                  product.variants[0].selectedOptions.filter(
-                    option => option.name === "Aspect Ratio"
-                  )[0].value,
-                  10
-                )}
+                size="default"
+                aspectRatio={productAspectRatio}
               />
-              <h2 className="Product-info__title">{product.title}</h2>
-              <p className="Product-info__description">{product.description}</p>
+            </div>
+          ) : (
+            <img
+              src="/assets/images/product-placeholder.jpg"
+              alt="placeholder"
+            />
+          )}
+        </div>
+        {product.hasOwnProperty("images") ? (
+          <div className="Product-checkout">
+            <div className="Product-checkout__image">
+              <img src={product.images[0].src} alt="product" />
+            </div>
+            <div className="Product-checkout__info">
+              <h1 className="Product-checkout__title">{product.title}</h1>
+              <p className="Product-checkout__parameter">{`${productMaterial} — ${productSize}`}</p>
+              <p className="Product-checkout__desc">{product.description}</p>
             </div>
             <button
+              className="Product-checkout__button"
               onClick={() => {
                 // console.log(product.variants[0].id, checkout.id);
                 this.props.addToCart(product.variants[0].id, 1, checkout.id);
               }}
             >
-              Add to Cart
+              <span>Add to Cart</span>
+              <span className="dollar">$</span>
+              <span>{productPrice}</span>
             </button>
-          </React.Fragment>
+          </div>
         ) : (
           ""
         )}
