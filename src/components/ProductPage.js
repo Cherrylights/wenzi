@@ -29,23 +29,27 @@ class ProductPage extends Component {
     }
     return (
       <div className="product-page transition-item">
-        <div className="Product-hero Product-hero--alignCenter">
-          {product.hasOwnProperty("images") ? (
-            <div className="Product-hero__image">
-              <TextureDisplacement
-                image={product.images[0].src}
-                handle={product.handle}
-                size="default"
-                aspectRatio={productAspectRatio}
-              />
+        {product.hasOwnProperty("images") ? (
+          <div className="Product-hero">
+            <div>
+              <h1 className="Product-hero__title">{product.title}</h1>
+              <div className="Product-hero__image">
+                <TextureDisplacement
+                  image={product.images[0].src}
+                  handle={product.handle}
+                  size="default"
+                  aspectRatio={productAspectRatio}
+                />
+              </div>
+              <div className="Product-hero__scroll">
+                <span className="Product-hero__discover">Discover</span>
+                <div className="Product-hero__line" />
+              </div>
             </div>
-          ) : (
-            <img
-              src="/assets/images/product-placeholder.jpg"
-              alt="placeholder"
-            />
-          )}
-        </div>
+          </div>
+        ) : (
+          ""
+        )}
         {product.hasOwnProperty("images") ? (
           <div className="Product-checkout">
             <div className="Product-checkout__image">

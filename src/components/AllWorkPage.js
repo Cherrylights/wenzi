@@ -34,16 +34,16 @@ class AllWorkPage extends Component {
             <div className="AvailableProducts__grid">
               {availableProducts.map(product => (
                 <div key={product.id}>
-                  {/* <TextureDisplacement
-                    image={product.images[0].src}
-                    handle={product.handle}
-                  /> */}
-                  <img
-                    src={product.images[0].src}
-                    alt="scarf"
-                    className="AvailableProducts__image"
-                  />
-                  <p className="AvailableProducts__name">{product.title}</p>
+                  <Link to={`/work/${product.handle}`}>
+                    <img
+                      src={product.images[0].src}
+                      alt="scarf"
+                      className="AvailableProducts__image"
+                    />
+                  </Link>
+                  <Link to={`/work/${product.handle}`}>
+                    <p className="AvailableProducts__name">{product.title}</p>
+                  </Link>
                 </div>
               ))}
             </div>

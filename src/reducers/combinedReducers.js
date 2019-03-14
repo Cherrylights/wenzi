@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import products from "./products";
 import checkout from "./checkout";
+import isCartOpen from "./isCartOpen";
+import isMenuOpen from "./isMenuOpen";
 import featuredProducts from "./featuredProducts";
 import currentIndex from "./currentIndex";
 import product from "./product";
@@ -10,6 +12,8 @@ import availableProducts from "./availableProducts";
 export default combineReducers({
   products,
   checkout,
+  isCartOpen,
+  isMenuOpen,
   featuredProducts,
   currentIndex,
   product,

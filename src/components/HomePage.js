@@ -47,13 +47,11 @@ class HomePage extends Component {
           </h1>
           <div className="FeaturedProducts__image">
             {currentProduct ? (
-              <Link to={`/work/${currentProduct.handle}`}>
-                <FilterDisplacement
-                  image={currentProduct.images[0].src}
-                  handle={currentProduct.handle}
-                  aspectRatio={currentProductAspectRatio}
-                />
-              </Link>
+              <FilterDisplacement
+                image={currentProduct.images[0].src}
+                handle={currentProduct.handle}
+                aspectRatio={currentProductAspectRatio}
+              />
             ) : (
               <img
                 src="/assets/images/product-placeholder.jpg"
@@ -75,6 +73,18 @@ class HomePage extends Component {
           </div>
           <button onClick={this.prevProduct}>Prev</button>
           <button onClick={this.nextProduct}>Next</button>
+          <div>
+            {currentProduct ? (
+              <Link
+                to={`/work/${currentProduct.handle}`}
+                className="FeaturedProducts__link"
+              >
+                {currentProduct.handle}
+              </Link>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
     );

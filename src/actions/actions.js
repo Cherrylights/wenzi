@@ -2,6 +2,8 @@ import {
   LOAD_PRODUCTS,
   CREATE_CHECKOUT,
   UPDATE_CHECKOUT,
+  TOGGLE_CART,
+  TOGGLE_MENU,
   LOAD_FEATURED_PRODUCTS,
   UPDATE_INDEX,
   LOAD_PRODUCT,
@@ -72,6 +74,16 @@ function updateCheckout(data) {
     payload: data
   };
 }
+
+// *******  TOGGLE CHECKOUT  *******
+export const toggleCart = () => ({
+  type: TOGGLE_CART
+});
+
+// *******  TOGGLE CHECKOUT  *******
+export const toggleMenu = () => ({
+  type: TOGGLE_MENU
+});
 
 // *******  LOAD FEATURED PRODUCTS  *******
 export const loadFeaturedProducts = () => {

@@ -14,8 +14,9 @@ import Nav from "./Nav";
 import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
-import Checkout from "./Checkout";
+import Cart from "./Cart";
 import AllWorkPage from "./AllWorkPage";
+import NotFoundPage from "./NotFoundPage";
 
 class App extends Component {
   componentDidMount() {
@@ -43,10 +44,11 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/work/:handle" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
-            <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/allwork" component={AllWorkPage} />
+            <Route exact path="/work" component={AllWorkPage} />
+            <Route component={NotFoundPage} />
           </Switch>
           <Menu />
+          <Cart />
           {/* </PageTransition> */}
         </React.Fragment>
         {/* )}

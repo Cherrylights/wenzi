@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LineItem from "./LineItem";
 import { isMobile } from "react-device-detect";
+import { toggleCart } from "../actions/actions";
 
-class Checkout extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
     this.openCheckout = this.openCheckout.bind(this);
@@ -13,7 +14,7 @@ class Checkout extends Component {
     window.open(this.props.checkout.webUrl);
   }
   render() {
-    const { checkout } = this.props;
+    const { checkout, isCartOpen, toggleCart } = this.props;
     const lineItems = checkout.lineItems.map(lineItem => (
       <LineItem
         key={lineItem.id.toString()}
@@ -22,14 +23,10 @@ class Checkout extends Component {
       />
     ));
     return (
-      <div
-        className={`Cart Cart--open ${
-          this.props.isCartOpen ? "Cart--open" : ""
-        }`}
-      >
+      <div className={`Cart ${isCartOpen ? "Cart--open" : ""}`}>
         {isMobile ? (
           <header className="Cart__header">
-            <span onClick={this.props.handleCartClose} className="Cart__close">
+            <span onClick={toggleCart} className="Cart__close">
               ×
             </span>
             <p className="Cart__titleText">Your cart</p>
@@ -65,10 +62,7 @@ class Checkout extends Component {
             Checkout
           </button>
           {isMobile ? (
-            <button
-              className="Cart__continueButton"
-              onClick={this.openCheckout}
-            >
+            <button className="Cart__continueButton" onClick={toggleCart}>
               Continue Shopping
             </button>
           ) : (
@@ -82,11 +76,12 @@ class Checkout extends Component {
 
 function mapStateToProps(state) {
   return {
-    checkout: state.checkout
+    checkout: state.checkout,
+    isCartOpen: state.isCartOpen
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
-)(Checkout);
+  { toggleCart }
+)(Cart);

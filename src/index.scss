@@ -2,6 +2,7 @@
 $navbar-height: 70px;
 $cartFooter-height: 172px;
 $cartFooter-mobile-height: 234px;
+$font-size: 13px;
 
 /*************** Extends ***************/
 %display-grid {
@@ -55,21 +56,28 @@ html {
   color: #888;
 }
 
+html,
+body {
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.15;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     sans-serif;
-  font-size: 13px;
-  line-height: 1;
   color: #1a1a1a;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 a {
   color: #1a1a1a;
+  text-decoration: none;
 }
 h1 {
   font-family: "Murmur Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -87,6 +95,8 @@ p,
 span {
   margin: 0;
   padding: 0;
+  line-height: 1.625rem;
+  letter-spacing: 0.01rem;
   letter-spacing: 0.5px;
 }
 
@@ -110,13 +120,15 @@ button {
   outline: none;
   padding: 16px 30px 14px 30px;
   width: auto;
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    sans-serif;
+  font-size: $font-size;
+  font-weight: 100;
+  line-height: 1;
   border: 1px solid #1a1a1a;
   border-radius: 4px;
   color: #1a1a1a;
-  font-family: "Helvetica Neue";
-  font-size: 13px;
-  font-weight: 100;
-  line-height: 1;
   transition: border-color 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
@@ -131,27 +143,100 @@ button {
   width: 100%;
 }
 
-.nav {
-  a {
-    text-decoration: none;
-  }
+/*************** Top Nav ***************/
+.TopNav {
+  position: fixed;
+  top: 0;
+  height: $navbar-height;
+  width: 100vw;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/*************** Menu ***************/
+
+.Cart {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  transform: translateX(105%);
+  transition: transform 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.Cart--open {
+  display: block;
+  right: 0;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition: transform 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.Menu {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1000;
+  transform: translateX(-105%);
+  transition: transform 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.Menu--open {
+  left: 0;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition: transform 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.Menu__header {
+  height: $navbar-height;
+}
+
+.Menu__body {
+  height: calc(100vh - #{$navbar-height});
+  @extend %display-grid;
+}
+
+.Menu__items {
+  align-self: center;
+}
+
+.Menu__link {
+  font-family: "Murmur Medium";
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 5vh;
+  text-decoration: none;
+}
 /*************** HomePage ***************/
 
 .home-page {
   @extend %display-grid;
   text-align: center;
-  height: calc(100vh - #{$navbar-height});
+  height: 100vh;
   overflow: hidden;
 }
 
 .FeaturedProducts {
   width: 100%;
 }
+
 .FeaturedProducts__title {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
+
 .FeaturedProducts__image {
   width: 80%;
   max-width: 74vh;
@@ -178,20 +263,46 @@ button {
 
 .Product-hero {
   @extend %display-grid;
+  position: relative;
   text-align: center;
-  height: calc(100vh - #{$navbar-height});
+  height: 100vh;
   overflow: hidden;
   width: 100%;
 }
 
-.Product-hero--alignCenter {
+.Product-hero > div {
   align-self: center;
+}
+
+.Product-hero__title {
+  margin-bottom: 3rem;
 }
 
 .Product-hero__image {
   width: 80%;
   max-width: 74vh;
-  margin: auto;
+  margin: 0 auto;
+}
+
+.Product-hero__scroll {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50px;
+}
+
+.Product-hero__discover {
+  display: block;
+}
+
+.Product-hero__line {
+  width: 1px;
+  height: 60px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30px;
+  background: #1a1a1a;
 }
 
 .Product-checkout {
@@ -231,7 +342,7 @@ button {
   border: 1px solid #1a1a1a;
   border-radius: 4px;
   color: #1a1a1a;
-  font-size: 13px;
+  font-size: $font-size;
   font-weight: 100;
   line-height: 1;
   font-family: "Helvetica Neue";
@@ -243,13 +354,15 @@ button {
 
 .AvailableProducts__title {
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 2rem 0 3rem 0;
 }
 
 .AvailableProducts__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   height: auto;
+  width: 90%;
+  margin: auto;
 }
 
 .AvailableProducts__image {
@@ -267,6 +380,7 @@ button {
 /*************** Cart ***************/
 
 .Cart {
+  // display: none;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -274,11 +388,12 @@ button {
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  transform: translateX(100%);
+  transform: translateX(105%);
   transition: transform 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .Cart--open {
+  display: block;
   right: 0;
   pointer-events: auto;
   transform: translateX(0);
@@ -433,3 +548,35 @@ button {
 }
 
 // Media Queries for Desktop
+@media only screen and (min-width: 1366px) {
+  .FeaturedProducts__image {
+    width: 37vw;
+    max-width: 56vh;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .FeaturedProducts__image {
+    width: 82%;
+    max-width: 59vh;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    letter-spacing: 0.45rem;
+  }
+
+  .FeaturedProducts__image,
+  .Product-hero__image {
+    width: 62vw;
+    max-width: 47vh;
+  }
+}

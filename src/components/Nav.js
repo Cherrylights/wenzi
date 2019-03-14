@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { toggleCart, toggleMenu } from "../actions/actions";
 
 class Nav extends Component {
   render() {
+    const { toggleCart, toggleMenu } = this.props;
     // set up the cart quantity
     let cartQuantity;
     if (this.props.checkout.lineItems.length > 0) {
@@ -18,23 +19,13 @@ class Nav extends Component {
     }
 
     return (
-      <nav>
-        <ul className="nav">
-          <li>
-            <Link to="/collections">Collections</Link>
-          </li>
-          <li>
-            <Link to="/">Wenzi</Link>
-          </li>
-          <li>
-            <Link to="/checkout">
-              Checkout <span>{cartQuantity}</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/allwork">All Work</Link>
-          </li>
-        </ul>
+      <nav className="TopNav">
+        <span onClick={toggleMenu} className="TopNav__item">
+          Menu
+        </span>
+        <span onClick={toggleCart} className="TopNav__item">
+          Cart <span>{cartQuantity}</span>
+        </span>
       </nav>
     );
   }
@@ -48,5 +39,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  null
+  { toggleCart, toggleMenu }
 )(Nav);
