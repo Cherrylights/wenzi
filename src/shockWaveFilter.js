@@ -8,6 +8,7 @@ function initFilter(
   aspectRatio = 1
 ) {
   let canvas;
+
   // Application
   let app = new PIXI.Application({
     width: document.getElementById(wrapperId).offsetWidth,
@@ -19,7 +20,7 @@ function initFilter(
   wrapperElement.appendChild(app.view);
 
   // Stage
-  app.stage.interactive = true;
+  // app.stage.interactive = true;
 
   // Container
   const container = new PIXI.Container();
@@ -48,7 +49,6 @@ function initFilter(
       container.addChild(newImage);
       newImage.x = 5;
       newImage.y = 5;
-      // image.scale.set(1, 1);
       newImage.width = app.renderer.width - 10;
       newImage.height = app.renderer.height - 10;
 
@@ -56,16 +56,21 @@ function initFilter(
       const shockwaveFilter = new ShockwaveFilter(
         [-image.width / 2, -image.height / 6],
         {
-          amplitude: 2.5,
-          wavelength: 400,
+          // amplitude: 2.5,
+          amplitude: image.width * 0.0083,
+          // wavelength: 400,
+          wavelength: image.width * 1.33,
           time: 0
         }
       );
       app.stage.filters = [shockwaveFilter];
       TweenMax.to(shockwaveFilter, 4, {
-        time: 1.27,
-        amplitude: 3.3,
-        wavelength: 100,
+        // time: 1.47,
+        time: image.width * 0.004,
+        // amplitude: 3.3,
+        amplitude: image.width * 0.011,
+        // wavelength: 100,
+        wavelength: image.width * 0.33,
         ease: "Power3.easeOut"
       });
     },
@@ -73,8 +78,8 @@ function initFilter(
     removeScene: function removeScene() {
       container.removeChildren();
       container.destroy(true);
-      wrapperElement.removeChild(canvas);
       app = null;
+      wrapperElement.removeChild(canvas);
     }
   };
 }

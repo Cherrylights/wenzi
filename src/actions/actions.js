@@ -184,7 +184,7 @@ export const updateLineItems = (productId, quantity = 1, checkoutId) => {
   const lineItemsToUpdate = [
     { id: productId, quantity: parseInt(quantity, 10) }
   ];
-  console.log(lineItemsToUpdate);
+  // console.log(lineItemsToUpdate);
   // return a thunk
   return (dispatch, getState) => {
     client.checkout
@@ -204,6 +204,10 @@ export const removeLineItems = (productId, checkoutId) => {
     client.checkout
       .removeLineItems(checkoutId, lineItemIdsToRemove)
       .then(checkout => {
+        if (checkout.lineItems.length === 0) {
+          dispatch(updateCheckout(checkout));
+          dispatch(toggleCart());
+        }
         dispatch(updateCheckout(checkout));
       });
   };

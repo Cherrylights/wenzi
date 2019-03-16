@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { isMobileOnly } from "react-device-detect";
 import {
   loadProducts,
   loadAvailableProducts,
@@ -9,6 +10,7 @@ import {
   fetchCheckout
 } from "../actions/actions";
 // import PageTransition from "react-router-page-transition";
+import Overlay from "./Overlay";
 import Menu from "./Menu";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
@@ -37,6 +39,7 @@ class App extends Component {
         {/* <Route
           render={({ location }) => ( */}
         <React.Fragment>
+          {isMobileOnly ? "" : <Overlay />}
           <Nav />
           {/* <PageTransition timeout={5000}> */}
           {/* <Switch location={location}> */}

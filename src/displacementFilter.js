@@ -18,7 +18,7 @@ function initFilter(
   wrapperElement.appendChild(app.view);
 
   // Stage
-  app.stage.interactive = true;
+  // app.stage.interactive = true;
 
   // Container
   const container = new PIXI.Container();
@@ -64,15 +64,15 @@ function initFilter(
     startAnimation: function startAnimation() {
       canvas = wrapperElement.querySelector("canvas");
       raf = requestAnimationFrame(startAnimation);
-      if (displacementFilter.scale.x < 6) {
-        displacementFilter.scale.x += 0.1;
-        displacementFilter.scale.y += 0.1;
+      if (displacementFilter.scale.x < 7) {
+        displacementFilter.scale.x += 0.2;
+        displacementFilter.scale.y += 0.2;
       }
-      displacementSprite.x += 1.2;
+      displacementSprite.x += 1.7;
       if (displacementSprite.x > displacementSprite.width) {
         displacementSprite.x = 0;
       }
-      displacementSprite.y += 0.8;
+      displacementSprite.y += 1.3;
       if (displacementSprite.y > displacementSprite.height) {
         displacementSprite.y = 0;
       }
@@ -82,8 +82,8 @@ function initFilter(
       cancelAnimationFrame(raf);
       container.removeChildren();
       container.destroy(true);
-      wrapperElement.removeChild(canvas);
       app = null;
+      wrapperElement.removeChild(canvas);
     }
   };
 }

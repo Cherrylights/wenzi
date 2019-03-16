@@ -8,7 +8,7 @@ class Menu extends Component {
   render() {
     const { isMenuOpen, toggleMenu } = this.props;
     return (
-      <div className={`Menu ${isMenuOpen ? "Menu--open" : ""}`}>
+      <div className={`Menu${isMenuOpen ? " Menu--open" : ""}`}>
         <div className="Menu__header">
           <span onClick={toggleMenu} className="Menu__close">
             ×

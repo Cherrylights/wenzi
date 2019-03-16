@@ -53,19 +53,16 @@ class AllWorkPage extends Component {
           <div className="AvailableProducts">
             <div className="AvailableProducts__image">
               {this.state.product ? (
-                <React.Fragment>
-                  <FilterDisplacement
-                    image={this.state.product.images[0].src}
-                    handle={this.state.product.handle}
-                    aspectRatio={parseInt(
-                      this.state.product.variants[0].selectedOptions.filter(
-                        option => option.name === "Aspect Ratio"
-                      )[0].value,
-                      10
-                    )}
-                  />
-                  {this.state.product.title}
-                </React.Fragment>
+                <FilterDisplacement
+                  image={this.state.product.images[0].src}
+                  handle={this.state.product.handle}
+                  aspectRatio={parseInt(
+                    this.state.product.variants[0].selectedOptions.filter(
+                      option => option.name === "Aspect Ratio"
+                    )[0].value,
+                    10
+                  )}
+                />
               ) : (
                 <img
                   src="/assets/images/product-placeholder.jpg"
@@ -90,6 +87,9 @@ class AllWorkPage extends Component {
                   {product.title}
                 </Link>
               ))}
+            </div>
+            <div className="AvailableProducts__title">
+              {this.state.product && this.state.product.title}
             </div>
           </div>
         </BrowserView>

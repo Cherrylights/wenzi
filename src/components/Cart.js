@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LineItem from "./LineItem";
-import { isMobile } from "react-device-detect";
+import { isMobileOnly } from "react-device-detect";
 import { toggleCart } from "../actions/actions";
 
 class Cart extends Component {
@@ -15,6 +15,7 @@ class Cart extends Component {
   }
   render() {
     const { checkout, isCartOpen, toggleCart } = this.props;
+    const isCartEmpty = checkout.lineItems.length === 0;
     const lineItems = checkout.lineItems.map(lineItem => (
       <LineItem
         key={lineItem.id.toString()}
@@ -23,29 +24,34 @@ class Cart extends Component {
       />
     ));
     return (
-      <div className={`Cart ${isCartOpen ? "Cart--open" : ""}`}>
-        {isMobile ? (
-          <header className="Cart__header">
-            <span onClick={toggleCart} className="Cart__close">
-              ×
-            </span>
-            <p className="Cart__titleText">Your cart</p>
-          </header>
-        ) : (
-          ""
-        )}
+      <div className={`Cart${isCartOpen ? " Cart--open" : ""}`}>
+        <div className="Cart__container">
+          {isMobileOnly ? (
+            <header className="Cart__header">
+              <span onClick={toggleCart} className="Cart__close">
+                ×
+              </span>
+              <p className="Cart__titleText">Your cart</p>
+            </header>
+          ) : (
+            ""
+          )}
+          {isCartEmpty ? (
+            <p className="Cart__empty">Your cart is currently empty.</p>
+          ) : (
+            <ul className={`Cart__line-items ${isMobileOnly ? "mobile" : ""}`}>
+              {lineItems}
+            </ul>
+          )}
 
-        <ul className={`Cart__line-items ${isMobile ? "mobile" : ""}`}>
-          {lineItems}
-        </ul>
-        <footer className="Cart__footer">
-          <div className="Cart-info clearfix">
-            <div className="Cart-info__total">Subtotal</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">${checkout.subtotalPrice}</span>
+          <footer className="Cart__footer">
+            <div className="Cart-info clearfix">
+              <div className="Cart-info__total">Subtotal</div>
+              <div className="Cart-info__pricing">
+                <span className="pricing">${checkout.subtotalPrice}</span>
+              </div>
             </div>
-          </div>
-          {/* <div className="Cart-info clearfix">
+            {/* <div className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Taxes</div>
             <div className="Cart-info__pricing">
               <span className="pricing">$ {checkout.totalTax}</span>
@@ -57,18 +63,23 @@ class Cart extends Component {
               <span className="pricing">$ {checkout.totalPrice}</span>
             </div>
           </div> */}
-          <p className="h6 grey">Excluding tax + shipping</p>
-          <button className="Cart__checkoutButton" onClick={this.openCheckout}>
-            Checkout
-          </button>
-          {isMobile ? (
-            <button className="Cart__continueButton" onClick={toggleCart}>
-              Continue Shopping
+            <p className="h6 grey">Excluding tax + shipping</p>
+            <button
+              className="Cart__checkoutButton"
+              disabled={isCartEmpty}
+              onClick={this.openCheckout}
+            >
+              Checkout
             </button>
-          ) : (
-            ""
-          )}
-        </footer>
+            {isMobileOnly ? (
+              <button className="Cart__continueButton" onClick={toggleCart}>
+                Continue Shopping
+              </button>
+            ) : (
+              ""
+            )}
+          </footer>
+        </div>
       </div>
     );
   }
