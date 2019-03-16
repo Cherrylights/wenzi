@@ -14,7 +14,7 @@ class ProductPage extends Component {
   }
 
   render() {
-    const { product, checkout, isCartOpen } = this.props;
+    const { product, checkout } = this.props;
     let productPrice, productAspectRatio;
     let productMarkup;
 
@@ -29,11 +29,7 @@ class ProductPage extends Component {
       productMarkup = { __html: product.descriptionHtml };
     }
     return (
-      <div
-        className={`product-page transition-item${
-          isCartOpen ? " Cart--open" : ""
-        }`}
-      >
+      <div className="product-page transition-item">
         {product.hasOwnProperty("images") ? (
           <div className="Product-hero">
             <div>
@@ -109,8 +105,7 @@ class ProductPage extends Component {
 function mapStateToProps(state) {
   return {
     product: state.product,
-    checkout: state.checkout,
-    isCartOpen: state.isCartOpen
+    checkout: state.checkout
   };
 }
 

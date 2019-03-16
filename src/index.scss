@@ -269,11 +269,6 @@ button {
 
 /*************** ProductPage ***************/
 
-.product-page.Cart--open {
-  height: 100vh;
-  overflow: hidden;
-}
-
 .Product-hero {
   @extend %display-grid;
   position: relative;

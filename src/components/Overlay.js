@@ -9,6 +9,9 @@ class Overlay extends Component {
       <div
         className={`Overlay${isCartOpen ? " Cart--open" : ""}`}
         onClick={toggleCart}
+        onWheel={e => {
+          e.preventDefault();
+        }}
       />
     );
   }
