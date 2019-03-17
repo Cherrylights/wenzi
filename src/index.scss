@@ -3,11 +3,21 @@ $navbar-height: 70px;
 $cartFooter-height: 172px;
 $cartFooter-mobile-height: 234px;
 $font-size: 13px;
+$page-content-margin-top: 15vh;
 
 /*************** Extends ***************/
 %display-grid {
   display: -ms-grid;
   display: grid;
+}
+
+%margin-for-name-below-image {
+  margin: 1.5rem 0 2rem 0;
+  text-align: center;
+}
+
+%margin-for-title-above-image {
+  margin-bottom: 3rem;
 }
 
 /*************** Fonts ***************/
@@ -287,7 +297,7 @@ button {
 }
 
 .FeaturedProducts__title {
-  margin-bottom: 3rem;
+  @extend %margin-for-title-above-image;
 }
 
 .FeaturedProducts__image {
@@ -332,7 +342,7 @@ button {
 }
 
 .Product-hero__title {
-  margin-bottom: 3rem;
+  @extend %margin-for-title-above-image;
 }
 
 .Product-hero__image {
@@ -453,12 +463,12 @@ button {
 /*************** AllWorkPage ***************/
 
 .AvailableProducts {
-  margin-top: 15vh;
+  margin-top: $page-content-margin-top;
 }
 
 .AvailableProducts__title {
   text-align: center;
-  margin: 2rem 0 3rem 0;
+  @extend %margin-for-title-above-image;
 }
 
 .AvailableProducts__grid {
@@ -477,8 +487,30 @@ button {
 }
 
 .AvailableProducts__name {
-  margin: 1.5rem 0 2rem 0;
-  text-align: center;
+  @extend %margin-for-name-below-image;
+}
+
+// Collections Page
+.Collections {
+  width: 90%;
+  margin: auto;
+  margin-top: $page-content-margin-top;
+}
+
+.Collection__title {
+  @extend %margin-for-title-above-image;
+}
+.Collection__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  img {
+    width: 90%;
+    display: inline-block;
+    margin: auto;
+  }
+}
+.Collection__name {
+  @extend %margin-for-name-below-image;
 }
 
 /*************** Cart ***************/
@@ -714,10 +746,22 @@ button {
 
   // All work page
   .AvailableProducts {
-    margin-top: 15vh;
+    margin-top: $page-content-margin-top;
   }
   .AvailableProducts__grid {
     width: 70%;
+  }
+
+  // Collections Page
+  .Collections {
+    width: 80%;
+    max-width: 115vh;
+  }
+  .Collection__title {
+    margin-top: 4rem;
+  }
+  .Collection__grid {
+    grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
   }
 }
 

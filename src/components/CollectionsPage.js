@@ -13,26 +13,28 @@ class CollectionsPage extends Component {
     );
     // console.log(filteredCollections);
     return (
-      <div className="transition-item">
-        {filteredCollections.map(collection => (
-          <div key={collection.id}>
-            <h1>{collection.title}</h1>
-            <div>
-              {collection.products.map(product => (
-                <div key={product.id}>
-                  <Link to={`/work/${product.handle}`}>
-                    {/* <TextureDisplacement
+      <div className="collections-page transition-item">
+        <div className="Collections">
+          {filteredCollections.map(collection => (
+            <div key={collection.id} className="Collection">
+              <h1 className="Collection__title">{collection.title}</h1>
+              <div className="Collection__grid">
+                {collection.products.map(product => (
+                  <div key={product.id}>
+                    <Link to={`/work/${product.handle}`}>
+                      {/* <TextureDisplacement
                       image={product.images[0].src}
                       handle={product.handle}
                     /> */}
-                    <img src={product.images[0].src} alt="scarf" />
-                  </Link>
-                  <p>{product.title}</p>
-                </div>
-              ))}
+                      <img src={product.images[0].src} alt="scarf" />
+                    </Link>
+                    <p className="AvailableProducts__name">{product.title}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }

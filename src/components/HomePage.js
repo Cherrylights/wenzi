@@ -17,6 +17,42 @@ class HomePage extends Component {
     this.props.loadFeaturedProducts();
   }
 
+  scrollHandler = event => {
+    if (event.deltaY > 0) {
+      this.nextProduct();
+    } else {
+      this.prevProduct();
+    }
+  };
+
+  prevProduct() {
+    if (this.props.featuredProducts[this.props.currentIndex]) {
+      const { updateIndex, featuredProducts, currentIndex } = this.props;
+      const total = featuredProducts.length - 1;
+      if (currentIndex === 0) {
+        updateIndex(total);
+      } else {
+        updateIndex(currentIndex - 1);
+      }
+    } else {
+      return;
+    }
+  }
+
+  nextProduct() {
+    if (this.props.featuredProducts[this.props.currentIndex]) {
+      const { updateIndex, featuredProducts, currentIndex } = this.props;
+      const total = featuredProducts.length - 1;
+      if (currentIndex === total) {
+        updateIndex(0);
+      } else {
+        updateIndex(currentIndex + 1);
+      }
+    } else {
+      return;
+    }
+  }
+
   render() {
     const { featuredProducts, currentIndex } = this.props;
     const currentProduct = featuredProducts[currentIndex];
@@ -41,7 +77,10 @@ class HomePage extends Component {
     }
 
     return (
-      <div className={`home-page transition-item ${isMobile ? "mobile" : ""}`}>
+      <div
+        className={`home-page transition-item ${isMobile ? "mobile" : ""}`}
+        onWheel={this.scrollHandler}
+      >
         {currentProduct ? (
           <div className="FeaturedProducts FeaturedProducts--alignCenter">
             <h1 className="FeaturedProducts__title">{currentProduct.title}</h1>
@@ -89,34 +128,6 @@ class HomePage extends Component {
         )}
       </div>
     );
-  }
-
-  prevProduct() {
-    if (this.props.featuredProducts[this.props.currentIndex]) {
-      const { updateIndex, featuredProducts, currentIndex } = this.props;
-      const total = featuredProducts.length - 1;
-      if (currentIndex === 0) {
-        updateIndex(total);
-      } else {
-        updateIndex(currentIndex - 1);
-      }
-    } else {
-      return;
-    }
-  }
-
-  nextProduct() {
-    if (this.props.featuredProducts[this.props.currentIndex]) {
-      const { updateIndex, featuredProducts, currentIndex } = this.props;
-      const total = featuredProducts.length - 1;
-      if (currentIndex === total) {
-        updateIndex(0);
-      } else {
-        updateIndex(currentIndex + 1);
-      }
-    } else {
-      return;
-    }
   }
 }
 
