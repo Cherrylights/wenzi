@@ -5,7 +5,7 @@ class ProductImageWithLink extends Component {
   render() {
     const { handle, src } = this.props;
     return (
-      <div className="carousel">
+      <div>
         <Link to={`/work/${handle}`}>
           <img src={src} alt="scarf" />
         </Link>
