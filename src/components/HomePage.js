@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { loadFeaturedProducts, updateIndex } from "../actions/actions";
 import FilterDisplacement from "./FilterDisplacement";
+import ProductImageWithLink from "./ProductImageWithLink";
 
 class HomePage extends Component {
   constructor(props) {
@@ -41,51 +42,51 @@ class HomePage extends Component {
 
     return (
       <div className={`home-page transition-item ${isMobile ? "mobile" : ""}`}>
-        <div className="FeaturedProducts FeaturedProducts--alignCenter">
-          <h1 className="FeaturedProducts__title">
-            {currentProduct ? currentProduct.title : ""}
-          </h1>
-          <div className="FeaturedProducts__image">
-            {currentProduct ? (
-              <FilterDisplacement
-                image={currentProduct.images[0].src}
-                handle={currentProduct.handle}
-                aspectRatio={currentProductAspectRatio}
-              />
-            ) : (
-              <img
-                src="/assets/images/product-placeholder.jpg"
-                className="placeholder-img"
-                alt="place-holder"
-              />
-            )}
-          </div>
-          <div className="FeaturedProducts__desc">
-            {currentProduct ? (
-              <React.Fragment>
-                <span>{currentProductMaterial}</span>
-                <span>{currentProductSize}</span>
-                <span>${currentProductPrice}</span>
-              </React.Fragment>
-            ) : (
-              ""
-            )}
-          </div>
-          <button onClick={this.prevProduct}>Prev</button>
-          <button onClick={this.nextProduct}>Next</button>
-          <div>
-            {currentProduct ? (
+        {currentProduct ? (
+          <div className="FeaturedProducts FeaturedProducts--alignCenter">
+            <h1 className="FeaturedProducts__title">{currentProduct.title}</h1>
+            <div className="FeaturedProducts__image">
+              {isMobile ? (
+                <FilterDisplacement
+                  image={currentProduct.images[0].src}
+                  handle={currentProduct.handle}
+                  aspectRatio={currentProductAspectRatio}
+                />
+              ) : (
+                <ProductImageWithLink
+                  handle={currentProduct.handle}
+                  src={currentProduct.images[0].src}
+                />
+              )}
+            </div>
+            <div className="FeaturedProducts__desc">
+              <span>{currentProductMaterial}</span>
+              <span>{currentProductSize}</span>
+              <span>${currentProductPrice}</span>
+            </div>
+            <button onClick={this.prevProduct}>Prev</button>
+            <button onClick={this.nextProduct}>Next</button>
+            <div>
               <Link
                 to={`/work/${currentProduct.handle}`}
                 className="FeaturedProducts__link"
               >
                 {currentProduct.handle}
               </Link>
-            ) : (
-              ""
-            )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="FeaturedProducts FeaturedProducts--alignCenter">
+            <h1 className="FeaturedProducts__title">Product</h1>
+            <div className="FeaturedProducts__image">
+              <img
+                src="/assets/images/product-placeholder.jpg"
+                className="placeholder-img"
+                alt="place-holder"
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   }

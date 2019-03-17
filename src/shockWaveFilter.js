@@ -64,11 +64,11 @@ function initFilter(
         }
       );
       app.stage.filters = [shockwaveFilter];
-      TweenMax.to(shockwaveFilter, 4, {
+      TweenMax.to(shockwaveFilter, 3.7, {
         // time: 1.47,
         time: image.width * 0.004,
         // amplitude: 3.3,
-        amplitude: image.width * 0.011,
+        amplitude: image.width * 0.01,
         // wavelength: 100,
         wavelength: image.width * 0.33,
         ease: "Power3.easeOut"

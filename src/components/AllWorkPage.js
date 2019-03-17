@@ -51,6 +51,45 @@ class AllWorkPage extends Component {
         </MobileView>
         <BrowserView>
           <div className="AvailableProducts">
+            <div className="AvailableProducts__info">
+              {this.state.product ? (
+                <React.Fragment>
+                  <div className="AvailableProducts__titleTop">
+                    <h1>{this.state.product.title}</h1>
+                  </div>
+                  <ul className="AvailableProducts__name">
+                    {availableProducts.map(product => (
+                      <li key={product.id}>
+                        <Link
+                          to={`/work/${product.handle}`}
+                          className={
+                            this.state.product.title === product.title
+                              ? "active"
+                              : ""
+                          }
+                          onMouseEnter={e => {
+                            const product = availableProducts.filter(
+                              product => product.title === e.target.textContent
+                            )[0];
+                            this.setState({
+                              product
+                            });
+                          }}
+                        >
+                          {product.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="AvailableProducts__titleBottom">
+                    {this.state.product.title}
+                  </div>
+                </React.Fragment>
+              ) : (
+                ""
+              )}
+            </div>
+
             <div className="AvailableProducts__image">
               {this.state.product ? (
                 <FilterDisplacement
@@ -67,29 +106,9 @@ class AllWorkPage extends Component {
                 <img
                   src="/assets/images/product-placeholder.jpg"
                   alt="placeholder"
+                  className="placeholder-img"
                 />
               )}
-            </div>
-            <div className="AvailableProducts__name">
-              {availableProducts.map(product => (
-                <Link
-                  to={`/work/${product.handle}`}
-                  key={product.id}
-                  onMouseEnter={e => {
-                    const product = availableProducts.filter(
-                      product => product.title === e.target.textContent
-                    )[0];
-                    this.setState({
-                      product
-                    });
-                  }}
-                >
-                  {product.title}
-                </Link>
-              ))}
-            </div>
-            <div className="AvailableProducts__title">
-              {this.state.product && this.state.product.title}
             </div>
           </div>
         </BrowserView>

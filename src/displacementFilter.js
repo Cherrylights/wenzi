@@ -64,7 +64,7 @@ function initFilter(
     startAnimation: function startAnimation() {
       canvas = wrapperElement.querySelector("canvas");
       raf = requestAnimationFrame(startAnimation);
-      if (displacementFilter.scale.x < 7) {
+      if (displacementFilter.scale.x < 8) {
         displacementFilter.scale.x += 0.2;
         displacementFilter.scale.y += 0.2;
       }
