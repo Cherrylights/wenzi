@@ -11,6 +11,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.productImage = React.createRef();
+    this.productTitle = React.createRef();
     this.prevProduct = this.prevProduct.bind(this);
     this.nextProduct = this.nextProduct.bind(this);
     this.fadeOut = this.fadeOut.bind(this);
@@ -22,6 +23,13 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.props.loadFeaturedProducts();
+    //set a class on the body tag to make it overflow hidden (need to check if this is a legit way to do it)
+    document.body.classList.toggle("scrollLock", true);
+  }
+
+  componentWillUnmount() {
+    //remove the scrollLock class
+    document.body.classList.remove("scrollLock");
   }
 
   scrollHandler = event => {
@@ -129,7 +137,7 @@ class HomePage extends Component {
           <BrowserView>
             {currentProduct ? (
               <React.Fragment>
-                <h1 className="FeaturedProducts__title">
+                <h1 className="FeaturedProducts__title" ref={this.productTitle}>
                   {currentProduct.title}
                 </h1>
                 <div

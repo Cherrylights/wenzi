@@ -12,7 +12,8 @@ function initFilter(
     width: document.getElementById(wrapperId).offsetWidth,
     height: document.getElementById(wrapperId).offsetWidth / aspectRatio,
     antialias: true,
-    transparent: true
+    transparent: true,
+    resolution: 1
   });
   const wrapperElement = document.getElementById(wrapperId);
   wrapperElement.appendChild(app.view);
