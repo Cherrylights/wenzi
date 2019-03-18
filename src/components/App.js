@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { isMobileOnly } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 import {
   loadProducts,
   loadAvailableProducts,
@@ -38,7 +38,7 @@ class App extends Component {
       <BrowserRouter>
         {/* <Route
           render={({ location }) => ( */}
-        <React.Fragment>
+        <div className={isMobile ? "mobile" : "desktop"}>
           {isMobileOnly ? "" : <Overlay />}
           <Nav />
           {/* <PageTransition timeout={5000}> */}
@@ -53,7 +53,7 @@ class App extends Component {
           <Menu />
           <Cart />
           {/* </PageTransition> */}
-        </React.Fragment>
+        </div>
         {/* )}
         /> */}
       </BrowserRouter>

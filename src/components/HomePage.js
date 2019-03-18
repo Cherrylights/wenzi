@@ -98,6 +98,8 @@ class HomePage extends Component {
   render() {
     const { featuredProducts, currentIndex } = this.props;
     const currentProduct = featuredProducts[currentIndex];
+    const productTotalQuantity = featuredProducts.length;
+    const productCurrentIndex = currentIndex + 1;
     let currentProductMaterial,
       currentProductSize,
       currentProductPrice,
@@ -121,7 +123,7 @@ class HomePage extends Component {
     return (
       <div
         className="home-page transition-item"
-        onWheel={isMobile ? "" : this.scrollHandler}
+        onWheel={isMobile ? null : this.scrollHandler}
       >
         <div className="FeaturedProducts FeaturedProducts--alignCenter">
           <BrowserView>
@@ -143,6 +145,23 @@ class HomePage extends Component {
                   <span>{currentProductMaterial}</span>
                   <span>{currentProductSize}</span>
                   <span>${currentProductPrice}</span>
+                </div>
+                <div className="FeaturedProducts__index">
+                  <span className="SelectedProducts__index-current">
+                    <span>{productCurrentIndex}</span>
+                  </span>
+                  <span className="SelectedProducts__index-dash">
+                    <span />
+                  </span>
+                  <span className="SelectedProducts__index-total">
+                    <span>{productTotalQuantity}</span>
+                  </span>
+                </div>
+                <div className="Scroll-to-explore">
+                  <span>Scroll to Explore</span>
+                </div>
+                <div className="Selected-design">
+                  <span>Selected Scarf Design</span>
                 </div>
               </React.Fragment>
             ) : (
@@ -202,6 +221,18 @@ class HomePage extends Component {
             )}
           </MobileView>
         </div>
+        {!isMobile && (
+          <nav className="BottomNav">
+            <div className="Artist">
+              <span>Artist / Designer</span>
+            </div>
+            <div className="Social-media">
+              <a href="/" alt="instagram">
+                Instagram
+              </a>
+            </div>
+          </nav>
+        )}
       </div>
     );
   }

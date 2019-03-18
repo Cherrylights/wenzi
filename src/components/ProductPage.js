@@ -41,6 +41,7 @@ class ProductPage extends Component {
                   size="default"
                   aspectRatio={productAspectRatio}
                 />
+                <div style={{ height: "36px" }} />
               </div>
               <div className="Product-hero__scroll">
                 <span className="Product-hero__discover">Discover</span>
@@ -77,18 +78,18 @@ class ProductPage extends Component {
                 className="Product-checkout__params"
                 dangerouslySetInnerHTML={productMarkup}
               />
+              <button
+                className="Product-checkout__button"
+                onClick={() => {
+                  this.props.addToCart(product.variants[0].id, 1, checkout.id);
+                  this.props.toggleCart();
+                }}
+              >
+                <span>Add to Cart</span>
+                <span className="dollar">$</span>
+                <span>{productPrice}</span>
+              </button>
             </div>
-            <button
-              className="Product-checkout__button"
-              onClick={() => {
-                this.props.addToCart(product.variants[0].id, 1, checkout.id);
-                this.props.toggleCart();
-              }}
-            >
-              <span>Add to Cart</span>
-              <span className="dollar">$</span>
-              <span>{productPrice}</span>
-            </button>
           </div>
         ) : (
           ""
