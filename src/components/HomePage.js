@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
 import { TweenMax } from "gsap/TweenMax";
+import Charming from "react-charming";
 import { loadFeaturedProducts, updateIndex } from "../actions/actions";
 import FilterDisplacement from "./FilterDisplacement";
 import ProductImageWithLink from "./ProductImageWithLink";
@@ -49,6 +50,9 @@ class HomePage extends Component {
   };
 
   fadeOut() {
+    const letters = Array.prototype.slice.call(
+      this.productTitle.current.querySelectorAll("span")
+    );
     return new Promise((resolve, reject) => {
       this.setState({
         isAnimating: true
@@ -60,10 +64,18 @@ class HomePage extends Component {
         },
         ease: "Power2.easeOut"
       });
+      TweenMax.staggerTo(letters, 0.4, {
+        opacity: 0,
+        stagger: 0.02,
+        ease: "Power2.easeOut"
+      });
     });
   }
 
   fadeIn() {
+    const letters = Array.prototype.slice.call(
+      this.productTitle.current.querySelectorAll("span")
+    );
     TweenMax.to(this.productImage.current, 0.7, {
       opacity: 1,
       onComplete: () => {
@@ -73,6 +85,18 @@ class HomePage extends Component {
       },
       ease: "Power2.easeIn"
     });
+    TweenMax.staggerFromTo(
+      letters,
+      0.4,
+      {
+        opacity: 0
+      },
+      {
+        opacity: 1,
+        stagger: 0.02,
+        ease: "Power2.easeIn"
+      }
+    );
   }
 
   prevProduct() {
@@ -137,9 +161,17 @@ class HomePage extends Component {
           <BrowserView>
             {currentProduct ? (
               <React.Fragment>
-                <h1 className="FeaturedProducts__title" ref={this.productTitle}>
-                  {currentProduct.title}
-                </h1>
+                <Charming
+                  letters={currentProduct.title}
+                  render={letters => (
+                    <h1
+                      className="FeaturedProducts__title"
+                      ref={this.productTitle}
+                    >
+                      {letters}
+                    </h1>
+                  )}
+                />
                 <div
                   className="FeaturedProducts__image"
                   ref={this.productImage}

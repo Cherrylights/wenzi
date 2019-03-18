@@ -333,6 +333,11 @@ button {
 
 .FeaturedProducts__title {
   @extend %margin-for-title-above-image;
+  span {
+    display: inline-block;
+    position: relative;
+    margin: 3px;
+  }
 }
 
 .FeaturedProducts__image {

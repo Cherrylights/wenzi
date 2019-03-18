@@ -8,6 +8,7 @@
     "node-sass": "^4.11.0",
     "pixi.js": "^5.0.0-rc.2",
     "react": "^16.8.2",
+    "react-charming": "^1.1.0",
     "react-device-detect": "^1.6.2",
     "react-dom": "^16.8.2",
     "react-redux": "^6.0.1",
