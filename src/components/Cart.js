@@ -11,7 +11,18 @@ class Cart extends Component {
   }
 
   openCheckout() {
-    window.open(this.props.checkout.webUrl);
+    window.open(this.props.checkout.webUrl, "_self");
+  }
+
+  componentDidUpdate(prevProps) {
+    //Set scroll lock on the body element
+    if (this.props.isCartOpen !== prevProps.isCartOpen) {
+      if (this.props.isCartOpen) {
+        document.body.classList.toggle("scrollLock", true);
+      } else {
+        document.body.classList.remove("scrollLock");
+      }
+    }
   }
   render() {
     const { checkout, isCartOpen, toggleCart } = this.props;

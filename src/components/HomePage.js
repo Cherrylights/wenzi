@@ -13,6 +13,7 @@ class HomePage extends Component {
     super(props);
     this.productImage = React.createRef();
     this.productTitle = React.createRef();
+    this.productDesc = React.createRef();
     this.prevProduct = this.prevProduct.bind(this);
     this.nextProduct = this.nextProduct.bind(this);
     this.fadeOut = this.fadeOut.bind(this);
@@ -38,12 +39,12 @@ class HomePage extends Component {
       if (event.deltaY > 0) {
         this.fadeOut().then(() => {
           this.nextProduct();
-          this.fadeIn();
+          setTimeout(this.fadeIn, 200);
         });
       } else {
         this.fadeOut().then(() => {
           this.prevProduct();
-          this.fadeIn();
+          setTimeout(this.fadeIn, 200);
         });
       }
     }
@@ -62,11 +63,19 @@ class HomePage extends Component {
         onComplete: () => {
           resolve(true);
         },
-        ease: "Power2.easeOut"
+        ease: "Power1.easeIn"
       });
-      TweenMax.staggerTo(letters, 0.4, {
+      TweenMax.staggerTo(letters, 0.5, {
         opacity: 0,
         stagger: 0.02,
+        ease: "Power1.easeOut",
+        onComplete: () => {
+          // Make sure to set the container to opacity 0 after the fade out animation, under such situation, even the props update is ahead of the fade in animation, the text will still get hidden.
+          this.productTitle.current.style.cssText = "opacity: 0";
+        }
+      });
+      TweenMax.to(this.productDesc.current, 0.7, {
+        opacity: 0,
         ease: "Power2.easeOut"
       });
     });
@@ -76,26 +85,40 @@ class HomePage extends Component {
     const letters = Array.prototype.slice.call(
       this.productTitle.current.querySelectorAll("span")
     );
-    TweenMax.to(this.productImage.current, 0.7, {
-      opacity: 1,
-      onComplete: () => {
-        this.setState({
-          isAnimating: false
-        });
+    this.productTitle.current.style.cssText = "opacity: 1";
+    TweenMax.to(
+      this.productImage.current,
+      0.7,
+      {
+        opacity: 1,
+        onComplete: () => {
+          this.setState({
+            isAnimating: false
+          });
+        },
+        ease: "Power1.easeIn"
       },
-      ease: "Power2.easeIn"
-    });
+      0.2
+    );
     TweenMax.staggerFromTo(
       letters,
-      0.4,
+      0.5,
       {
         opacity: 0
       },
       {
         opacity: 1,
         stagger: 0.02,
-        ease: "Power2.easeIn"
+        ease: "Power1.easeIn"
       }
+    );
+    TweenMax.fromTo(
+      this.productDesc.current,
+      0.8,
+      {
+        opacity: 0
+      },
+      { opacity: 1, ease: "Power2.easeOut" }
     );
   }
 
@@ -165,7 +188,7 @@ class HomePage extends Component {
                   letters={currentProduct.title}
                   render={letters => (
                     <h1
-                      className="FeaturedProducts__title"
+                      className="FeaturedProducts__title charming"
                       ref={this.productTitle}
                     >
                       {letters}
@@ -181,7 +204,7 @@ class HomePage extends Component {
                     src={currentProduct.images[0].src}
                   />
                 </div>
-                <div className="FeaturedProducts__desc">
+                <div className="FeaturedProducts__desc" ref={this.productDesc}>
                   <span>{currentProductMaterial}</span>
                   <span>{currentProductSize}</span>
                   <span>${currentProductPrice}</span>

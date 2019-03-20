@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { isMobile } from "react-device-detect";
 import {
   loadProduct,
   unloadProduct,
@@ -7,6 +8,7 @@ import {
   toggleCart
 } from "../actions/actions";
 import TextureDisplacement from "./TextureDisplacement";
+import Charming from "react-charming";
 
 class ProductPage extends Component {
   componentDidMount() {
@@ -33,7 +35,13 @@ class ProductPage extends Component {
         {product.hasOwnProperty("images") ? (
           <div className="Product-hero">
             <div>
-              <h1 className="Product-hero__title">{product.title}</h1>
+              <Charming
+                letters={product.title}
+                render={letters => (
+                  <h1 className="Product-hero__title charming">{letters}</h1>
+                )}
+              />
+              {/* <h1 className="Product-hero__title">{product.title}</h1> */}
               <div className="Product-hero__image">
                 <TextureDisplacement
                   image={product.images[0].src}
@@ -62,7 +70,11 @@ class ProductPage extends Component {
         )}
         {product.hasOwnProperty("images") ? (
           <div className="Product-gallery">
-            <img src={product.images[0].src} alt="product" />
+            {isMobile ? (
+              <img src={product.images[0].src} alt="product" />
+            ) : (
+              <img src={product.images[1].src} alt="product" />
+            )}
           </div>
         ) : (
           ""

@@ -9,7 +9,7 @@ import {
   createCheckout,
   fetchCheckout
 } from "../actions/actions";
-// import PageTransition from "react-router-page-transition";
+//import PageTransition from "react-router-page-transition";
 import Overlay from "./Overlay";
 import Menu from "./Menu";
 import Nav from "./Nav";
@@ -18,6 +18,8 @@ import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
 import Cart from "./Cart";
 import AllWorkPage from "./AllWorkPage";
+import AboutPage from "./AboutPage";
+import LocalStorePage from "./LocalStorePage";
 import NotFoundPage from "./NotFoundPage";
 
 class App extends Component {
@@ -33,36 +35,58 @@ class App extends Component {
     this.props.loadAvailableProducts();
     this.props.loadCollections();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.products !== this.props.products) {
+      // Prefetch all product thumbnail images at the initial load
+      const thumbnails = this.props.products.map(
+        product => product.images[0].src
+      );
+      thumbnails.forEach(thumbnail => {
+        const img = new Image();
+        img.src = thumbnail;
+      });
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
-        {/* <Route
-          render={({ location }) => ( */}
         <div className={isMobile ? "mobile" : "desktop"}>
           {isMobileOnly ? "" : <Overlay />}
           <Nav />
-          {/* <PageTransition timeout={5000}> */}
+          {/* <Route
+            render={({ location }) => (
+              <PageTransition timeout={2000}> */}
           {/* <Switch location={location}> */}
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/work/:handle" component={ProductPage} />
             <Route exact path="/collections" component={CollectionsPage} />
-            <Route exact path="/work" component={AllWorkPage} />
+            <Route exact path="/works" component={AllWorkPage} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/localstore" component={LocalStorePage} />
             <Route component={NotFoundPage} />
           </Switch>
+          {/* </PageTransition>
+            )}
+          /> */}
           <Menu />
           <Cart />
-          {/* </PageTransition> */}
         </div>
-        {/* )}
-        /> */}
       </BrowserRouter>
     );
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    products: state.products
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   {
     loadProducts,
     loadAvailableProducts,

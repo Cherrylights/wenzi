@@ -20,12 +20,28 @@ class Nav extends Component {
 
     return (
       <nav className="TopNav">
-        <span onClick={toggleMenu} className="TopNav__item">
-          Menu
+        <span onClick={toggleMenu} className="TopNav__item Menu-button">
+          <svg
+            width="22px"
+            height="14px"
+            viewBox="0 0 22 14"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0,0.11144 L0,0.726824615 L21.5384615,0.726824615 L21.5384615,0.11144 L0,0.11144 Z M0,6.49606154 L0,7.11144615 L21.5384615,7.11144615 L21.5384615,6.49606154 L0,6.49606154 Z M0,12.8806769 L0,13.4960615 L21.5384615,13.4960615 L21.5384615,12.8806769 L0,12.8806769 Z"
+              id="Shape"
+            />
+          </svg>
         </span>
-        <span onClick={toggleCart} className="TopNav__item">
-          Cart <span>{cartQuantity}</span>
-        </span>
+        <div onClick={toggleCart} className="TopNav__item Cart-button">
+          Cart
+          <span className="Cart-quantity__number">{cartQuantity}</span>
+          {/* <span className="Cart-quantity">
+            <span className="Cart-quantity__number">{cartQuantity}</span>
+            <span className="Cart-quantity__circle" />
+          </span> */}
+        </div>
       </nav>
     );
   }

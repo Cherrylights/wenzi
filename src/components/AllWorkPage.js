@@ -27,7 +27,7 @@ class AllWorkPage extends Component {
   render() {
     const { availableProducts } = this.props;
     return (
-      <div className="allWork-page">
+      <div className="allWork-page transition-item">
         <MobileView>
           <div className="AvailableProducts">
             <h1 className="AvailableProducts__title">All Work</h1>
