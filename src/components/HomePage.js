@@ -71,12 +71,12 @@ class HomePage extends Component {
 
   scrollHandler = event => {
     if (!this.state.isAnimating) {
-      if (event.deltaY > 0) {
+      if (event.deltaY > 20) {
         this.fadeOut().then(() => {
           this.nextProduct();
           setTimeout(this.fadeIn, 200);
         });
-      } else {
+      } else if (event.deltaY < -20) {
         this.fadeOut().then(() => {
           this.prevProduct();
           setTimeout(this.fadeIn, 200);
