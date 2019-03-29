@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
 import { TweenMax } from "gsap/TweenMax";
 import Charming from "react-charming";
+import Skeleton from "react-loading-skeleton";
 import { loadFeaturedProducts, updateIndex } from "../actions/actions";
-import FilterDisplacement from "./FilterDisplacement";
 import ProductImageWithLink from "./ProductImageWithLink";
 
 class HomePage extends Component {
@@ -19,7 +18,11 @@ class HomePage extends Component {
     this.fadeOut = this.fadeOut.bind(this);
     this.fadeIn = this.fadeIn.bind(this);
     this.state = {
-      isAnimating: false
+      isAnimating: false,
+      ts: {
+        x: 0,
+        y: 0
+      }
     };
   }
 
@@ -33,6 +36,38 @@ class HomePage extends Component {
     //remove the scrollLock class
     document.body.classList.remove("scrollLock");
   }
+
+  touchStartHandler = event => {
+    this.setState({
+      ts: {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY
+      }
+    });
+  };
+
+  touchEndHandler = event => {
+    const te = {
+      x: event.changedTouches[0].clientX,
+      y: event.changedTouches[0].clientY
+    };
+
+    if (!this.state.isAnimating) {
+      if (this.state.ts.y > te.y + 100) {
+        // swipe up
+        this.fadeOut().then(() => {
+          this.nextProduct();
+          setTimeout(this.fadeIn, 200);
+        });
+      } else if (this.state.ts.y < te.y - 100) {
+        // swipe down
+        this.fadeOut().then(() => {
+          this.prevProduct();
+          setTimeout(this.fadeIn, 200);
+        });
+      }
+    }
+  };
 
   scrollHandler = event => {
     if (!this.state.isAnimating) {
@@ -155,10 +190,7 @@ class HomePage extends Component {
     const currentProduct = featuredProducts[currentIndex];
     const productTotalQuantity = featuredProducts.length;
     const productCurrentIndex = currentIndex + 1;
-    let currentProductMaterial,
-      currentProductSize,
-      currentProductPrice,
-      currentProductAspectRatio;
+    let currentProductMaterial, currentProductSize, currentProductPrice;
     if (currentProduct) {
       currentProductMaterial = currentProduct.variants[0].selectedOptions.filter(
         option => option.name === "Material"
@@ -167,18 +199,20 @@ class HomePage extends Component {
         option => option.name === "Size"
       )[0].value;
       currentProductPrice = currentProduct.variants[0].price;
-      currentProductAspectRatio = parseInt(
-        currentProduct.variants[0].selectedOptions.filter(
-          option => option.name === "Aspect Ratio"
-        )[0].value,
-        10
-      );
+      // currentProductAspectRatio = parseInt(
+      //   currentProduct.variants[0].selectedOptions.filter(
+      //     option => option.name === "Aspect Ratio"
+      //   )[0].value,
+      //   10
+      // );
     }
 
     return (
       <div
         className="home-page transition-item"
         onWheel={isMobile ? null : this.scrollHandler}
+        onTouchStart={isMobile ? this.touchStartHandler : null}
+        onTouchEnd={isMobile ? this.touchEndHandler : null}
       >
         <div className="FeaturedProducts FeaturedProducts--alignCenter">
           <BrowserView>
@@ -229,13 +263,11 @@ class HomePage extends Component {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <h1 className="FeaturedProducts__title">Product</h1>
+                <h1 className="FeaturedProducts__title">
+                  <Skeleton width={300} />
+                </h1>
                 <div className="FeaturedProducts__image">
-                  <img
-                    src="/assets/images/product-placeholder.jpg"
-                    className="placeholder-img"
-                    alt="place-holder"
-                  />
+                  <Skeleton width={300} height={300} />
                 </div>
               </React.Fragment>
             )}
@@ -244,30 +276,30 @@ class HomePage extends Component {
           <MobileView>
             {currentProduct ? (
               <React.Fragment>
-                <h1 className="FeaturedProducts__title">
-                  {currentProduct.title}
-                </h1>
-                <div className="FeaturedProducts__image">
-                  <FilterDisplacement
-                    image={currentProduct.images[0].src}
+                <Charming
+                  letters={currentProduct.title}
+                  render={letters => (
+                    <h1
+                      className="FeaturedProducts__title charming"
+                      ref={this.productTitle}
+                    >
+                      {letters}
+                    </h1>
+                  )}
+                />
+                <div
+                  className="FeaturedProducts__image"
+                  ref={this.productImage}
+                >
+                  <ProductImageWithLink
                     handle={currentProduct.handle}
-                    aspectRatio={currentProductAspectRatio}
+                    src={currentProduct.images[0].src}
                   />
                 </div>
-                <div className="FeaturedProducts__desc">
+                <div className="FeaturedProducts__desc" ref={this.productDesc}>
                   <span>{currentProductMaterial}</span>
                   <span>{currentProductSize}</span>
                   <span>${currentProductPrice}</span>
-                </div>
-                <button onClick={this.prevProduct}>Prev</button>
-                <button onClick={this.nextProduct}>Next</button>
-                <div>
-                  <Link
-                    to={`/work/${currentProduct.handle}`}
-                    className="FeaturedProducts__link"
-                  >
-                    {currentProduct.handle}
-                  </Link>
                 </div>
               </React.Fragment>
             ) : (

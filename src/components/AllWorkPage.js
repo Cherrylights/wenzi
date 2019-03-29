@@ -5,10 +5,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import FilterDisplacement from "./FilterDisplacement";
 
 class AllWorkPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
 
   componentDidMount() {
     this.setState({

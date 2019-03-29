@@ -32,9 +32,7 @@ class Menu extends Component {
             <Link to="/works" className="Menu__link" onClick={toggleMenu}>
               All Work
             </Link>
-            {isMobile ? (
-              ""
-            ) : (
+            {isMobile ? null : (
               <Link
                 to="/collections"
                 className="Menu__link"

@@ -41,24 +41,6 @@ $page-content-margin-top: 15vh;
 
 /*************** General ***************/
 
-/* Disable the rubber band scrolling in MacOS */
-
-// html {
-//   height: 100%;
-//   width: 100%;
-//   overflow: hidden;
-// }
-
-// body {
-//   height: 100%;
-//   padding: 0;
-//   margin: 0;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   -webkit-overflow-scrolling: touch;
-//   overflow: hidden;
-// }
-
 html {
   box-sizing: border-box;
 }
@@ -564,6 +546,9 @@ button {
   width: 80%;
   max-width: 74vh;
   margin: 0 auto;
+  img {
+    width: 100%;
+  }
 }
 
 .Product-hero__scroll {

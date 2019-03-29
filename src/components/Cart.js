@@ -44,9 +44,7 @@ class Cart extends Component {
               </span>
               <p className="Cart__titleText">Your cart</p>
             </header>
-          ) : (
-            ""
-          )}
+          ) : null}
           {isCartEmpty ? (
             <p className="Cart__empty">Your cart is currently empty.</p>
           ) : (
@@ -86,9 +84,7 @@ class Cart extends Component {
               <button className="Cart__continueButton" onClick={toggleCart}>
                 Continue Shopping
               </button>
-            ) : (
-              ""
-            )}
+            ) : null}
           </footer>
         </div>
       </div>

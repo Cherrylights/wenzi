@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import {
@@ -51,30 +51,28 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className={isMobile ? "mobile" : "desktop"}>
-          {isMobileOnly ? "" : <Overlay />}
-          <Nav />
-          {/* <Route
+      <div className={isMobile ? "mobile" : "desktop"}>
+        {isMobileOnly ? "" : <Overlay />}
+        <Nav />
+        {/* <Route
             render={({ location }) => (
               <PageTransition timeout={2000}> */}
-          {/* <Switch location={location}> */}
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/work/:handle" component={ProductPage} />
-            <Route exact path="/collections" component={CollectionsPage} />
-            <Route exact path="/works" component={AllWorkPage} />
-            <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/localstore" component={LocalStorePage} />
-            <Route component={NotFoundPage} />
-          </Switch>
-          {/* </PageTransition>
+        {/* <Switch location={location}> */}
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/work/:handle" component={ProductPage} />
+          <Route exact path="/collections" component={CollectionsPage} />
+          <Route exact path="/works" component={AllWorkPage} />
+          <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/localstore" component={LocalStorePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        {/* </PageTransition>
             )}
           /> */}
-          <Menu />
-          <Cart />
-        </div>
-      </BrowserRouter>
+        <Menu />
+        <Cart />
+      </div>
     );
   }
 }
