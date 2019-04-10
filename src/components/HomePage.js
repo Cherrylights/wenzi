@@ -219,12 +219,10 @@ class HomePage extends Component {
             {currentProduct ? (
               <React.Fragment>
                 <Charming
+                  className="FeaturedProducts__title Charming"
                   letters={currentProduct.title}
                   render={letters => (
-                    <h1
-                      className="FeaturedProducts__title charming"
-                      ref={this.productTitle}
-                    >
+                    <h1 className="charming" ref={this.productTitle}>
                       {letters}
                     </h1>
                   )}
@@ -267,7 +265,7 @@ class HomePage extends Component {
                   <Skeleton width={300} />
                 </h1>
                 <div className="FeaturedProducts__image">
-                  <Skeleton width={300} height={300} />
+                  <Skeleton width="100%" height="60vh" />
                 </div>
               </React.Fragment>
             )}

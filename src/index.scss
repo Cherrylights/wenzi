@@ -11,6 +11,12 @@ $page-content-margin-top: 15vh;
   display: grid;
 }
 
+%display-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 %margin-for-name-below-image {
   margin: 1rem 0 2rem 0;
   text-align: center;
@@ -172,7 +178,7 @@ button {
 }
 
 .charming span {
-  display: inline-block;
+  // display: inline-block;
   position: relative;
   margin: 3px;
 }
@@ -376,7 +382,7 @@ button {
 
 .Menu__body {
   height: calc(100vh - #{$navbar-height});
-  @extend %display-grid;
+  @extend %display-flex;
 }
 
 .Menu__items {
@@ -414,6 +420,9 @@ button {
 
 .FeaturedProducts__title {
   @extend %margin-for-title-above-image;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 3rem;
 }
 
 .FeaturedProducts__image {
