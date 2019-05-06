@@ -5,7 +5,7 @@
   "dependencies": {
     "@pixi/filter-shockwave": "^2.7.0",
     "gsap": "^2.1.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "pixi.js": "^5.0.0-rc.2",
     "react": "^16.8.2",
     "react-charming": "^1.1.0",
