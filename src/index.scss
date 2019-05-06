@@ -555,6 +555,15 @@ button {
   width: 80%;
   max-width: 74vh;
   margin: 0 auto;
+  position: relative;
+
+  .Product-hero__overlay {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    width: 98%;
+  }
+
   img {
     width: 100%;
   }

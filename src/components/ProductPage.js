@@ -9,10 +9,15 @@ import {
 } from "../actions/actions";
 import TextureDisplacement from "./TextureDisplacement";
 import Charming from "react-charming";
+import ProductOverlay from "./ProductOverlay";
 
 class ProductPage extends Component {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.handle);
+  }
+
+  componentWillUnmount() {
+    this.props.unloadProduct();
   }
 
   render() {
@@ -46,12 +51,15 @@ class ProductPage extends Component {
                 {isMobile ? (
                   <img src={product.images[0].src} alt="product" />
                 ) : (
-                  <TextureDisplacement
-                    image={product.images[0].src}
-                    handle={product.handle}
-                    size="default"
-                    aspectRatio={productAspectRatio}
-                  />
+                  <div>
+                    <ProductOverlay product={product} />
+                    <TextureDisplacement
+                      image={product.images[0].src}
+                      handle={product.handle}
+                      size="default"
+                      aspectRatio={productAspectRatio}
+                    />
+                  </div>
                 )}
 
                 <div style={{ height: "36px" }} />
@@ -113,10 +121,6 @@ class ProductPage extends Component {
         )}
       </div>
     );
-  }
-
-  componentWillUnmount() {
-    this.props.unloadProduct();
   }
 }
 
