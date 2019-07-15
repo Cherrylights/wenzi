@@ -47,6 +47,11 @@ $page-content-margin-top: 15vh;
 
 /*************** General ***************/
 
+html,
+body {
+  height: 100%;
+}
+
 html {
   box-sizing: border-box;
 }

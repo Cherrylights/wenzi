@@ -39,7 +39,7 @@ function initFilter(
   canvas = wrapperElement.querySelector("canvas");
 
   return {
-    startAnimation: function startAnimation(productImage, title) {
+    startAnimation: function startAnimation(productImage, title, aspectRatio) {
       // loader.add(`image-${title}`, image);
       // loader.load(() => {
       //   image.texture = PIXI.utils.TextureCache[`image-${title}`];
@@ -49,8 +49,9 @@ function initFilter(
       container.addChild(newImage);
       newImage.x = 5;
       newImage.y = 5;
-      newImage.width = app.renderer.width - 10;
+      // newImage.width = app.renderer.width - 10;
       newImage.height = app.renderer.height - 10;
+      newImage.width = newImage.height * aspectRatio;
 
       // Filter
       const shockwaveFilter = new ShockwaveFilter(

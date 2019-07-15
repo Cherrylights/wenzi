@@ -22,7 +22,11 @@ class FilterDisplacement extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.image !== prevProps.image) {
-      this.initFilter.startAnimation(this.props.image, this.props.handle);
+      this.initFilter.startAnimation(
+        this.props.image,
+        this.props.handle,
+        this.props.aspectRatio
+      );
     }
   }
 

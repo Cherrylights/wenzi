@@ -92,7 +92,7 @@ class AllWorkPage extends Component {
                 <FilterDisplacement
                   image={this.state.product.images[0].src}
                   handle={this.state.product.handle}
-                  aspectRatio={parseInt(
+                  aspectRatio={parseFloat(
                     this.state.product.variants[0].selectedOptions.filter(
                       option => option.name === "Aspect Ratio"
                     )[0].value,
