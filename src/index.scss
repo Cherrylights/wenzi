@@ -778,9 +778,7 @@ figure {
 
 .local-store-page {
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: grid;
+  padding-top: 15vh;
 }
 
 .LocalStore {
@@ -794,9 +792,25 @@ figure {
     max-width: 64vh;
   }
 
-  h1 {
-    margin-bottom: 2rem;
+  h3,
+  h4 {
+    font-family: "Murmur Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0.9rem;
+    letter-spacing: 1.2px;
   }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+
+.LocalStore__info {
+  margin-top: 3rem;
 }
 
 /*************** Not Found Page ***************/
