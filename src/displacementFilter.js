@@ -2,8 +2,7 @@ import * as PIXI from "pixi.js";
 
 function initFilter(
   productImage = "/assets/images/1.jpg",
-  wrapperId = "canvas-default",
-  aspectRatio = 1
+  wrapperId = "canvas-default"
 ) {
   let raf, canvas;
 
@@ -34,9 +33,8 @@ function initFilter(
   background.x = 5;
   background.y = 5;
   background.scale.set(1, 1);
-  // background.width = app.renderer.width - 10;
+  background.width = app.renderer.width - 10;
   background.height = app.renderer.height - 10;
-  background.width = background.height * aspectRatio;
 
   // setTimeout(() => {
   //   const loader = new PIXI.Loader();

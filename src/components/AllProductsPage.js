@@ -60,11 +60,19 @@ class AllProducts extends Component {
                   <div className="slide__inner">
                     <div className="slide__img js-transition-img">
                       <figure className="js-transition-img__inner">
-                        <img
-                          src={product.images[0].src}
-                          draggable="false"
-                          alt="scarf"
-                        />
+                        {product.options[2].values[0].value === "Square" ? (
+                          <img
+                            src={product.images[0].src}
+                            draggable="false"
+                            alt="scarf"
+                          />
+                        ) : (
+                          <img
+                            src={product.images[2].src}
+                            draggable="false"
+                            alt="scarf"
+                          />
+                        )}
                       </figure>
                     </div>
                   </div>
@@ -82,7 +90,7 @@ class AllProducts extends Component {
                 >
                   <div className="slide__inner">
                     <div className="slide__sub-title">
-                      <span>2019</span>
+                      <span>{product.options[0].values[0].value}</span>
                     </div>
                     <h1 className="slide__title">
                       <div className="js-transition-title">{product.title}</div>
@@ -94,7 +102,7 @@ class AllProducts extends Component {
                       />
                     </div>
                     <div className="slide__project">
-                      {product.options[0].values[0].value}
+                      {product.options[1].values[0].value}
                     </div>
                   </div>
                 </article>

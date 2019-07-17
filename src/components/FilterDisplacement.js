@@ -13,20 +13,12 @@ class FilterDisplacement extends Component {
   }
 
   componentDidMount() {
-    this.initFilter = initFilter(
-      this.props.image,
-      this.wrapperId,
-      this.props.aspectRatio
-    );
+    this.initFilter = initFilter(this.props.image, this.wrapperId);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.image !== prevProps.image) {
-      this.initFilter.startAnimation(
-        this.props.image,
-        this.props.handle,
-        this.props.aspectRatio
-      );
+      this.initFilter.startAnimation(this.props.image, this.props.handle);
     }
   }
 
@@ -44,6 +36,5 @@ export default FilterDisplacement;
 FilterDisplacement.defaultProps = {
   image: "/assets/images/product-placeholder.jpg",
   handle: "default",
-  size: "default",
-  aspectRatio: 1
+  size: "default"
 };

@@ -4,15 +4,14 @@ import { ShockwaveFilter } from "@pixi/filter-shockwave";
 
 function initFilter(
   productImage = "/assets/images/1.jpg",
-  wrapperId = "canvas-default",
-  aspectRatio = 1
+  wrapperId = "canvas-default"
 ) {
   let canvas;
 
   // Application
   let app = new PIXI.Application({
     width: document.getElementById(wrapperId).offsetWidth,
-    height: document.getElementById(wrapperId).offsetWidth / aspectRatio,
+    height: document.getElementById(wrapperId).offsetWidth,
     antialias: true,
     transparent: true
   });
@@ -39,7 +38,7 @@ function initFilter(
   canvas = wrapperElement.querySelector("canvas");
 
   return {
-    startAnimation: function startAnimation(productImage, title, aspectRatio) {
+    startAnimation: function startAnimation(productImage, title) {
       // loader.add(`image-${title}`, image);
       // loader.load(() => {
       //   image.texture = PIXI.utils.TextureCache[`image-${title}`];
@@ -49,9 +48,8 @@ function initFilter(
       container.addChild(newImage);
       newImage.x = 5;
       newImage.y = 5;
-      // newImage.width = app.renderer.width - 10;
+      newImage.width = app.renderer.width - 10;
       newImage.height = app.renderer.height - 10;
-      newImage.width = newImage.height * aspectRatio;
 
       // Filter
       const shockwaveFilter = new ShockwaveFilter(

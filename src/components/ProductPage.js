@@ -31,17 +31,11 @@ class ProductPage extends Component {
 
   render() {
     const { product, checkout } = this.props;
-    let productPrice, productAspectRatio;
+    let productPrice;
     let productMarkup;
 
     if (product.hasOwnProperty("images")) {
       productPrice = product.variants[0].price;
-      productAspectRatio = parseFloat(
-        product.variants[0].selectedOptions.filter(
-          option => option.name === "Aspect Ratio"
-        )[0].value,
-        10
-      );
       productMarkup = { __html: product.descriptionHtml };
     }
     return (
@@ -67,7 +61,6 @@ class ProductPage extends Component {
                         image={product.images[0].src}
                         handle={product.handle}
                         size="default"
-                        aspectRatio={productAspectRatio}
                       />
                     </div>
                   )}
@@ -106,7 +99,7 @@ class ProductPage extends Component {
             <div className="Product-checkout">
               <div>
                 <div className="Product-checkout__image">
-                  <img src={product.images[0].src} alt="product" />
+                  <img src={product.images[1].src} alt="product" />
                 </div>
                 <div className="Product-checkout__info">
                   <h1 className="Product-checkout__title">{product.title}</h1>

@@ -13,11 +13,7 @@ class TextureDisplacement extends Component {
   }
 
   componentDidMount() {
-    this.initFilter = initFilter(
-      this.props.image,
-      this.wrapperId,
-      this.props.aspectRatio
-    );
+    this.initFilter = initFilter(this.props.image, this.wrapperId);
     this.initFilter.startAnimation();
   }
 
@@ -34,6 +30,5 @@ export default TextureDisplacement;
 TextureDisplacement.defaultProps = {
   image: "/assets/images/product-placeholder.jpg",
   handle: "default",
-  size: "default",
-  aspectRatio: 1
+  size: "default"
 };

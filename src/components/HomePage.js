@@ -199,12 +199,6 @@ class HomePage extends Component {
         option => option.name === "Size"
       )[0].value;
       currentProductPrice = currentProduct.variants[0].price;
-      // currentProductAspectRatio = parseInt(
-      //   currentProduct.variants[0].selectedOptions.filter(
-      //     option => option.name === "Aspect Ratio"
-      //   )[0].value,
-      //   10
-      // );
     }
 
     return (
