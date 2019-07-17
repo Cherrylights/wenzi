@@ -10,7 +10,7 @@ function initFilter(
   // Application
   let app = new PIXI.Application({
     width: document.getElementById(wrapperId).offsetWidth,
-    height: document.getElementById(wrapperId).offsetWidth / aspectRatio,
+    height: document.getElementById(wrapperId).offsetWidth,
     antialias: true,
     transparent: true,
     resolution: 1
@@ -34,8 +34,9 @@ function initFilter(
   background.x = 5;
   background.y = 5;
   background.scale.set(1, 1);
-  background.width = app.renderer.width - 10;
+  // background.width = app.renderer.width - 10;
   background.height = app.renderer.height - 10;
+  background.width = background.height * aspectRatio;
 
   // setTimeout(() => {
   //   const loader = new PIXI.Loader();

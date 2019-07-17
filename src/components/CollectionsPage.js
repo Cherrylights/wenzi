@@ -1,8 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import SmoothScroll from "../utils/SmoothScroll";
 
 class CollectionsPage extends Component {
+  componentDidMount() {
+    new SmoothScroll();
+  }
+
+  componentDidUpdate(prevProps) {
+    //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
+    if (this.props.collections !== prevProps.collections) {
+      new SmoothScroll();
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.style.cssText = "";
+  }
   render() {
     const { collections } = this.props;
     // filter out the featured collections and available products
@@ -13,8 +28,8 @@ class CollectionsPage extends Component {
     );
     // console.log(filteredCollections);
     return (
-      <div className="collections-page transition-item">
-        <div className="Collections">
+      <div className="collections-page transition-item smooth-scroll-wrapper">
+        <div className="Collections smooth-scroll-content">
           {filteredCollections.map(collection => (
             <div key={collection.id} className="Collection">
               <h1 className="Collection__title">{collection.title}</h1>

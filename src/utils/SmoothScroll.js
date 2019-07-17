@@ -23,8 +23,8 @@ class SmoothScroll {
       last: 0
     };
     this.dom = {
-      el: document.querySelector(".product-page"),
-      content: document.querySelector(".product-page-content")
+      el: document.querySelector(".smooth-scroll-wrapper"),
+      content: document.querySelector(".smooth-scroll-content")
     };
     this.rAF = null;
     this.init();
@@ -49,7 +49,7 @@ class SmoothScroll {
 
   resize() {
     this.setHeight();
-    // this.scroll();
+    this.scroll();
   }
 
   preload() {

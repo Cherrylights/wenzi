@@ -19,7 +19,8 @@ import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
 import Cart from "./Cart";
-import AllWorkPage from "./AllWorkPage";
+// import AllWorkPage from "./AllWorkPage";
+import AllProductsPage from "./AllProductsPage";
 import AboutPage from "./AboutPage";
 import LocalStorePage from "./LocalStorePage";
 import NotFoundPage from "./NotFoundPage";
@@ -66,7 +67,8 @@ class App extends Component {
               <Route exact path="/" component={HomePage} />
               <Route path="/work/:handle" component={ProductPage} />
               <Route exact path="/collections" component={CollectionsPage} />
-              <Route exact path="/works" component={AllWorkPage} />
+              {/* <Route exact path="/works" component={AllWorkPage} /> */}
+              <Route exact path="/works" component={AllProductsPage} />
               <Route exact path="/about" component={AboutPage} />
               <Route exact path="/localstore" component={LocalStorePage} />
               <Route component={NotFoundPage} />

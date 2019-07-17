@@ -10,12 +10,19 @@ import {
 import TextureDisplacement from "./TextureDisplacement";
 import Charming from "react-charming";
 import ProductOverlay from "./ProductOverlay";
-// import SmoothScroll from "../utils/SmoothScroll";
+import SmoothScroll from "../utils/SmoothScroll";
 
 class ProductPage extends Component {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.handle);
-    // new SmoothScroll();
+    new SmoothScroll();
+  }
+
+  componentDidUpdate(prevProps) {
+    //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
+    if (this.props.product !== prevProps.product) {
+      new SmoothScroll();
+    }
   }
 
   componentWillUnmount() {
@@ -29,7 +36,7 @@ class ProductPage extends Component {
 
     if (product.hasOwnProperty("images")) {
       productPrice = product.variants[0].price;
-      productAspectRatio = parseInt(
+      productAspectRatio = parseFloat(
         product.variants[0].selectedOptions.filter(
           option => option.name === "Aspect Ratio"
         )[0].value,
@@ -38,8 +45,8 @@ class ProductPage extends Component {
       productMarkup = { __html: product.descriptionHtml };
     }
     return (
-      <div className="product-page transition-item">
-        <div className="product-page-content">
+      <div className="product-page transition-item smooth-scroll-wrapper">
+        <div className="product-page-content smooth-scroll-content">
           {product.hasOwnProperty("images") ? (
             <div className="Product-hero">
               <div>
@@ -97,30 +104,32 @@ class ProductPage extends Component {
           )}
           {product.hasOwnProperty("images") ? (
             <div className="Product-checkout">
-              <div className="Product-checkout__image">
-                <img src={product.images[0].src} alt="product" />
-              </div>
-              <div className="Product-checkout__info">
-                <h1 className="Product-checkout__title">{product.title}</h1>
-                <div
-                  className="Product-checkout__params"
-                  dangerouslySetInnerHTML={productMarkup}
-                />
-                <button
-                  className="Product-checkout__button"
-                  onClick={() => {
-                    this.props.addToCart(
-                      product.variants[0].id,
-                      1,
-                      checkout.id
-                    );
-                    this.props.toggleCart();
-                  }}
-                >
-                  <span>Add to Cart</span>
-                  <span className="dollar">$</span>
-                  <span>{productPrice}</span>
-                </button>
+              <div>
+                <div className="Product-checkout__image">
+                  <img src={product.images[0].src} alt="product" />
+                </div>
+                <div className="Product-checkout__info">
+                  <h1 className="Product-checkout__title">{product.title}</h1>
+                  <div
+                    className="Product-checkout__params"
+                    dangerouslySetInnerHTML={productMarkup}
+                  />
+                  <button
+                    className="Product-checkout__button"
+                    onClick={() => {
+                      this.props.addToCart(
+                        product.variants[0].id,
+                        1,
+                        checkout.id
+                      );
+                      this.props.toggleCart();
+                    }}
+                  >
+                    <span>Add to Cart</span>
+                    <span className="dollar">$</span>
+                    <span>{productPrice}</span>
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
