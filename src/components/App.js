@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import {
@@ -23,7 +23,7 @@ import Cart from "./Cart";
 import AllProductsPage from "./AllProductsPage";
 import AboutPage from "./AboutPage";
 import LocalStorePage from "./LocalStorePage";
-import NotFoundPage from "./NotFoundPage";
+// import NotFoundPage from "./NotFoundPage";
 
 const routes = [
   { path: "/", Component: HomePage },
@@ -77,6 +77,7 @@ class App extends Component {
               <Route exact path="/localstores" component={LocalStorePage} />
               <Route component={NotFoundPage} />
             </Switch> */}
+
             {routes.map(({ path, Component }) => {
               return (
                 <Route key={path} exact path={path}>
@@ -95,7 +96,6 @@ class App extends Component {
                 </Route>
               );
             })}
-
             <Menu />
             <Cart />
           </div>

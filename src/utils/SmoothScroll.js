@@ -9,10 +9,10 @@ const math = {
   }
 };
 
-const config = {
-  height: window.innerHeight,
-  width: window.innerWidth
-};
+// const config = {
+//   height: window.innerHeight,
+//   width: window.innerWidth
+// };
 
 class SmoothScroll {
   constructor() {
@@ -50,7 +50,6 @@ class SmoothScroll {
   resize() {
     this.setHeight();
     this.scroll();
-    console.log("resize");
   }
 
   preload() {
@@ -74,10 +73,10 @@ class SmoothScroll {
       this.data.last = 0;
     }
 
-    const diff = this.data.current - this.data.last;
-    const acc = diff / config.width;
-    const velo = +acc;
-    const skew = velo * 7.5;
+    // const diff = this.data.current - this.data.last;
+    // const acc = diff / config.width;
+    // const velo = +acc;
+    // const skew = velo * 7.5;
 
     this.dom.content.style.transform = `translate3d(0, -${
       this.data.last
