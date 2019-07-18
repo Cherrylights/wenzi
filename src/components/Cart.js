@@ -76,7 +76,10 @@ class Cart extends Component {
             <button
               className="Cart__checkoutButton"
               disabled={isCartEmpty}
-              onClick={this.openCheckout}
+              onClick={() => {
+                toggleCart();
+                this.openCheckout();
+              }}
             >
               Checkout
             </button>
