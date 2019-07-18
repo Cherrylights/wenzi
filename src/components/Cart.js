@@ -11,7 +11,7 @@ class Cart extends Component {
   }
 
   openCheckout() {
-    window.open(this.props.checkout.webUrl, "_self");
+    window.open(this.props.checkout.webUrl);
   }
 
   componentDidUpdate(prevProps) {

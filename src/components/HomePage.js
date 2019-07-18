@@ -30,6 +30,7 @@ class HomePage extends Component {
     this.props.loadFeaturedProducts();
     //set a class on the body tag to make it overflow hidden (need to check if this is a legit way to do it)
     document.body.classList.toggle("scrollLock", true);
+    document.body.style.cssText = "";
   }
 
   componentWillUnmount() {
@@ -311,7 +312,13 @@ class HomePage extends Component {
         {!isMobile && (
           <nav className="BottomNav">
             <div className="Artist">
-              <span>Artist / Designer</span>
+              <a
+                href="https://www.wenzi.ca/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Artist / Designer
+              </a>
             </div>
             <div className="Social-media">
               <a href="/" alt="instagram">

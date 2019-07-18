@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class LocalStorePage extends Component {
+  componentDidMount() {
+    document.body.style.cssText = "";
+  }
   render() {
     return (
       <div className="local-store-page transition-item">

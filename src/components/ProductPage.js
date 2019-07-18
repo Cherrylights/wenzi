@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { isMobile, isBrowser } from "react-device-detect";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import {
   loadProduct,
   unloadProduct,
@@ -15,13 +17,18 @@ import SmoothScroll from "../utils/SmoothScroll";
 class ProductPage extends Component {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.handle);
-    new SmoothScroll();
+    if (isBrowser) {
+      document.body.style.cssText = "";
+      new SmoothScroll();
+    }
   }
 
   componentDidUpdate(prevProps) {
-    //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
     if (this.props.product !== prevProps.product) {
-      new SmoothScroll();
+      if (isBrowser) {
+        document.body.style.cssText = "";
+        new SmoothScroll();
+      }
     }
   }
 
@@ -97,7 +104,7 @@ class ProductPage extends Component {
           )}
           {product.hasOwnProperty("images") ? (
             <div className="Product-checkout">
-              <div>
+              <div className="Product-checkout__wrapper">
                 <div className="Product-checkout__image">
                   <img src={product.images[1].src} alt="product" />
                 </div>
@@ -108,7 +115,7 @@ class ProductPage extends Component {
                     dangerouslySetInnerHTML={productMarkup}
                   />
                   <button
-                    className="Product-checkout__button"
+                    className="Product-checkout__buyButton"
                     onClick={() => {
                       this.props.addToCart(
                         product.variants[0].id,
@@ -123,6 +130,13 @@ class ProductPage extends Component {
                     <span>{productPrice}</span>
                   </button>
                 </div>
+                {isBrowser ? (
+                  <Link className="Product-checkout__backButton" to="/works">
+                    Back to Products
+                  </Link>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ) : (
@@ -144,4 +158,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { loadProduct, unloadProduct, addToCart, toggleCart }
-)(ProductPage);
+)(withRouter(ProductPage));

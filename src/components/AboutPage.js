@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class AboutPage extends Component {
+  componentDidMount() {
+    document.body.style.cssText = "";
+  }
   render() {
     return (
       <div className="about-page transition-item">

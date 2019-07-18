@@ -50,6 +50,7 @@ class SmoothScroll {
   resize() {
     this.setHeight();
     this.scroll();
+    console.log("resize");
   }
 
   preload() {

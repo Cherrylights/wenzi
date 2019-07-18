@@ -103,7 +103,8 @@ body.scrollLock {
 }
 
 button:hover {
-  border-color: #ccc;
+  // border-color: #ccc;
+  border-color: #a6a6a6;
 }
 
 a {
@@ -115,6 +116,7 @@ a {
   font-weight: 400;
   line-height: 1.5;
 }
+
 h1 {
   font-family: "Murmur Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -125,6 +127,7 @@ h1 {
   color: #1a1a1a;
   letter-spacing: 0.26rem;
   text-transform: uppercase;
+  margin-top: 0;
 }
 
 p,
@@ -434,7 +437,7 @@ figure {
   @extend %margin-for-title-above-image;
   width: 80%;
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .FeaturedProducts__image {
@@ -653,6 +656,10 @@ figure {
   max-width: 400px;
 }
 
+.Product-checkout__wrapper {
+  text-align: center;
+}
+
 .Product-checkout__image {
   width: 80%;
   max-width: 74vh;
@@ -675,7 +682,7 @@ figure {
 .Product-checkout__params .Product-info__desc {
   display: none;
 }
-.Product-checkout__button {
+.Product-checkout__buyButton {
   width: auto;
   padding: 16px 30px 14px 30px;
   border: 1px solid #1a1a1a;
@@ -686,6 +693,16 @@ figure {
   font-family: "Helvetica Neue";
   transition: border-color 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
   position: relative;
+}
+
+.Product-checkout__backButton {
+  display: block;
+  margin-top: 2rem;
+  transition: color 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.Product-checkout__backButton:hover {
+  color: #6b6b6b;
 }
 
 /*************** AllWorkPage ***************/
@@ -1326,16 +1343,16 @@ figure {
 .slide__sub-title {
   position: absolute;
   top: 15%;
-  left: 5vw;
+  left: 5.5vw;
   color: rgba(0, 0, 0, 0.5);
-  font-size: 1vw;
+  font-size: 0.9vw;
 }
 .slide__title {
   position: absolute;
-  top: 7.5%;
-  left: 7.5vw;
+  top: 18%;
+  left: 8vw;
   color: #1a1a1a;
-  font-size: 4vw;
+  font-size: 3.6vw;
   z-index: 2;
   overflow: hidden;
 }
@@ -1344,7 +1361,7 @@ figure {
   position: absolute;
   top: 100%;
   right: 5%;
-  font-size: 1.15vw;
+  // font-size: 1.15vw;
   padding-top: 1.5vw;
 }
 .slide__img {
@@ -1400,4 +1417,31 @@ figure {
   -webkit-transform-origin: left;
   transform-origin: left;
   background-color: rgba(0, 0, 0, 0.25);
+}
+
+/*************** Transition ****************/
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.page-enter {
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 1500ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 0ms;
 }

@@ -9,7 +9,7 @@ import {
   createCheckout,
   fetchCheckout
 } from "../actions/actions";
-//import PageTransition from "react-router-page-transition";
+import { CSSTransition } from "react-transition-group";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBounday from "./ErrorBoundary";
 import Overlay from "./Overlay";
@@ -24,6 +24,15 @@ import AllProductsPage from "./AllProductsPage";
 import AboutPage from "./AboutPage";
 import LocalStorePage from "./LocalStorePage";
 import NotFoundPage from "./NotFoundPage";
+
+const routes = [
+  { path: "/", Component: HomePage },
+  { path: "/work/:handle", Component: ProductPage },
+  { path: "/collections", Component: CollectionsPage },
+  { path: "/works", Component: AllProductsPage },
+  { path: "/about", Component: AboutPage },
+  { path: "/localstores", Component: LocalStorePage }
+];
 
 class App extends Component {
   componentDidMount() {
@@ -59,23 +68,34 @@ class App extends Component {
           <div className={isMobile ? "mobile" : "desktop"}>
             {isMobileOnly ? "" : <Overlay />}
             <Nav />
-            {/* <Route
-            render={({ location }) => (
-              <PageTransition timeout={2000}> */}
-            {/* <Switch location={location}> */}
-            <Switch>
+            {/* <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/work/:handle" component={ProductPage} />
+              <Route exact path="/work/:handle" component={ProductPage} />
               <Route exact path="/collections" component={CollectionsPage} />
-              {/* <Route exact path="/works" component={AllWorkPage} /> */}
               <Route exact path="/works" component={AllProductsPage} />
               <Route exact path="/about" component={AboutPage} />
-              <Route exact path="/localstore" component={LocalStorePage} />
+              <Route exact path="/localstores" component={LocalStorePage} />
               <Route component={NotFoundPage} />
-            </Switch>
-            {/* </PageTransition>
-            )}
-          /> */}
+            </Switch> */}
+            {routes.map(({ path, Component }) => {
+              return (
+                <Route key={path} exact path={path}>
+                  {({ match }) => (
+                    <CSSTransition
+                      in={match != null}
+                      timeout={1500}
+                      classNames="page"
+                      unmountOnExit
+                    >
+                      <div className="page">
+                        <Component />
+                      </div>
+                    </CSSTransition>
+                  )}
+                </Route>
+              );
+            })}
+
             <Menu />
             <Cart />
           </div>

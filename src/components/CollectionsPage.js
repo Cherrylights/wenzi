@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { isBrowser } from "react-device-detect";
 import SmoothScroll from "../utils/SmoothScroll";
 
 class CollectionsPage extends Component {
   componentDidMount() {
-    new SmoothScroll();
+    if (isBrowser) {
+      document.body.style.cssText = "";
+      new SmoothScroll();
+    }
   }
 
   componentDidUpdate(prevProps) {
     //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
     if (this.props.collections !== prevProps.collections) {
-      new SmoothScroll();
+      if (isBrowser) {
+        document.body.style.cssText = "";
+        new SmoothScroll();
+      }
     }
   }
 
-  componentWillUnmount() {
-    document.body.style.cssText = "";
-  }
   render() {
     const { collections } = this.props;
     // filter out the featured collections and available products

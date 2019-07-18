@@ -44,7 +44,7 @@ class Menu extends Component {
             <Link to="/about" className="Menu__link" onClick={toggleMenu}>
               About
             </Link>
-            <Link to="/localstore" className="Menu__link" onClick={toggleMenu}>
+            <Link to="/localstores" className="Menu__link" onClick={toggleMenu}>
               Find in Store
             </Link>
           </ul>

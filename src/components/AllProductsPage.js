@@ -7,6 +7,7 @@ import Smooth from "../utils/Smooth";
 class AllProducts extends Component {
   componentDidMount() {
     if (isBrowser) {
+      document.body.style.cssText = "";
       new Smooth();
     }
   }
@@ -15,14 +16,13 @@ class AllProducts extends Component {
     if (isBrowser) {
       //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
       if (this.props.availableProducts !== prevProps.availableProducts) {
+        document.body.style.cssText = "";
         new Smooth();
       }
     }
   }
 
-  componentWillUnmount() {
-    document.body.style.cssText = "";
-  }
+  componentWillUnmount() {}
 
   render() {
     const { availableProducts } = this.props;
