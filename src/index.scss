@@ -593,16 +593,48 @@ figure {
 
 .Product-hero__discover {
   display: block;
+  position: relative;
+  opacity: 0;
+  animation-name: discover-text-fade-in;
+  animation-duration: 0.5s;
+  animation-delay: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 .Product-hero__line {
   width: 1px;
-  height: 60px;
+  height: 0px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: 30px;
   background: #1a1a1a;
+  animation-name: discover-line-fade-in;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes discover-text-fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes discover-line-fade-in {
+  from {
+    height: 0;
+  }
+  to {
+    height: 60px;
+  }
 }
 
 .Product-info {
@@ -675,9 +707,10 @@ figure {
 }
 .Product-checkout__title {
   line-height: 1.75;
+  margin: 15px 0 10px;
 }
 .Product-checkout__params {
-  margin-bottom: 3vh;
+  margin-bottom: 2.5vh;
 }
 .Product-checkout__params .Product-info__desc {
   display: none;
@@ -697,7 +730,7 @@ figure {
 
 .Product-checkout__backButton {
   display: block;
-  margin-top: 2rem;
+  margin-top: 5vh;
   transition: color 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 

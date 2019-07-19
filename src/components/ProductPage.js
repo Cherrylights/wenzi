@@ -129,14 +129,14 @@ class ProductPage extends Component {
                     <span className="dollar">$</span>
                     <span>{productPrice}</span>
                   </button>
+                  {isBrowser ? (
+                    <Link className="Product-checkout__backButton" to="/works">
+                      Back to Products
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                 </div>
-                {isBrowser ? (
-                  <Link className="Product-checkout__backButton" to="/works">
-                    Back to Products
-                  </Link>
-                ) : (
-                  ""
-                )}
               </div>
             </div>
           ) : (
