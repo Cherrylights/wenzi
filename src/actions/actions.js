@@ -9,9 +9,17 @@ import {
   LOAD_PRODUCT,
   UNLOAD_PRODUCT,
   LOAD_COLLECTIONS,
-  LOAD_AVAILABLE_PRODUCTS
+  LOAD_AVAILABLE_PRODUCTS,
+  MARK_AS_LOADED
 } from "../constants/actionTypes";
 import client from "../api/client";
+
+// *******  MARK AS LOADED *******
+export const markAsLoaded = () => {
+  return {
+    type: MARK_AS_LOADED
+  };
+};
 
 // *******  LOAD PRODUCTS  *******
 export const loadProducts = () => {

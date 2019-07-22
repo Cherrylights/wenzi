@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { isMobile, isMobileOnly } from "react-device-detect";
 import {
@@ -10,7 +10,6 @@ import {
   fetchCheckout
 } from "../actions/actions";
 import { CSSTransition } from "react-transition-group";
-import { BrowserRouter } from "react-router-dom";
 import ErrorBounday from "./ErrorBoundary";
 import Overlay from "./Overlay";
 import Menu from "./Menu";
@@ -23,10 +22,12 @@ import Cart from "./Cart";
 import AllProductsPage from "./AllProductsPage";
 import AboutPage from "./AboutPage";
 import LocalStorePage from "./LocalStorePage";
+import CarouselPage from "./CarouselPage";
 // import NotFoundPage from "./NotFoundPage";
 
 const routes = [
-  { path: "/", Component: HomePage },
+  // { path: "/", Component: HomePage },
+  { path: "/welcome", Component: CarouselPage },
   { path: "/work/:handle", Component: ProductPage },
   { path: "/collections", Component: CollectionsPage },
   { path: "/works", Component: AllProductsPage },
@@ -77,7 +78,17 @@ class App extends Component {
               <Route exact path="/localstores" component={LocalStorePage} />
               <Route component={NotFoundPage} />
             </Switch> */}
-
+            <Route
+              exact
+              path="/"
+              render={() =>
+                this.props.isInitialLoad ? (
+                  <Redirect to="/welcome" />
+                ) : (
+                  <HomePage />
+                )
+              }
+            />
             {routes.map(({ path, Component }) => {
               return (
                 <Route key={path} exact path={path}>
@@ -85,10 +96,10 @@ class App extends Component {
                     <CSSTransition
                       in={match != null}
                       timeout={1500}
-                      classNames="page"
+                      classNames="Page"
                       unmountOnExit
                     >
-                      <div className="page">
+                      <div className="Page">
                         <Component />
                       </div>
                     </CSSTransition>
@@ -107,7 +118,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products
+    products: state.products,
+    isInitialLoad: state.isInitialLoad
   };
 }
 

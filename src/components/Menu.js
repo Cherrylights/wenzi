@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { connect } from "react-redux";
-import { toggleMenu } from "../actions/actions";
+import { toggleMenu, markAsLoaded } from "../actions/actions";
 
 class Menu extends Component {
   render() {
-    const { isMenuOpen, toggleMenu } = this.props;
+    const { isMenuOpen, toggleMenu, markAsLoaded } = this.props;
     return (
       <div className={`Menu${isMenuOpen ? " Menu--open" : ""}`}>
         <div className="Menu__header">
@@ -26,7 +26,14 @@ class Menu extends Component {
         </div>
         <div className="Menu__body">
           <ul className="Menu__items">
-            <Link to="/" className="Menu__link" onClick={toggleMenu}>
+            <Link
+              to="/"
+              className="Menu__link"
+              onClick={() => {
+                markAsLoaded();
+                toggleMenu();
+              }}
+            >
               Home
             </Link>
             <Link to="/works" className="Menu__link" onClick={toggleMenu}>
@@ -62,5 +69,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { toggleMenu }
+  { toggleMenu, markAsLoaded }
 )(Menu);

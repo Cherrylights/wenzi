@@ -46,7 +46,7 @@ class ProductPage extends Component {
       productMarkup = { __html: product.descriptionHtml };
     }
     return (
-      <div className="product-page transition-item smooth-scroll-wrapper">
+      <div className="product-page smooth-scroll-wrapper">
         <div className="product-page-content smooth-scroll-content">
           {product.hasOwnProperty("images") ? (
             <div className="Product-hero">

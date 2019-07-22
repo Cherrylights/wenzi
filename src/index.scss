@@ -224,6 +224,105 @@ figure {
   opacity: 1;
 }
 
+/*************** Carousel Page ***************/
+
+.Carousel__wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.Carousel__imageWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.Carousel__image {
+  position: absolute;
+  top: 0;
+  left: -3%;
+  width: 120%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+}
+
+#Carousel__image1 {
+  background-image: url("/assets/images/Lagoon-HD.jpg");
+}
+
+#Carousel__image2 {
+  background-image: url("/assets/images/Dulcet-HD.jpg");
+}
+
+#Carousel__image3 {
+  background-image: url("/assets/images/Erstwhile-HD.jpg");
+}
+
+#Carousel__image4 {
+  background-image: url("/assets/images/Floral-HD.jpg");
+}
+
+.Carousel__overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.Carousel__text {
+  position: absolute;
+  width: 100%;
+  bottom: 50%;
+  text-align: center;
+  transform: translateY(50%);
+  z-index: 1;
+  h1 {
+    line-height: 1.4;
+    margin: 2rem 0;
+  }
+  p {
+    letter-spacing: 2px;
+  }
+  * {
+    color: white;
+  }
+}
+
+.Carousel__button {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-200%);
+  z-index: 1;
+  display: block;
+  padding: 10%;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  padding: 2rem;
+  animation-name: explore-button-animation;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes explore-button-animation {
+  from {
+    transform: translate3d(-50%, -10px, 0);
+  }
+  to {
+    transform: translate3d(-50%, 10px, 0);
+  }
+}
+
 /*************** Top Nav ***************/
 .TopNav {
   position: fixed;
@@ -1213,6 +1312,11 @@ figure {
 
 // Media Queries for iPad in landscape mode
 @media only screen and (min-width: 1000px) {
+  .Carousel__text {
+    width: 40%;
+    left: 10%;
+    text-align: left;
+  }
   .FeaturedProducts__image,
   .Product-hero__image {
     width: 82%;
@@ -1453,7 +1557,7 @@ figure {
 }
 
 /*************** Transition ****************/
-.page {
+.Page {
   position: absolute;
   top: 0;
   left: 0;
@@ -1461,20 +1565,20 @@ figure {
   height: 100vh;
 }
 
-.page-enter {
+.Page-enter {
   opacity: 0;
 }
 
-.page-enter-active {
+.Page-enter-active {
   opacity: 1;
   transition: opacity 1500ms;
 }
 
-.page-exit {
+.Page-exit {
   opacity: 1;
 }
 
-.page-exit-active {
+.Page-exit-active {
   opacity: 0;
   transition: opacity 0ms;
 }

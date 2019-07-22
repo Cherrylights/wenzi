@@ -8,6 +8,7 @@ import currentIndex from "./currentIndex";
 import product from "./product";
 import collections from "./collections";
 import availableProducts from "./availableProducts";
+import isInitialLoad from "./isInitialLoad";
 
 export default combineReducers({
   products,
@@ -18,5 +19,6 @@ export default combineReducers({
   currentIndex,
   product,
   collections,
-  availableProducts
+  availableProducts,
+  isInitialLoad
 });

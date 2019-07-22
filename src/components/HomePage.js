@@ -335,7 +335,8 @@ class HomePage extends Component {
 function mapStateToProps(state) {
   return {
     featuredProducts: state.featuredProducts,
-    currentIndex: state.currentIndex
+    currentIndex: state.currentIndex,
+    isInitialLoad: state.isInitialLoad
   };
 }
 
