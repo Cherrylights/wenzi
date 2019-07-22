@@ -299,27 +299,25 @@ figure {
   position: absolute;
   bottom: 8%;
   left: 50%;
-  transform: translateX(-200%);
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 16px 30px 14px 30px;
+  border: 1px solid #fff;
+  border-radius: 4px;
   z-index: 1;
   display: block;
-  padding: 10%;
   color: white;
   letter-spacing: 2px;
   font-size: 1.1rem;
-  padding: 2rem;
-  animation-name: explore-button-animation;
-  animation-duration: 3s;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
+  width: 80%;
 }
 
 @keyframes explore-button-animation {
   from {
-    transform: translate3d(-50%, -10px, 0);
+    transform: translate3d(-50%, -8px, 0);
   }
   to {
-    transform: translate3d(-50%, 10px, 0);
+    transform: translate3d(-50%, 8px, 0);
   }
 }
 
@@ -1316,6 +1314,16 @@ figure {
     width: 40%;
     left: 10%;
     text-align: left;
+  }
+  .Carousel__button {
+    border: none;
+    text-align: initial;
+    width: auto;
+    animation-name: explore-button-animation;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
   }
   .FeaturedProducts__image,
   .Product-hero__image {
