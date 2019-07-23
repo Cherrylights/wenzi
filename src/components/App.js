@@ -76,7 +76,17 @@ class App extends Component {
                 this.props.isInitialLoad ? (
                   <Redirect to="/welcome" />
                 ) : (
-                  <HomePage />
+                  <CSSTransition
+                    in={true}
+                    timeout={1500}
+                    classNames="Page"
+                    unmountOnExit
+                    exit={false}
+                  >
+                    <div className="Page">
+                      <HomePage />
+                    </div>
+                  </CSSTransition>
                 )
               }
             />
@@ -89,6 +99,7 @@ class App extends Component {
                       timeout={1500}
                       classNames="Page"
                       unmountOnExit
+                      exit={false}
                     >
                       <div className="Page">
                         <Component />

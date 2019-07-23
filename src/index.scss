@@ -140,6 +140,10 @@ span {
   letter-spacing: 0.5px;
 }
 
+span {
+  line-height: 0;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -197,6 +201,12 @@ figure {
   font-size: 3.8rem;
   position: relative;
   margin: 3px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 /*************** Page Transitions ***************/
@@ -343,6 +353,10 @@ figure {
   span {
     cursor: pointer;
   }
+}
+
+body.carousel .TopNav {
+  display: none;
 }
 
 .Menu-button {
@@ -718,7 +732,7 @@ figure {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 30px;
+  top: 15px;
   background: #1a1a1a;
   animation-name: discover-line-fade-in;
   animation-duration: 0.5s;
@@ -734,7 +748,7 @@ figure {
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, -5px, 0);
   }
 }
 
@@ -743,7 +757,7 @@ figure {
     height: 0;
   }
   to {
-    height: 60px;
+    height: 50px;
   }
 }
 
