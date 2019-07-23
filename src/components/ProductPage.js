@@ -17,16 +17,16 @@ import SmoothScroll from "../utils/SmoothScroll";
 class ProductPage extends Component {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.handle);
+    document.body.style.cssText = "";
     if (isBrowser) {
-      document.body.style.cssText = "";
       new SmoothScroll();
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.product !== prevProps.product) {
+      document.body.style.cssText = "";
       if (isBrowser) {
-        document.body.style.cssText = "";
         new SmoothScroll();
       }
     }

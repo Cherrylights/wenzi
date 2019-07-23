@@ -11,9 +11,9 @@ import {
 } from "../actions/actions";
 import { CSSTransition } from "react-transition-group";
 import ErrorBounday from "./ErrorBoundary";
-import Overlay from "./Overlay";
 import Menu from "./Menu";
 import Nav from "./Nav";
+import Overlay from "./Overlay";
 import HomePage from "./HomePage";
 import ProductPage from "./ProductPage";
 import CollectionsPage from "./CollectionsPage";
@@ -69,15 +69,6 @@ class App extends Component {
           <div className={isMobile ? "mobile" : "desktop"}>
             {isMobileOnly ? "" : <Overlay />}
             <Nav />
-            {/* <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/work/:handle" component={ProductPage} />
-              <Route exact path="/collections" component={CollectionsPage} />
-              <Route exact path="/works" component={AllProductsPage} />
-              <Route exact path="/about" component={AboutPage} />
-              <Route exact path="/localstores" component={LocalStorePage} />
-              <Route component={NotFoundPage} />
-            </Switch> */}
             <Route
               exact
               path="/"

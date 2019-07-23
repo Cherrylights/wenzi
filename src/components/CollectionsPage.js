@@ -6,8 +6,8 @@ import SmoothScroll from "../utils/SmoothScroll";
 
 class CollectionsPage extends Component {
   componentDidMount() {
+    document.body.style.cssText = "";
     if (isBrowser) {
-      document.body.style.cssText = "";
       new SmoothScroll();
     }
   }
@@ -15,8 +15,8 @@ class CollectionsPage extends Component {
   componentDidUpdate(prevProps) {
     //Make sure the component will get properly re-rendered even if the props get updated after the componentDidMount call
     if (this.props.collections !== prevProps.collections) {
+      document.body.style.cssText = "";
       if (isBrowser) {
-        document.body.style.cssText = "";
         new SmoothScroll();
       }
     }
@@ -45,7 +45,11 @@ class CollectionsPage extends Component {
                       image={product.images[0].src}
                       handle={product.handle}
                     /> */}
-                      <img src={product.images[0].src} alt="scarf" />
+                      <img
+                        className="Collection__image"
+                        src={product.images[0].src}
+                        alt="scarf"
+                      />
                     </Link>
                     <p className="AvailableProducts__name">{product.title}</p>
                   </div>
