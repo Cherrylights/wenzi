@@ -23,7 +23,7 @@ $page-content-margin-top: 15vh;
 }
 
 %margin-for-title-above-image {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 /*************** Fonts ***************/
@@ -55,6 +55,7 @@ body {
 html {
   box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
@@ -716,7 +717,7 @@ body.carousel .TopNav {
 }
 
 .Product-hero__discover {
-  display: block;
+  display: inline-block;
   position: relative;
   opacity: 0;
   animation-name: discover-text-fade-in;
@@ -732,7 +733,7 @@ body.carousel .TopNav {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 15px;
+  top: 25px;
   background: #1a1a1a;
   animation-name: discover-line-fade-in;
   animation-duration: 0.5s;
@@ -748,7 +749,7 @@ body.carousel .TopNav {
   }
   to {
     opacity: 1;
-    transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
