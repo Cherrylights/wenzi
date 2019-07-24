@@ -241,7 +241,36 @@ figure {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  z-index: 3;
+  background: #000;
+}
+
+.Carousel__loading {
+  color: #fff;
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  text-align: center;
+  h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 6px;
+    font-size: 38px;
+  }
+}
+
+.Carousel__loading.Carousel-loaded {
+  // display: none;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 1s ease 1s, z-index 0.5s 2s;
 }
 
 .Carousel__imageWrapper {
