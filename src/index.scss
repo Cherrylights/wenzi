@@ -136,13 +136,8 @@ span {
   font-size: 1.4rem;
   margin: 0;
   padding: 0;
-  line-height: 1.7;
   letter-spacing: 0.01rem;
   letter-spacing: 0.5px;
-}
-
-span {
-  line-height: 0;
 }
 
 ul {
@@ -1151,6 +1146,8 @@ body.carousel .TopNav {
   width: 30%;
   display: inline-block;
   vertical-align: middle;
+  position: relative;
+  top: 5px;
 }
 
 .Line-item__img img {
@@ -1170,7 +1167,7 @@ body.carousel .TopNav {
   align-items: center;
   justify-content: space-between;
   height: auto;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .Line-item__title {
@@ -1179,10 +1176,8 @@ body.carousel .TopNav {
   font-size: 24px;
   line-height: 1.3;
   letter-spacing: 3px;
-  -ms-grid-column: 1;
-  grid-column-start: 1;
-  -ms-grid-column-span: 9;
-  grid-column-end: span 9;
+  width: 80%;
+  overflow: hidden;
 }
 
 .Line-item__variant-title span {
@@ -1192,8 +1187,9 @@ body.carousel .TopNav {
 
 .Line-item__quantity-container {
   display: flex;
-  width: 60%;
+  width: 55%;
   justify-content: flex-start;
+  align-items: center;
   font-size: 1.4rem;
 }
 
@@ -1219,7 +1215,7 @@ body.carousel .TopNav {
 
 .Line-item__remove {
   display: inline-block;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   justify-self: right;
   padding: 10px;
   transition: opacity 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
