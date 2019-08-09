@@ -204,7 +204,7 @@ class HomePage extends Component {
 
     return (
       <div
-        className="home-page transition-item"
+        className="home-page"
         onWheel={isMobile ? null : this.scrollHandler}
         onTouchStart={isMobile ? this.touchStartHandler : null}
         onTouchEnd={isMobile ? this.touchEndHandler : null}
@@ -316,12 +316,18 @@ class HomePage extends Component {
                 href="https://www.wenzi.ca/"
                 target="_blank"
                 rel="noopener noreferrer"
+                atl="website"
               >
                 Artist / Designer
               </a>
             </div>
             <div className="Social-media">
-              <a href="/" alt="instagram">
+              <a
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="instagram"
+              >
                 Instagram
               </a>
             </div>

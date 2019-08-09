@@ -290,19 +290,19 @@ figure {
 }
 
 #Carousel__image1 {
-  background-image: url("/assets/images/Lagoon-HD.jpg");
+  background-image: url("/assets/images/Hybrid-4-HD.jpg");
 }
 
 #Carousel__image2 {
-  background-image: url("/assets/images/Dulcet-HD.jpg");
+  background-image: url("/assets/images/Hybrid-1-HD.jpg");
 }
 
 #Carousel__image3 {
-  background-image: url("/assets/images/Erstwhile-HD.jpg");
+  background-image: url("/assets/images/Hybrid-2-HD.jpg");
 }
 
 #Carousel__image4 {
-  background-image: url("/assets/images/Floral-HD.jpg");
+  background-image: url("/assets/images/Hybrid-3-HD.jpg");
 }
 
 .Carousel__overlay {
@@ -369,7 +369,7 @@ figure {
   transform: translateX(-50%);
   height: $navbar-height;
   width: 100vw;
-  max-width: 1500px;
+  max-width: 2300px;
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
@@ -597,6 +597,7 @@ body.carousel .TopNav {
   width: 100%;
   transform: scale(0.97);
   transition: transform 0.8s cubic-bezier(0.39, 0.575, 0.565, 1);
+  box-shadow: 0 0px 20px 0 rgba(69, 79, 89, 0.2);
 }
 
 .FeaturedProducts__image:hover img {
@@ -871,6 +872,11 @@ body.carousel .TopNav {
   font-family: "Helvetica Neue";
   transition: border-color 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
   position: relative;
+}
+.Product-checkout__buyButton:disabled {
+  border-color: #a6a6a6;
+  color: #a6a6a6;
+  cursor: no-drop;
 }
 
 .Product-checkout__backButton {
@@ -1678,5 +1684,5 @@ body.carousel .TopNav {
 
 .Page-exit-active {
   opacity: 0;
-  transition: opacity 0ms;
+  transition: opacity 1500ms;
 }

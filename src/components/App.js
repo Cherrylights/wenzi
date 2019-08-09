@@ -27,7 +27,7 @@ import CarouselPage from "./CarouselPage";
 
 const routes = [
   // { path: "/", Component: HomePage },
-  { path: "/welcome", Component: CarouselPage },
+  // { path: "/welcome", Component: CarouselPage },
   { path: "/work/:handle", Component: ProductPage },
   { path: "/collections", Component: CollectionsPage },
   { path: "/works", Component: AllProductsPage },
@@ -72,16 +72,16 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() =>
+              render={({ match }) =>
                 this.props.isInitialLoad ? (
                   <Redirect to="/welcome" />
                 ) : (
                   <CSSTransition
-                    in={true}
+                    in={match != null}
                     timeout={1500}
                     classNames="Page"
                     unmountOnExit
-                    exit={false}
+                    exit={true}
                   >
                     <div className="Page">
                       <HomePage />
@@ -90,6 +90,43 @@ class App extends Component {
                 )
               }
             />
+            {/* <Route exact path="/">
+              {({ match }) => {
+                if (this.props.isInitialLoad) {
+                  return <Redirect to="/welcome" />;
+                } else {
+                  return (
+                    <CSSTransition
+                      in={match != null}
+                      timeout={1500}
+                      classNames="Page"
+                      unmountOnExit
+                      exit={true}
+                    >
+                      <div className="Page">
+                        <HomePage />
+                      </div>
+                    </CSSTransition>
+                  );
+                }
+              }}
+            </Route> */}
+            <Route exact path="/welcome">
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={1500}
+                  classNames="Page"
+                  unmountOnExit
+                  exit={true}
+                >
+                  <div className="Page">
+                    <CarouselPage />
+                  </div>
+                </CSSTransition>
+              )}
+            </Route>
+
             {routes.map(({ path, Component }) => {
               return (
                 <Route key={path} exact path={path}>

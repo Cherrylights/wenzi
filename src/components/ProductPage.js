@@ -114,21 +114,28 @@ class ProductPage extends Component {
                     className="Product-checkout__params"
                     dangerouslySetInnerHTML={productMarkup}
                   />
-                  <button
-                    className="Product-checkout__buyButton"
-                    onClick={() => {
-                      this.props.addToCart(
-                        product.variants[0].id,
-                        1,
-                        checkout.id
-                      );
-                      this.props.toggleCart();
-                    }}
-                  >
-                    <span>Add to Cart</span>
-                    <span className="dollar">$</span>
-                    <span>{productPrice}</span>
-                  </button>
+                  {product.availableForSale ? (
+                    <button
+                      className="Product-checkout__buyButton"
+                      onClick={() => {
+                        this.props.addToCart(
+                          product.variants[0].id,
+                          1,
+                          checkout.id
+                        );
+                        this.props.toggleCart();
+                      }}
+                    >
+                      <span>Add to Cart</span>
+                      <span className="dollar">$</span>
+                      <span>{productPrice}</span>
+                    </button>
+                  ) : (
+                    <button className="Product-checkout__buyButton" disabled>
+                      <span>Sold out</span>
+                    </button>
+                  )}
+
                   {isBrowser ? (
                     <Link className="Product-checkout__backButton" to="/works">
                       Back to Products

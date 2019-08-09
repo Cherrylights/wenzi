@@ -60,9 +60,8 @@ function setCheckout(data) {
 export const fetchCheckout = checkoutId => {
   // return a thunk
   return (dispatch, getState) => {
-    // Fetch the cart info and see if it's been checked out
     client.checkout.fetch(checkoutId).then(checkout => {
-      // If checkout equals to null, maybe because it expires, then remove from localStorage and recreate a new one
+      // First we need to check if the checkout equals to null (maybe because it expires), then we remove it from localStorage and recreate a new one
       if (checkout === null) {
         localStorage.removeItem("checkoutId");
         client.checkout.create().then(checkout => {
@@ -70,8 +69,10 @@ export const fetchCheckout = checkoutId => {
         });
         return;
       }
+
+      // And then we need to check if it's been checked out
+      // if the cart hasn't been checked out yet, fetch it
       if (checkout.completedAt === null) {
-        // if the cart hasn't been checked out yet, fetch it
         dispatch(updateCheckout(checkout));
       } else {
         // if it's been checked out, then clear it and create a new one
