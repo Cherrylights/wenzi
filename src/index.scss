@@ -375,6 +375,8 @@ figure {
 	justify-content: space-between;
 	align-items: flex-end;
 	z-index: 1;
+	left: 50%;
+	transform: translate(-50%, 0);
 	span {
 		cursor: pointer;
 	}
@@ -679,11 +681,13 @@ body.carousel .TopNav {
 	bottom: 0;
 	height: $navbar-height;
 	width: 100vw;
-	max-width: 1500px;
+	max-width: 2300px;
 	padding: 0 5%;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	left: 50%;
+	transform: translate(-50%, 0);
 	.Artist,
 	.Social-media {
 		font-size: 14px;
