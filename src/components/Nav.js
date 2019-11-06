@@ -20,7 +20,12 @@ class Nav extends Component {
 
     return (
       <nav className="TopNav">
-        <span onClick={toggleMenu} className="TopNav__item Menu-button">
+        <button
+          onClick={toggleMenu}
+          className="TopNav__item Menu-button"
+          tabIndex={0}
+          aria-label="menu-button"
+        >
           <svg
             width="22px"
             height="14px"
@@ -33,15 +38,20 @@ class Nav extends Component {
               id="Shape"
             />
           </svg>
-        </span>
-        <div onClick={toggleCart} className="TopNav__item Cart-button">
+        </button>
+        <button
+          onClick={toggleCart}
+          className="TopNav__item Cart-button"
+          tabIndex={0}
+          aria-label="shopping-cart-button"
+        >
           Cart
           <span className="Cart-quantity__number">{cartQuantity}</span>
           {/* <span className="Cart-quantity">
             <span className="Cart-quantity__number">{cartQuantity}</span>
             <span className="Cart-quantity__circle" />
           </span> */}
-        </div>
+        </button>
       </nav>
     );
   }
