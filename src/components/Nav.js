@@ -7,7 +7,10 @@ class Nav extends Component {
     const { toggleCart, toggleMenu } = this.props;
     // set up the cart quantity
     let cartQuantity;
-    if (this.props.checkout.lineItems.length > 0) {
+    if (
+      this.props.checkout.lineItems &&
+      this.props.checkout.lineItems.length > 0
+    ) {
       cartQuantity = this.props.checkout.lineItems.reduce(
         (accumulator, lineItem) => {
           return accumulator + lineItem.quantity;

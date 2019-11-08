@@ -1,6 +1,10 @@
 import { LOAD_PRODUCT, UNLOAD_PRODUCT } from "../constants/actionTypes";
+import Product from "../types/Product";
+import { ProductActionTypes } from "../types/actions";
 
-function product(state = {}, action) {
+const defaultState: Product = {};
+
+function product(state = defaultState, action: ProductActionTypes): Product {
   switch (action.type) {
     case LOAD_PRODUCT: {
       return { ...action.payload };

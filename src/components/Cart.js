@@ -26,14 +26,16 @@ class Cart extends Component {
   }
   render() {
     const { checkout, isCartOpen, toggleCart } = this.props;
-    const isCartEmpty = checkout.lineItems.length === 0;
-    const lineItems = checkout.lineItems.map(lineItem => (
-      <LineItem
-        key={lineItem.id.toString()}
-        lineItem={lineItem}
-        checkoutId={checkout.id}
-      />
-    ));
+    const isCartEmpty = checkout.lineItems && checkout.lineItems.length === 0;
+    const lineItems =
+      checkout.lineItems &&
+      checkout.lineItems.map(lineItem => (
+        <LineItem
+          key={lineItem.id.toString()}
+          lineItem={lineItem}
+          checkoutId={checkout.id}
+        />
+      ));
     return (
       <div className={`Cart${isCartOpen ? " Cart--open" : ""}`}>
         <div className="Cart__container">

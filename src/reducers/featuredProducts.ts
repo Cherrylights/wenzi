@@ -1,6 +1,13 @@
 import { LOAD_FEATURED_PRODUCTS } from "../constants/actionTypes";
+import Product from "../types/Product";
+import { ProductActionTypes } from "../types/actions";
 
-function featuredProducts(state = [], action) {
+const defaultState: Product[] = [];
+
+function featuredProducts(
+  state = defaultState,
+  action: ProductActionTypes
+): Product[] {
   switch (action.type) {
     case LOAD_FEATURED_PRODUCTS:
       return [...action.payload];
