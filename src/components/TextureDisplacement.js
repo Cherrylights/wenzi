@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import initFilter from "../displacementFilter";
+import initFilter from "../utils/displacementFilter";
 
 class TextureDisplacement extends Component {
   constructor(props) {

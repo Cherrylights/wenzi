@@ -7,9 +7,9 @@ import {
   unloadProduct,
   addToCart,
   toggleCart
-} from "../actions/actions";
-import SmoothScroll from "./SmoothScroll";
-import ProductContent from "./ProductContent";
+} from "../../actions/actions";
+import SmoothScroll from "../SmoothScroll";
+import ProductContent from "../ProductContent";
 
 class ProductPage extends Component {
   componentDidMount() {

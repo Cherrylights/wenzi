@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { markAsLoaded } from "../actions/actions";
+import { markAsLoaded } from "../../actions/actions";
 import imagesLoaded from "imagesloaded";
-import createTimelines from "../utils/createTimelines";
+import createTimelines from "../../utils/createTimelines";
 
 class Carousel extends Component {
   state = {
@@ -40,7 +40,7 @@ class Carousel extends Component {
         >
           <div>
             <h1>Wenzi</h1>
-            <img src="/assets/images/loader.svg" alt="loader" />
+            {/* <img src="/assets/images/loader.svg" alt="loader" /> */}
           </div>
         </div>
         <div className="Carousel__imageWrapper">

@@ -9,7 +9,6 @@ class WorkArchiveContent extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.filteredCollections !== this.props.filteredCollections) {
       this.props.onLoad();
-      console.log(this.props.filteredCollections);
     }
   }
 

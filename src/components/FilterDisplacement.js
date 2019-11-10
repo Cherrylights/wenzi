@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import initFilter from "../shockWaveFilter";
+import initFilter from "../utils/shockWaveFilter";
 
 class FilterDisplacement extends Component {
   constructor(props) {

@@ -10,20 +10,22 @@ import {
   fetchCheckout
 } from "../actions/actions";
 import { CSSTransition } from "react-transition-group";
+// Components
 import ErrorBounday from "./ErrorBoundary";
 import Menu from "./Menu";
 import Nav from "./Nav";
 import Overlay from "./Overlay";
-import HomePage from "./HomePage";
-import ProductPage from "./ProductPage";
-import CollectionsPage from "./CollectionsPage";
 import Cart from "./Cart";
-// import AllWorkPage from "./AllWorkPage";
-import AllProductsPage from "./AllProductsPage";
-import AboutPage from "./AboutPage";
-import LocalStorePage from "./LocalStorePage";
-import CarouselPage from "./CarouselPage";
-// import NotFoundPage from "./NotFoundPage";
+// Pages
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import CollectionsPage from "./pages/CollectionsPage";
+import AllProductsPage from "./pages/AllProductsPage";
+import AboutPage from "./pages/AboutPage";
+import LocalStorePage from "./pages/LocalStorePage";
+import CarouselPage from "./pages/CarouselPage";
+// import AllWorkPage from ".pages/AllWorkPage";
+// import NotFoundPage from "./pages/NotFoundPage";
 
 const routes = [
   // { path: "/", Component: HomePage },

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isMobile } from "react-device-detect";
-import SmoothScroll from "./SmoothScroll";
-import CollectionsContent from "./CollectionsContent";
+import SmoothScroll from "../SmoothScroll";
+import CollectionsContent from "../CollectionsContent";
 
 class CollectionsPage extends Component {
   render() {

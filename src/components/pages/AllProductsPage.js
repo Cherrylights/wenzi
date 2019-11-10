@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
-import HorizontalScroll from "./HorizontalScroll";
-import AllProductsContent from "./AllProductsContent";
+import HorizontalScroll from "../HorizontalScroll";
+import AllProductsContent from "../AllProductsContent";
 // import Smooth from "../utils/Smooth";
 
 class AllProducts extends Component {

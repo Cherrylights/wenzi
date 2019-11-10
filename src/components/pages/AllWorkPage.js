@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
-import FilterDisplacement from "./FilterDisplacement";
+import FilterDisplacement from "../FilterDisplacement";
 
 class AllWorkPage extends Component {
   state = {};
