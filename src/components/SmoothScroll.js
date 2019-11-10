@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import imagesLoaded from "imagesloaded";
 
-const ScrollWrapper = React.forwardRef((props, ref) => {
-  return (
-    <div ref={ref} className="data-scroll">
-      {props.children}
-    </div>
-  );
-});
-
 const math = {
   lerp: (a, b, n) => {
     return (1 - n) * a + n * b;
@@ -18,6 +10,7 @@ const math = {
 class SmoothScroll extends Component {
   constructor(props) {
     super(props);
+    this.containerRef = React.createRef();
     this.contentRef = React.createRef();
     this.data = {
       ease: 0.125,
@@ -26,25 +19,35 @@ class SmoothScroll extends Component {
     };
     this.rAF = null;
     this.dom = {
-      el: null,
+      container: null,
       content: null
+    };
+    this.state = {
+      contentLoaded: 0
     };
   }
 
   componentDidMount() {
-    this.dom.el = this.contentRef.current;
-    this.dom.content = this.contentRef.current.children[0];
+    this.dom.container = this.containerRef.current;
+    this.dom.content = this.contentRef.current;
     this.init();
   }
 
-  componentDidUpdate() {
-    console.log("smooth scroll update");
-    this.setHeight();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contentLoaded !== this.state.contentLoaded) {
+      this.preload();
+    }
   }
 
   componentWillUnmount() {
     this.destroy();
   }
+
+  onLoad = () => {
+    this.setState(state => ({
+      contentLoaded: state.contentLoaded + 1
+    }));
+  };
 
   init = () => {
     this.preload();
@@ -60,19 +63,17 @@ class SmoothScroll extends Component {
   setHeight = () => {
     // calculate the content height
     document.body.style.height = `${this.dom.content.offsetHeight}px`;
-    // console.log(this.dom.content.offsetHeight);
   };
 
   on = () => {
     this.setStyles();
-    // this.setHeight();
     this.addEvents();
     this.requestAnimationFrame();
   };
 
   setStyles = () => {
     // give container a height 100% and make it overflow to hidden
-    Object.assign(this.dom.el.style, {
+    Object.assign(this.dom.container.style, {
       position: "fixed",
       top: 0,
       left: 0,
@@ -95,7 +96,6 @@ class SmoothScroll extends Component {
   scroll = () => {
     // window.scrollY calculates how much user scroll -> window.scrollY + window.innerHeight = content.offsetHeight
     this.data.current = window.scrollY;
-    // console.log(window.scrollY);
   };
 
   requestAnimationFrame = () => {
@@ -113,15 +113,7 @@ class SmoothScroll extends Component {
     if (this.data.last < 0.1) {
       this.data.last = 0;
     }
-    // If want to create some effect for the content when scrolling, we can do something like this
-    // const diff = this.data.current - this.data.last;
-    // const acc = diff / config.width;
-    // const velo = +acc;
-    // const skew = velo * 7.5;
-
-    // this.dom.content.style.transform = `translate3d(0, -${this.data.last}px, 0) skewY(${skew}deg)`
     this.dom.content.style.transform = `translate3d(0, -${this.data.last}px, 0)`;
-
     this.requestAnimationFrame();
   };
 
@@ -137,9 +129,8 @@ class SmoothScroll extends Component {
 
   destroy = () => {
     document.body.style.height = "";
-
-    this.data = null;
-    this.dom = null;
+    // this.data = null;
+    // this.dom = null;
     this.removeEvents();
     this.cancelAnimationFrame();
   };
@@ -151,7 +142,9 @@ class SmoothScroll extends Component {
 
   render() {
     return (
-      <ScrollWrapper ref={this.contentRef}>{this.props.children}</ScrollWrapper>
+      <div ref={this.containerRef}>
+        <div ref={this.contentRef}>{this.props.render(this.onLoad)}</div>
+      </div>
     );
   }
 }

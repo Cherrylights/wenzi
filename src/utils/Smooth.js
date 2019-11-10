@@ -56,7 +56,6 @@ class Smooth {
 
     this.rAF = null;
     this.parallax = null;
-
     this.init();
   }
 
@@ -64,24 +63,22 @@ class Smooth {
     ["scroll", "run", "resize"].forEach(fn => (this[fn] = this[fn].bind(this)));
   }
 
-  setStyles() {
-    this.dom.el.style.position = "fixed";
-    this.dom.el.style.top = 0;
-    this.dom.el.style.left = 0;
-    this.dom.el.style.height = "100%";
-    this.dom.el.style.width = "100%";
-    this.dom.el.style.overflow = "hidden";
+  preload() {
+    imagesLoaded(this.dom.content, instance => {
+      this.setBounds(this.dom.elems[0]);
+      this.setBounds(this.dom.elems[1]);
+    });
   }
 
   setBounds(elems) {
     let w = 0;
     elems.forEach((el, index) => {
-      const bounds = el.getBoundingClientRect();
+      const bounds = el.getBoundingClientRect(); // will return {bottom, heifght, left,right,top,width,x,y}
 
       el.style.position = "absolute";
       el.style.top = 0;
       el.style.left = `${w}px`;
-
+      // Calculate the total width of all elements
       w = w + bounds.width;
 
       this.bounds.width = w;
@@ -98,17 +95,58 @@ class Smooth {
     });
   }
 
+  on() {
+    // make sure the images are all loaded so we can calculate the body height correctly when user click the back button
+    imagesLoaded(this.dom.content, instance => {
+      this.setBounds(this.dom.elems[0]);
+      this.setBounds(this.dom.elems[1]);
+    });
+    this.setStyles();
+    // this.setBounds(this.dom.elems[0]);
+    // this.setBounds(this.dom.elems[1]);
+    this.addEvents();
+
+    this.requestAnimationFrame();
+  }
+
+  setStyles() {
+    // set the container to full width and height of the viewport and set position to"fix"
+    this.dom.el.style.position = "fixed";
+    this.dom.el.style.top = 0;
+    this.dom.el.style.left = 0;
+    this.dom.el.style.height = "100%";
+    this.dom.el.style.width = "100%";
+    this.dom.el.style.overflow = "hidden";
+  }
+
   resize() {
     this.setBounds(this.dom.elems[0]);
     this.setBounds(this.dom.elems[1]);
     this.scroll();
   }
 
-  preload() {
-    imagesLoaded(this.dom.content, instance => {
-      this.setBounds(this.dom.elems[0]);
-      this.setBounds(this.dom.elems[1]);
-    });
+  addEvents() {
+    window.addEventListener("scroll", this.scroll, { passive: true });
+
+    // this.dom.el.addEventListener(
+    //   "mousemove",
+    //   e => {
+    //     if (!this.state.dragging) return;
+
+    //     this.drag(e);
+    //   },
+    //   { passive: true }
+    // );
+
+    // this.dom.el.addEventListener("mousedown", e => {
+    // 	this.state.dragging = true;
+    // 	this.data.on = e.clientX;
+    // });
+
+    // window.addEventListener("mouseup", () => {
+    // 	this.state.dragging = false;
+    // 	window.scrollTo(0, this.data.current);
+    // });
   }
 
   scroll() {
@@ -118,16 +156,21 @@ class Smooth {
     this.clamp();
   }
 
+  clamp() {
+    // set 0 < this.data.current < this.bounds.max
+    this.data.current = Math.min(
+      Math.max(this.data.current, 0),
+      this.bounds.max
+    );
+  }
+
   drag(e) {
     this.data.current = window.scrollY - (e.clientX - this.data.on);
     this.clamp();
   }
 
-  clamp() {
-    this.data.current = Math.min(
-      Math.max(this.data.current, 0),
-      this.bounds.max
-    );
+  requestAnimationFrame() {
+    this.rAF = requestAnimationFrame(this.run);
   }
 
   run() {
@@ -147,9 +190,11 @@ class Smooth {
     const bounce = 1 - Math.abs(velo * 0.25);
     const skew = velo * 7.5;
 
+    // move, rotate and skew images
     this.dom.content[0].style.transform = `translate3d(-${this.data.last.one.toFixed(
       2
     )}px, 0, 0) scaleY(${bounce}) skewX(${skew}deg)`;
+    // move and scale texts
     this.dom.content[1].style.transform = `translate3d(-${this.data.last.two.toFixed(
       2
     )}px, 0, 0) scaleY(${bounce})`;
@@ -161,51 +206,26 @@ class Smooth {
     this.requestAnimationFrame();
   }
 
-  on() {
-    // make sure the images are all loaded so we can calculate the body height correctly when user click the back button
-    imagesLoaded(this.dom.content, instance => {
-      this.setBounds(this.dom.elems[0]);
-      this.setBounds(this.dom.elems[1]);
-    });
-    this.setStyles();
-    // this.setBounds(this.dom.elems[0]);
-    // this.setBounds(this.dom.elems[1]);
-    this.addEvents();
-
-    this.requestAnimationFrame();
-  }
-
-  requestAnimationFrame() {
-    this.rAF = requestAnimationFrame(this.run);
-  }
-
   // resize() {
   //   this.setBounds();
   // }
 
-  addEvents() {
-    window.addEventListener("scroll", this.scroll, { passive: true });
+  cancelAnimationFrame = () => {
+    cancelAnimationFrame(this.rAF);
+  };
 
-    this.dom.el.addEventListener(
-      "mousemove",
-      e => {
-        if (!this.state.dragging) return;
+  destroy = () => {
+    document.body.style.height = "";
+    this.data = null;
+    this.dom = null;
+    this.removeEvents();
+    this.cancelAnimationFrame();
+  };
 
-        this.drag(e);
-      },
-      { passive: true }
-    );
-
-    // this.dom.el.addEventListener("mousedown", e => {
-    // 	this.state.dragging = true;
-    // 	this.data.on = e.clientX;
-    // });
-
-    // window.addEventListener("mouseup", () => {
-    // 	this.state.dragging = false;
-    // 	window.scrollTo(0, this.data.current);
-    // });
-  }
+  removeEvents = () => {
+    window.removeEventListener("resize", this.resize, { passive: true });
+    window.removeEventListener("scroll", this.scroll, { passive: true });
+  };
 
   init() {
     this.preload();

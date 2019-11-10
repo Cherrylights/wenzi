@@ -924,7 +924,7 @@ body.carousel .TopNav {
 .collections-page {
   width: 100vw;
 }
-.collections-page-content {
+.collections-content {
   width: 90%;
   margin: auto;
   padding-top: $page-content-margin-top;
@@ -940,7 +940,7 @@ body.carousel .TopNav {
     width: 90%;
     display: inline-block;
     margin: auto;
-    box-shadow: 0 0px 20px 0 rgba(69, 79, 89, 0.2);
+    // box-shadow: 0 0px 20px 0 rgba(69, 79, 89, 0.2);
   }
 }
 .Collection__name {
@@ -1363,7 +1363,7 @@ body.carousel .TopNav {
   }
 
   // Collections Page
-  .collections-page-content {
+  .collections-content {
     width: 80%;
     max-width: 115vh;
   }
@@ -1526,7 +1526,8 @@ body.carousel .TopNav {
   left: 0;
 }
 
-.slide {
+.slide,
+.js-slide {
   display: flex;
   width: 50vw;
   height: 100%;

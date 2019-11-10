@@ -37,7 +37,7 @@ class Menu extends Component {
               Home
             </Link>
             <Link to="/works" className="Menu__link" onClick={toggleMenu}>
-              Collections
+              Current Work
             </Link>
             {isMobile ? null : (
               <Link
@@ -45,7 +45,7 @@ class Menu extends Component {
                 className="Menu__link"
                 onClick={toggleMenu}
               >
-                Work Archive
+                Collections
               </Link>
             )}
             <Link to="/about" className="Menu__link" onClick={toggleMenu}>
