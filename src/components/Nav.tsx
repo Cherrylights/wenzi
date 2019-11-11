@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toggleCart, toggleMenu } from "../actions/actions";
+import Checkout from "../types/Checkout";
+import { AppActions } from "../types/actions";
+import { AppState } from "../store/store";
 
-class Nav extends Component {
+type NavProps = LinkStateProps & LinkDispatchProps;
+
+class Nav extends Component<NavProps> {
   render() {
     const { toggleCart, toggleMenu } = this.props;
     // set up the cart quantity
@@ -60,7 +65,16 @@ class Nav extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  checkout: Checkout;
+}
+
+interface LinkDispatchProps {
+  toggleCart: () => AppActions;
+  toggleMenu: () => AppActions;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     checkout: state.checkout
   };

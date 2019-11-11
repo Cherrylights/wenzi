@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import imagesLoaded from "imagesloaded";
 
 const math = {
-  lerp: (a, b, n) => {
+  lerp: (a: number, b: number, n: number) => {
     return (1 - n) * a + n * b;
   },
-  norm: (value, min, max) => {
+  norm: (value: number, min: number, max: number) => {
     return (value - min) / (max - min);
   }
 };
@@ -15,8 +15,25 @@ const config = {
   height: window.innerHeight
 };
 
-class HorizontalScroll extends Component {
-  constructor(props) {
+interface HorizontalScrollState {
+  contentLoaded: number;
+}
+
+interface HorizontalScrollProps {
+  children: (onLoad: () => void) => ReactNode;
+}
+
+class HorizontalScroll extends Component<
+  HorizontalScrollProps,
+  HorizontalScrollState
+> {
+  containerRef;
+  contentRef;
+  data;
+  rAF;
+  dom;
+  bounds;
+  constructor(props: HorizontalScrollProps) {
     super(props);
     this.containerRef = React.createRef();
     this.contentRef = React.createRef();
@@ -207,14 +224,14 @@ class HorizontalScroll extends Component {
   };
 
   removeEvents = () => {
-    window.removeEventListener("resize", this.resize, { passive: true });
-    window.removeEventListener("scroll", this.scroll, { passive: true });
+    window.removeEventListener("resize", this.resize);
+    window.removeEventListener("scroll", this.scroll);
   };
 
   render() {
     return (
       <div ref={this.containerRef}>
-        <div ref={this.contentRef}>{this.props.render(this.onLoad)}</div>
+        <div ref={this.contentRef}>{this.props.children(this.onLoad)}</div>
       </div>
     );
   }

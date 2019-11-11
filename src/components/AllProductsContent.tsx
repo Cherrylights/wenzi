@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Product from "../types/Product";
 
-export default class AllProductsContent extends Component {
+interface AllProductsContentProps {
+  onLoad: () => void;
+  availableProducts: Product[];
+}
+
+class AllProductsContent extends Component<AllProductsContentProps> {
   componentDidMount() {
     this.props.onLoad();
   }
@@ -27,13 +33,13 @@ export default class AllProductsContent extends Component {
                     {product.options[2].values[0].value === "Square" ? (
                       <img
                         src={product.images[0].src}
-                        draggable="false"
+                        draggable={false}
                         alt="scarf"
                       />
                     ) : (
                       <img
                         src={product.images[2].src}
-                        draggable="false"
+                        draggable={false}
                         alt="scarf"
                       />
                     )}
@@ -79,3 +85,5 @@ export default class AllProductsContent extends Component {
     );
   }
 }
+
+export default AllProductsContent;

@@ -3,9 +3,14 @@ import { connect } from "react-redux";
 import LineItem from "./LineItem";
 import { isMobileOnly } from "react-device-detect";
 import { toggleCart } from "../actions/actions";
+import { AppState } from "../store/store";
+import Checkout from "../types/Checkout";
+import { AppActions } from "../types/actions";
 
-class Cart extends Component {
-  constructor(props) {
+type CartProps = LinkStateProps & LinkDispatchProps;
+
+class Cart extends Component<CartProps> {
+  constructor(props: CartProps) {
     super(props);
     this.openCheckout = this.openCheckout.bind(this);
   }
@@ -14,7 +19,7 @@ class Cart extends Component {
     window.open(this.props.checkout.webUrl);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: CartProps) {
     //Set scroll lock on the body element
     if (this.props.isCartOpen !== prevProps.isCartOpen) {
       if (this.props.isCartOpen) {
@@ -97,7 +102,16 @@ class Cart extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  checkout: Checkout;
+  isCartOpen: boolean;
+}
+
+interface LinkDispatchProps {
+  toggleCart: () => AppActions;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     checkout: state.checkout,
     isCartOpen: state.isCartOpen

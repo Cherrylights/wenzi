@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ReactNode } from "react";
 import imagesLoaded from "imagesloaded";
 
 const math = {
@@ -7,8 +7,21 @@ const math = {
   }
 };
 
-class SmoothScroll extends Component {
-  constructor(props) {
+interface SmoothScrollProps {
+  children: (onLoad: () => void) => ReactNode;
+}
+
+interface SmoothScrollState {
+  contentLoaded: number;
+}
+
+class SmoothScroll extends Component<SmoothScrollProps, SmoothScrollState> {
+  containerRef;
+  contentRef;
+  data;
+  rAF;
+  dom;
+  constructor(props: SmoothScrollProps) {
     super(props);
     this.containerRef = React.createRef();
     this.contentRef = React.createRef();
@@ -119,7 +132,6 @@ class SmoothScroll extends Component {
 
   off = () => {
     this.cancelAnimationFrame();
-
     this.removeEvents();
   };
 
@@ -136,14 +148,14 @@ class SmoothScroll extends Component {
   };
 
   removeEvents = () => {
-    window.removeEventListener("resize", this.resize, { passive: true });
-    window.removeEventListener("scroll", this.scroll, { passive: true });
+    window.removeEventListener("resize", this.resize);
+    window.removeEventListener("scroll", this.scroll);
   };
 
   render() {
     return (
       <div ref={this.containerRef}>
-        <div ref={this.contentRef}>{this.props.render(this.onLoad)}</div>
+        <div ref={this.contentRef}>{this.props.children(this.onLoad)}</div>
       </div>
     );
   }

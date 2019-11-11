@@ -3,9 +3,20 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
 import FilterDisplacement from "../FilterDisplacement";
+// import Product from "../../types/Product";
+// import { AppState } from "../../store/store";
+
+// interface AllWorkPageState {
+//   product: Product;
+// }
 
 class AllWorkPage extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: {}
+    };
+  }
 
   componentDidMount() {
     this.setState({
@@ -107,6 +118,10 @@ class AllWorkPage extends Component {
     );
   }
 }
+
+// interface LinkStateProp {
+//   availableProducts: Product[];
+// }
 
 function mapStateToProps(state) {
   return {

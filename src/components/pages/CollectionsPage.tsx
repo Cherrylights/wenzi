@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { isMobile } from "react-device-detect";
 import SmoothScroll from "../SmoothScroll";
 import CollectionsContent from "../CollectionsContent";
+import { AppState } from "../../store/store";
+import Collection from "../../types/Collection";
 
-class CollectionsPage extends Component {
+class CollectionsPage extends Component<LinkStateProps> {
   render() {
     const { collections } = this.props;
     // filter out the featured collections and available products
@@ -25,21 +27,25 @@ class CollectionsPage extends Component {
             }}
           ></CollectionsContent>
         ) : (
-          <SmoothScroll
-            render={onLoad => (
+          <SmoothScroll>
+            {onLoad => (
               <CollectionsContent
                 onLoad={onLoad}
                 filteredCollections={filteredCollections}
               ></CollectionsContent>
             )}
-          ></SmoothScroll>
+          </SmoothScroll>
         )}
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  collections: Collection[];
+}
+
+function mapStateToProps(state: AppState) {
   return {
     collections: state.collections
   };

@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { connect } from "react-redux";
 import { toggleMenu, markAsLoaded } from "../actions/actions";
+import { AppActions } from "../types/actions";
+import { AppState } from "../store/store";
 
-class Menu extends Component {
+type MenuProps = LinkStateProps & LinkDispatchProps;
+
+class Menu extends Component<MenuProps> {
   render() {
     const { isMenuOpen, toggleMenu, markAsLoaded } = this.props;
     return (
@@ -19,7 +23,6 @@ class Menu extends Component {
               xmlns="http://www.w3.org/2000/svg"
             >
               <polygon points="8 7.5 15.5 0 16 0.5 8.5 8 16 15.5 15.5 16 8 8.5 0.5 16 0 15.5 7.5 8 0 0.5 0.5 0" />
-
               <polygon points="8 7.5 15.5 0 16 0.5 8.5 8 16 15.5 15.5 16 8 8.5 0.5 16 0 15.5 7.5 8 0 0.5 0.5 0" />
             </svg>
           </button>
@@ -61,7 +64,16 @@ class Menu extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  isMenuOpen: boolean;
+}
+
+interface LinkDispatchProps {
+  toggleMenu: () => AppActions;
+  markAsLoaded: () => AppActions;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     isMenuOpen: state.isMenuOpen
   };

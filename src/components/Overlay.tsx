@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toggleCart } from "../actions/actions";
+import { AppState } from "../store/store";
+import { AppActions } from "../types/actions";
 
-class Overlay extends Component {
+type Props = LinkStateProps & LinkDispatchProps;
+
+class Overlay extends Component<Props> {
   render() {
     const { isCartOpen, toggleCart } = this.props;
     return (
@@ -17,7 +21,15 @@ class Overlay extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  isCartOpen: boolean;
+}
+
+interface LinkDispatchProps {
+  toggleCart: () => AppActions;
+}
+
+function mapStateToProps(state: AppState): LinkStateProps {
   return {
     isCartOpen: state.isCartOpen
   };

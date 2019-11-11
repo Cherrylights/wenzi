@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class ProductImageWithLink extends Component {
+interface ProductImageWidthLinkProps {
+  handle: string;
+  src: string;
+}
+
+class ProductImageWithLink extends Component<ProductImageWidthLinkProps> {
   render() {
     const { handle, src } = this.props;
     return (

@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { TweenMax } from "gsap/TweenMax";
+import Product from "../types/Product";
 
-export default class ProductOverlay extends Component {
+interface ProductOverlayProps {
+  product: Product;
+}
+
+export default class ProductOverlay extends Component<ProductOverlayProps> {
+  overlay;
   constructor(props) {
     super(props);
     this.overlay = React.createRef();

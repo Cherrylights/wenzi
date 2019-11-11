@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Collection from "../types/Collection";
 
-class WorkArchiveContent extends Component {
+interface WorkArchiveContentProps {
+  filteredCollections: Collection[];
+  onLoad: () => void;
+}
+
+class WorkArchiveContent extends Component<WorkArchiveContentProps> {
   componentDidMount() {
     this.props.onLoad();
   }

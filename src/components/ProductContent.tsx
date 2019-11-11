@@ -4,8 +4,25 @@ import Charming from "react-charming";
 import ProductOverlay from "./ProductOverlay";
 import { isMobile, isBrowser } from "react-device-detect";
 import { Link } from "react-router-dom";
+import Product from "../types/Product";
+import Checkout from "../types/Checkout";
+import { AppActions } from "../types/actions";
+import { AppState } from "../store/store";
+import { Dispatch } from "redux";
 
-class ProductContent extends Component {
+interface ProductContentProps {
+  onLoad: () => void;
+  product: Product;
+  checkout: Checkout;
+  addToCart: (
+    variantId: string,
+    quantity: string,
+    checkoutId: string
+  ) => (dispatch: Dispatch<AppActions>, getState: () => AppState) => void;
+  toggleCart: () => AppActions;
+}
+
+class ProductContent extends Component<ProductContentProps> {
   componentDidMount() {
     this.props.onLoad();
   }
@@ -41,7 +58,7 @@ class ProductContent extends Component {
                   <img src={product.images[0].src} alt="product" />
                 ) : (
                   <div>
-                    <ProductOverlay product={product} />
+                    {/* <ProductOverlay product={product} /> */}
                     <TextureDisplacement
                       image={product.images[0].src}
                       handle={product.handle}
@@ -97,7 +114,7 @@ class ProductContent extends Component {
                     onClick={() => {
                       this.props.addToCart(
                         product.variants[0].id,
-                        1,
+                        "1",
                         checkout.id
                       );
                       this.props.toggleCart();

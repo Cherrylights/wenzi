@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import initFilter from "../utils/shockWaveFilter";
 
-class FilterDisplacement extends Component {
+interface FilterDisplacementProps {
+  image: string;
+  handle: string;
+  size: string;
+}
+
+class FilterDisplacement extends Component<FilterDisplacementProps> {
+  initFilter;
+  wrapperId;
   constructor(props) {
     super(props);
     this.initFilter = null;
@@ -11,6 +19,12 @@ class FilterDisplacement extends Component {
       this.wrapperId = `canvas-${this.props.handle}-small`;
     }
   }
+
+  static defaultProps = {
+    image: "/assets/images/product-placeholder.jpg",
+    handle: "default",
+    size: "default"
+  };
 
   componentDidMount() {
     this.initFilter = initFilter(this.props.image, this.wrapperId);
@@ -32,9 +46,3 @@ class FilterDisplacement extends Component {
 }
 
 export default FilterDisplacement;
-
-FilterDisplacement.defaultProps = {
-  image: "/assets/images/product-placeholder.jpg",
-  handle: "default",
-  size: "default"
-};

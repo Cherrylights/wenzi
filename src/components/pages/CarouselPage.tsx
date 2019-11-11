@@ -4,11 +4,19 @@ import { Link } from "react-router-dom";
 import { markAsLoaded } from "../../actions/actions";
 import imagesLoaded from "imagesloaded";
 import createTimelines from "../../utils/createTimelines";
+import { AppActions } from "../../types/actions";
 
-class Carousel extends Component {
-  state = {
-    backgroundLoaded: false
-  };
+interface CarouselPageState {
+  backgroundLoaded: boolean;
+}
+
+class CarouselPage extends Component<LinkDispatchProps, CarouselPageState> {
+  constructor(props: LinkDispatchProps) {
+    super(props);
+    this.state = {
+      backgroundLoaded: false
+    };
+  }
 
   componentDidMount() {
     imagesLoaded(
@@ -63,7 +71,11 @@ class Carousel extends Component {
   }
 }
 
+interface LinkDispatchProps {
+  markAsLoaded: () => AppActions;
+}
+
 export default connect(
   null,
   { markAsLoaded }
-)(Carousel);
+)(CarouselPage);

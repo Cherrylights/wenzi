@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isMobile } from "react-device-detect";
-import { withRouter } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 import {
   loadProduct,
   unloadProduct,
@@ -10,8 +10,17 @@ import {
 } from "../../actions/actions";
 import SmoothScroll from "../SmoothScroll";
 import ProductContent from "../ProductContent";
+import { AppState } from "../../store/store";
+import Product from "../../types/Product";
+import Checkout from "../../types/Checkout";
+import { AppActions } from "../../types/actions";
+import { Dispatch } from "redux";
 
-class ProductPage extends Component {
+type ProductPageProps = LinkStateProps &
+  LinkDispatchProps &
+  RouteComponentProps<{ handle: string }>;
+
+class ProductPage extends Component<ProductPageProps> {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.handle);
   }
@@ -35,8 +44,8 @@ class ProductPage extends Component {
             }}
           />
         ) : (
-          <SmoothScroll
-            render={onLoad => (
+          <SmoothScroll>
+            {onLoad => (
               <ProductContent
                 product={product}
                 checkout={checkout}
@@ -45,14 +54,32 @@ class ProductPage extends Component {
                 onLoad={onLoad}
               ></ProductContent>
             )}
-          ></SmoothScroll>
+          </SmoothScroll>
         )}
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  product: Product;
+  checkout: Checkout;
+}
+
+interface LinkDispatchProps {
+  loadProduct: (
+    handle: string
+  ) => (dispatch: Dispatch<AppActions>, getState: () => AppState) => void;
+  unloadProduct: () => AppActions;
+  addToCart: (
+    variantId: string,
+    quantity: string,
+    checkoutId: string
+  ) => (dispatch: Dispatch<AppActions>, getState: () => AppState) => void;
+  toggleCart: () => AppActions;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     product: state.product,
     checkout: state.checkout

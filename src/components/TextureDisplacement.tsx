@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import initFilter from "../utils/displacementFilter";
 
-class TextureDisplacement extends Component {
+interface TextureDisplacementProps {
+  image: string;
+  handle: string;
+  size: string;
+}
+
+class TextureDisplacement extends Component<TextureDisplacementProps> {
+  initFilter;
+  wrapperId;
   constructor(props) {
     super(props);
     this.initFilter = null;
@@ -11,6 +19,12 @@ class TextureDisplacement extends Component {
       this.wrapperId = `canvas-${this.props.handle}-small`;
     }
   }
+
+  static defaultProps = {
+    image: "/assets/images/product-placeholder.jpg",
+    handle: "default",
+    size: "default"
+  };
 
   componentDidMount() {
     this.initFilter = initFilter(this.props.image, this.wrapperId);
@@ -26,9 +40,3 @@ class TextureDisplacement extends Component {
 }
 
 export default TextureDisplacement;
-
-TextureDisplacement.defaultProps = {
-  image: "/assets/images/product-placeholder.jpg",
-  handle: "default",
-  size: "default"
-};
