@@ -54,11 +54,7 @@ class Nav extends Component<NavProps> {
           aria-label="shopping-cart-button"
         >
           Cart
-          <span className="Cart-quantity__number">{cartQuantity}</span>
-          {/* <span className="Cart-quantity">
-            <span className="Cart-quantity__number">{cartQuantity}</span>
-            <span className="Cart-quantity__circle" />
-          </span> */}
+          <span className="Cart-button__quantity-number">{cartQuantity}</span>
         </button>
       </nav>
     );

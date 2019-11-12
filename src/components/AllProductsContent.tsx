@@ -24,11 +24,11 @@ class AllProductsContent extends Component<AllProductsContentProps> {
         <div className="scroll-content">
           {availableProducts.map((product, index) => (
             <article
-              className={`slide slide--${index} js-slide`}
+              className={`Slide Slide--${index} js-slide`}
               key={product.id}
             >
-              <div className="slide__inner">
-                <div className="slide__img">
+              <div className="Slide__inner">
+                <div className="Slide__img">
                   <figure>
                     {product.options[2].values[0].value === "Square" ? (
                       <img
@@ -52,34 +52,34 @@ class AllProductsContent extends Component<AllProductsContentProps> {
         <div className="scroll-content scroll-content--last">
           {availableProducts.map((product, index) => (
             <article
-              className={`slide slide--${index} js-slide`}
+              className={`Slide Slide--${index} js-slide`}
               key={product.id}
             >
-              <div className="slide__inner">
-                <div className="slide__sub-title__top">
+              <div className="Slide__inner">
+                <div className="Slide__sub-title__top">
                   <span>{product.options[0].values[0].value}</span>
                 </div>
-                <h1 className="slide__title">
+                <h1 className="Slide__title">
                   <div className="js-transition-title">{product.title}</div>
                 </h1>
-                <div className="slide__sub-title__bottom">
+                <div className="Slide__sub-title__bottom">
                   <span>{product.options[2].values[0].value}</span>
                 </div>
-                <div className="slide__img slide__img--proxy">
+                <div className="Slide__img Slide__img--proxy">
                   <Link
-                    className="slide__img-link"
+                    className="Slide__img-link"
                     to={`/work/${product.handle}`}
                   />
                 </div>
-                <div className="slide__project">
+                <div className="Slide__project">
                   {product.options[1].values[0].value}
                 </div>
               </div>
             </article>
           ))}
         </div>
-        <div className="scrollbar" data-scrollbar>
-          <div className="scrollbar__handle js-scrollbar__handle" />
+        <div className="Scrollbar" data-scrollbar>
+          <div className="Scrollbar__handle js-scrollbar__handle" />
         </div>
       </React.Fragment>
     );

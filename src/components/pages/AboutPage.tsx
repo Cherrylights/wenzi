@@ -7,7 +7,7 @@ class AboutPage extends Component {
   render() {
     return (
       <div className="about-page transition-item">
-        <div className="About__wrapper">
+        <div className="About">
           <div className="About__text">
             <div>
               <h1>About Wenzi</h1>

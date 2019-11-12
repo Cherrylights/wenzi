@@ -40,7 +40,7 @@ class CarouselPage extends Component<LinkDispatchProps, CarouselPageState> {
     const { markAsLoaded } = this.props;
 
     return (
-      <div className="Carousel__wrapper">
+      <div className="Carousel">
         <div
           className={`Carousel__loading ${
             this.state.backgroundLoaded ? "Carousel-loaded" : ""
