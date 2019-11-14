@@ -54,6 +54,6 @@ type Checkout = {
     implementsNode: boolean | null;
   };
   userErrors?: any[];
-};
+} | null;
 
 export default Checkout;

@@ -45,6 +45,10 @@ class AllProducts extends Component<LinkStateProp> {
           </div>
         </MobileView>
         <BrowserView>
+          {/* <AllProductsContent
+            availableProducts={availableProducts}
+            onLoad={() => {}}
+          /> */}
           <HorizontalScroll>
             {onLoad => (
               <AllProductsContent
@@ -69,7 +73,4 @@ function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(AllProducts);
+export default connect(mapStateToProps, null)(AllProducts);

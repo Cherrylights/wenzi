@@ -27,6 +27,10 @@ class CollectionsPage extends Component<LinkStateProps> {
             }}
           ></CollectionsContent>
         ) : (
+          // <CollectionsContent
+          //   onLoad={() => {}}
+          //   filteredCollections={filteredCollections}
+          // ></CollectionsContent>
           <SmoothScroll>
             {onLoad => (
               <CollectionsContent
@@ -51,7 +55,4 @@ function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(CollectionsPage);
+export default connect(mapStateToProps, null)(CollectionsPage);

@@ -63,7 +63,13 @@ class CarouselPage extends Component<LinkDispatchProps, CarouselPageState> {
           <h1>Exclusive Scarf Collections</h1>
           <p>Crafted By Wenzi</p>
         </div>
-        <Link className="Carousel__button" to="/" onClick={markAsLoaded}>
+        <Link
+          className="Carousel__button"
+          to="/"
+          onClick={markAsLoaded}
+          role="button"
+          aria-label="Click here to enter to the main page"
+        >
           Click Here to Explore
         </Link>
       </div>
@@ -75,7 +81,4 @@ interface LinkDispatchProps {
   markAsLoaded: () => AppActions;
 }
 
-export default connect(
-  null,
-  { markAsLoaded }
-)(CarouselPage);
+export default connect(null, { markAsLoaded })(CarouselPage);

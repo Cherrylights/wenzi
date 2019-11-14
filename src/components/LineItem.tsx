@@ -1,40 +1,46 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateLineItems, removeLineItems } from "../actions/actions";
+import { Dispatch, bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../types/actions";
 
-class LineItem extends Component {
-  constructor(props) {
-    super(props);
+interface LineItemProps {
+  key: string;
+  lineItem: any;
+  checkoutId: string;
+}
 
-    this.decrementQuantity = this.decrementQuantity.bind(this);
-    this.incrementQuantity = this.incrementQuantity.bind(this);
-    this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
-  }
+type Props = LineItemProps & LinkDispatchProps;
 
-  decrementQuantity() {
+class LineItem extends Component<Props> {
+  decrementQuantity = () => {
     // From props passed down from parent element
     const { lineItem, checkoutId } = this.props;
-    let updatedQuantity;
+    let updatedQuantity: number;
     if (parseInt(lineItem.quantity, 10) === 0) {
       updatedQuantity = 0;
     } else {
       updatedQuantity = lineItem.quantity - 1;
     }
+    this.props.updateLineItems(
+      lineItem.id,
+      updatedQuantity.toString(),
+      checkoutId
+    );
+  };
 
-    this.props.updateLineItems(lineItem.id, updatedQuantity, checkoutId);
-  }
-
-  incrementQuantity() {
+  incrementQuantity = () => {
     // From props passed down from parent element
     const { lineItem, checkoutId } = this.props;
     let updatedQuantity = lineItem.quantity + 1;
     this.props.updateLineItems(lineItem.id, updatedQuantity, checkoutId);
-  }
+  };
 
-  removeLineItemInCart() {
+  removeLineItemInCart = () => {
     const { lineItem, checkoutId } = this.props;
     this.props.removeLineItems(lineItem.id, checkoutId);
-  }
+  };
 
   render() {
     const { lineItem } = this.props;
@@ -61,12 +67,13 @@ class LineItem extends Component {
         <div className="Line-item__content">
           <div className="Line-item__content-row">
             <p className="Line-item__title">{lineItem.title}</p>
-            <span
+            <button
               className="Line-item__remove"
               onClick={this.removeLineItemInCart}
+              aria-label="Remove current item(s) from shopping cart"
             >
-              ×
-            </span>
+              <span tabIndex={-1}>×</span>
+            </button>
           </div>
           <div className="Line-item__content-row">
             <div className="Line-item__variant-title">
@@ -75,19 +82,21 @@ class LineItem extends Component {
           </div>
           <div className="Line-item__content-row">
             <div className="Line-item__quantity-container">
-              <span
+              <button
                 className="Line-item__quantity-update"
                 onClick={this.decrementQuantity}
+                aria-label="Decrease quantity by one"
               >
-                -
-              </span>
+                <span tabIndex={-1}>-</span>
+              </button>
               <span className="Line-item__quantity">{lineItem.quantity}</span>
-              <span
+              <button
                 className="Line-item__quantity-update"
                 onClick={this.incrementQuantity}
+                aria-label="Increase quantity by one"
               >
-                +
-              </span>
+                <span tabIndex={-1}>+</span>
+              </button>
             </div>
             <span className="Line-item__price">
               $ {(lineItem.quantity * lineItem.variant.price).toFixed(2)}
@@ -99,10 +108,18 @@ class LineItem extends Component {
   }
 }
 
-export default connect(
-  null,
-  {
-    updateLineItems,
-    removeLineItems
-  }
-)(LineItem);
+interface LinkDispatchProps {
+  updateLineItems: (
+    productId: string,
+    quantity: string,
+    checkoutId: string
+  ) => void;
+  removeLineItems: (productId: string, checkoutId: string) => void;
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>) => ({
+  updateLineItems: bindActionCreators(updateLineItems, dispatch),
+  removeLineItems: bindActionCreators(removeLineItems, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(LineItem);

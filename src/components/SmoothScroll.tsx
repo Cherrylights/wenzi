@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from "react";
 import imagesLoaded from "imagesloaded";
 
 const math = {
-  lerp: (a, b, n) => {
+  lerp: (a: number, b: number, n: number) => {
     return (1 - n) * a + n * b;
   }
 };
@@ -26,7 +26,7 @@ class SmoothScroll extends Component<SmoothScrollProps, SmoothScrollState> {
     this.containerRef = React.createRef();
     this.contentRef = React.createRef();
     this.data = {
-      ease: 0.125,
+      ease: 0.11,
       current: 0,
       last: 0
     };

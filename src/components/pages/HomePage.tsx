@@ -6,8 +6,26 @@ import Charming from "react-charming";
 import Skeleton from "react-loading-skeleton";
 import { loadFeaturedProducts, updateIndex } from "../../actions/actions";
 import ProductImageWithLink from "../ProductImageWithLink";
+import { AppState } from "../../store/store";
+import Product from "../../types/Product";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../../types/actions";
+import { bindActionCreators } from "redux";
 
-class HomePage extends Component {
+type Props = LinkStateProps & LinkDispatchProps;
+
+interface HomePageState {
+  isAnimating: boolean;
+  ts: {
+    x: number;
+    y: number;
+  };
+}
+
+class HomePage extends Component<Props, HomePageState> {
+  productImage;
+  productTitle;
+  productDesc;
   constructor(props) {
     super(props);
     this.productImage = React.createRef();
@@ -31,11 +49,13 @@ class HomePage extends Component {
     //set a class on the body tag to make it overflow hidden (need to check if this is a legit way to do it)
     document.body.classList.toggle("scrollLock", true);
     document.body.style.cssText = "";
+    window.addEventListener("keydown", this.keyboardHandler);
   }
 
   componentWillUnmount() {
     //remove the scrollLock class
     document.body.classList.remove("scrollLock");
+    window.removeEventListener("keydown", this.keyboardHandler);
   }
 
   touchStartHandler = event => {
@@ -83,6 +103,26 @@ class HomePage extends Component {
           setTimeout(this.fadeIn, 200);
         });
       }
+    }
+  };
+
+  keyboardHandler = event => {
+    const KEY_UP = 38;
+    const KEY_DOWN = 40;
+    if (!this.state.isAnimating) {
+      if (event.keyCode === KEY_DOWN) {
+        this.fadeOut().then(() => {
+          this.nextProduct();
+          setTimeout(this.fadeIn, 200);
+        });
+      } else if (event.keyCode === KEY_UP) {
+        this.fadeOut().then(() => {
+          this.prevProduct();
+          setTimeout(this.fadeIn, 200);
+        });
+      }
+    } else {
+      return;
     }
   };
 
@@ -257,7 +297,7 @@ class HomePage extends Component {
             ) : (
               <React.Fragment>
                 <h1 className="FeaturedProducts__title">
-                  <Skeleton width={300} />
+                  <Skeleton width="300px" />
                 </h1>
                 <div className="FeaturedProducts__image">
                   <Skeleton width="100%" height="60vh" />
@@ -316,7 +356,7 @@ class HomePage extends Component {
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                atl="website"
+                aria-label="Designer's Personal Website Link"
               >
                 Artist / Designer
               </a>
@@ -326,7 +366,7 @@ class HomePage extends Component {
                 href="https://www.instagram.com/wenzi.ca/"
                 target="_blank"
                 rel="noopener noreferrer"
-                alt="instagram"
+                aria-label="Designer's Instagram Link"
               >
                 Instagram
               </a>
@@ -338,7 +378,18 @@ class HomePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  featuredProducts: Product[];
+  currentIndex: number;
+  isInitalLoad: boolean;
+}
+
+interface LinkDispatchProps {
+  loadFeaturedProducts: () => void;
+  updateIndex: (index: number) => AppActions;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     featuredProducts: state.featuredProducts,
     currentIndex: state.currentIndex,
@@ -346,7 +397,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { updateIndex, loadFeaturedProducts }
-)(HomePage);
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, AppActions>) {
+  return {
+    loadFeaturedProducts: bindActionCreators(loadFeaturedProducts, dispatch),
+    updateIndex: bindActionCreators(updateIndex, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

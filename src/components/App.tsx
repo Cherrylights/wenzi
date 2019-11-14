@@ -24,8 +24,15 @@ import AllProductsPage from "./pages/AllProductsPage";
 import AboutPage from "./pages/AboutPage";
 import LocalStorePage from "./pages/LocalStorePage";
 import CarouselPage from "./pages/CarouselPage";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../types/actions";
+import { bindActionCreators } from "redux";
+import Product from "../types/Product";
+import { AppState } from "../store/store";
 // import AllWorkPage from ".pages/AllWorkPage";
 // import NotFoundPage from "./pages/NotFoundPage";
+
+type Props = LinkStateProps & LinkDispatchProps;
 
 const routes = [
   // { path: "/", Component: HomePage },
@@ -37,7 +44,7 @@ const routes = [
   { path: "/localstores", Component: LocalStorePage }
 ];
 
-class App extends Component {
+class App extends Component<Props> {
   componentDidMount() {
     // Check if the visitor is a new customer without any cart info in the cache
     const checkoutId = localStorage.getItem("checkoutId");
@@ -85,9 +92,9 @@ class App extends Component {
                     unmountOnExit
                     exit={true}
                   >
-                    <div className="Page">
+                    <main className="Page">
                       <HomePage />
-                    </div>
+                    </main>
                   </CSSTransition>
                 )
               }
@@ -140,9 +147,9 @@ class App extends Component {
                       unmountOnExit
                       exit={false}
                     >
-                      <div className="Page">
+                      <main className="Page">
                         <Component />
-                      </div>
+                      </main>
                     </CSSTransition>
                   )}
                 </Route>
@@ -157,20 +164,34 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+interface LinkStateProps {
+  products: Product[];
+  isInitialLoad: boolean;
+}
+
+interface LinkDispatchProps {
+  loadProducts: () => void;
+  loadAvailableProducts: () => void;
+  loadCollections: () => void;
+  createCheckout: () => void;
+  fetchCheckout: (checkoutId: string) => void;
+}
+
+function mapStateToProps(state: AppState) {
   return {
     products: state.products,
     isInitialLoad: state.isInitialLoad
   };
 }
 
-export default connect(
-  mapStateToProps,
-  {
-    loadProducts,
-    loadAvailableProducts,
-    loadCollections,
-    createCheckout,
-    fetchCheckout
-  }
-)(App);
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, AppActions>) {
+  return {
+    loadProducts: bindActionCreators(loadProducts, dispatch),
+    loadAvailableProducts: bindActionCreators(loadAvailableProducts, dispatch),
+    loadCollections: bindActionCreators(loadCollections, dispatch),
+    createCheckout: bindActionCreators(createCheckout, dispatch),
+    fetchCheckout: bindActionCreators(fetchCheckout, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

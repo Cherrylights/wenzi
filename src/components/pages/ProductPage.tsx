@@ -44,6 +44,13 @@ class ProductPage extends Component<ProductPageProps> {
             }}
           />
         ) : (
+          // <ProductContent
+          //   product={product}
+          //   checkout={checkout}
+          //   addToCart={addToCart}
+          //   toggleCart={toggleCart}
+          //   onLoad={() => {}}
+          // ></ProductContent>
           <SmoothScroll>
             {onLoad => (
               <ProductContent
@@ -86,7 +93,9 @@ function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { loadProduct, unloadProduct, addToCart, toggleCart }
-)(withRouter(ProductPage));
+export default connect(mapStateToProps, {
+  loadProduct,
+  unloadProduct,
+  addToCart,
+  toggleCart
+})(withRouter(ProductPage));

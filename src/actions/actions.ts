@@ -139,7 +139,6 @@ export const loadProduct = (handle: string) => {
   // return a thunk
   return (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
     client.product.fetchAll().then((products: Product[]) => {
-      // 'filter' method returns an array so it needs to get the first element
       const product = products.filter(product => product.handle === handle)[0];
       dispatch(setProduct(product));
     });
@@ -235,7 +234,6 @@ export const updateLineItems = (
 };
 
 // *******  REMOVE LINE ITEMS  *******
-
 export const removeLineItems = (productId: string, checkoutId: string) => {
   const lineItemIdsToRemove = [productId];
   // return a thunk

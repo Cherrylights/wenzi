@@ -24,7 +24,7 @@ class AboutPage extends Component {
             </div>
           </div>
           <div className="About__photo">
-            <img src="/assets/images/wenzi.png" alt="wensi" />
+            <img src="/assets/images/wenzi.png" alt="wenzi" />
           </div>
         </div>
       </div>
