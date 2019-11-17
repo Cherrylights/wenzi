@@ -48,12 +48,11 @@ class HomePage extends Component<Props, HomePageState> {
     this.props.loadFeaturedProducts();
     //set a class on the body tag to make it overflow hidden (need to check if this is a legit way to do it)
     document.body.classList.toggle("scrollLock", true);
-    document.body.style.cssText = "";
     window.addEventListener("keydown", this.keyboardHandler);
   }
 
   componentWillUnmount() {
-    //remove the scrollLock class
+    //remove the scrollLock class and unbind event listener
     document.body.classList.remove("scrollLock");
     window.removeEventListener("keydown", this.keyboardHandler);
   }
@@ -76,16 +75,12 @@ class HomePage extends Component<Props, HomePageState> {
     if (!this.state.isAnimating) {
       if (this.state.ts.y > te.y + 100) {
         // swipe up
-        this.fadeOut().then(() => {
-          this.nextProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.nextProductTransition();
       } else if (this.state.ts.y < te.y - 100) {
         // swipe down
-        this.fadeOut().then(() => {
-          this.prevProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.prevProductTransition();
+      } else {
+        return;
       }
     }
   };
@@ -93,15 +88,11 @@ class HomePage extends Component<Props, HomePageState> {
   scrollHandler = event => {
     if (!this.state.isAnimating) {
       if (event.deltaY > 20) {
-        this.fadeOut().then(() => {
-          this.nextProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.nextProductTransition();
       } else if (event.deltaY < -20) {
-        this.fadeOut().then(() => {
-          this.prevProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.prevProductTransition();
+      } else {
+        return;
       }
     }
   };
@@ -111,15 +102,9 @@ class HomePage extends Component<Props, HomePageState> {
     const KEY_DOWN = 40;
     if (!this.state.isAnimating) {
       if (event.keyCode === KEY_DOWN) {
-        this.fadeOut().then(() => {
-          this.nextProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.nextProductTransition();
       } else if (event.keyCode === KEY_UP) {
-        this.fadeOut().then(() => {
-          this.prevProduct();
-          setTimeout(this.fadeIn, 200);
-        });
+        this.prevProductTransition();
       }
     } else {
       return;
@@ -225,6 +210,20 @@ class HomePage extends Component<Props, HomePageState> {
       return;
     }
   }
+
+  nextProductTransition = () => {
+    this.fadeOut().then(() => {
+      this.nextProduct();
+      setTimeout(this.fadeIn, 200);
+    });
+  };
+
+  prevProductTransition = () => {
+    this.fadeOut().then(() => {
+      this.prevProduct();
+      setTimeout(this.fadeIn, 200);
+    });
+  };
 
   render() {
     const { featuredProducts, currentIndex } = this.props;

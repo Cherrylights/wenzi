@@ -14,20 +14,25 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error) {
+  componentDidCatch(error, errorInfo) {
     console.log("Error: ", error);
+    console.log("Error Info", errorInfo);
+    this.setState({
+      hasError: true
+    });
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <h1 className="error-message">
-          Oops, there is an error. Please refresh your screen and try again.
-        </h1>
+        <div className="error-page">
+          <div className="inner">
+            <h1>Something went wrong</h1>
+            <p>
+              Oops, there is an error. Please refresh your screen and try again.
+            </p>
+          </div>
+        </div>
       );
     }
     return this.props.children;

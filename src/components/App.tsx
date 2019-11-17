@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { isMobile, isMobileOnly } from "react-device-detect";
+// Redux
 import {
   loadProducts,
   loadAvailableProducts,
@@ -11,7 +12,6 @@ import {
 } from "../actions/actions";
 import { CSSTransition } from "react-transition-group";
 // Components
-import ErrorBounday from "./ErrorBoundary";
 import Menu from "./Menu";
 import Nav from "./Nav";
 import Overlay from "./Overlay";
@@ -24,6 +24,7 @@ import AllProductsPage from "./pages/AllProductsPage";
 import AboutPage from "./pages/AboutPage";
 import LocalStorePage from "./pages/LocalStorePage";
 import CarouselPage from "./pages/CarouselPage";
+// Types
 import { ThunkDispatch } from "redux-thunk";
 import { AppActions } from "../types/actions";
 import { bindActionCreators } from "redux";
@@ -73,33 +74,32 @@ class App extends Component<Props> {
 
   render() {
     return (
-      <ErrorBounday>
-        <BrowserRouter>
-          <div className={isMobile ? "mobile" : "desktop"}>
-            {isMobileOnly ? "" : <Overlay />}
-            <Nav />
-            <Route
-              exact
-              path="/"
-              render={({ match }) =>
-                this.props.isInitialLoad ? (
-                  <Redirect to="/welcome" />
-                ) : (
-                  <CSSTransition
-                    in={match != null}
-                    timeout={1500}
-                    classNames="Page"
-                    unmountOnExit
-                    exit={true}
-                  >
-                    <main className="Page">
-                      <HomePage />
-                    </main>
-                  </CSSTransition>
-                )
-              }
-            />
-            {/* <Route exact path="/">
+      <BrowserRouter>
+        <div className={isMobile ? "mobile" : "desktop"}>
+          {isMobileOnly ? "" : <Overlay />}
+          <Nav />
+          <Route
+            exact
+            path="/"
+            render={({ match }) =>
+              this.props.isInitialLoad ? (
+                <Redirect to="/welcome" />
+              ) : (
+                <CSSTransition
+                  in={match != null}
+                  timeout={1500}
+                  classNames="Page"
+                  unmountOnExit
+                  exit={true}
+                >
+                  <main className="Page">
+                    <HomePage />
+                  </main>
+                </CSSTransition>
+              )
+            }
+          />
+          {/* <Route exact path="/">
               {({ match }) => {
                 if (this.props.isInitialLoad) {
                   return <Redirect to="/welcome" />;
@@ -120,46 +120,45 @@ class App extends Component<Props> {
                 }
               }}
             </Route> */}
-            <Route exact path="/welcome">
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={1500}
-                  classNames="Page"
-                  unmountOnExit
-                  exit={true}
-                >
-                  <div className="Page">
-                    <CarouselPage />
-                  </div>
-                </CSSTransition>
-              )}
-            </Route>
+          <Route exact path="/welcome">
+            {({ match }) => (
+              <CSSTransition
+                in={match != null}
+                timeout={1500}
+                classNames="Page"
+                unmountOnExit
+                exit={true}
+              >
+                <div className="Page">
+                  <CarouselPage />
+                </div>
+              </CSSTransition>
+            )}
+          </Route>
 
-            {routes.map(({ path, Component }) => {
-              return (
-                <Route key={path} exact path={path}>
-                  {({ match }) => (
-                    <CSSTransition
-                      in={match != null}
-                      timeout={1500}
-                      classNames="Page"
-                      unmountOnExit
-                      exit={false}
-                    >
-                      <main className="Page">
-                        <Component />
-                      </main>
-                    </CSSTransition>
-                  )}
-                </Route>
-              );
-            })}
-            <Menu />
-            <Cart />
-          </div>
-        </BrowserRouter>
-      </ErrorBounday>
+          {routes.map(({ path, Component }) => {
+            return (
+              <Route key={path} exact path={path}>
+                {({ match }) => (
+                  <CSSTransition
+                    in={match != null}
+                    timeout={1500}
+                    classNames="Page"
+                    unmountOnExit
+                    exit={false}
+                  >
+                    <main className="Page">
+                      <Component />
+                    </main>
+                  </CSSTransition>
+                )}
+              </Route>
+            );
+          })}
+          <Menu />
+          <Cart />
+        </div>
+      </BrowserRouter>
     );
   }
 }

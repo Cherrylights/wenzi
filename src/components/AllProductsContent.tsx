@@ -11,6 +11,7 @@ class AllProductsContent extends Component<AllProductsContentProps> {
   componentDidMount() {
     this.props.onLoad();
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.availableProducts !== prevProps.availableProducts) {
       this.props.onLoad();

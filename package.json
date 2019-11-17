@@ -4,6 +4,12 @@
   "private": true,
   "dependencies": {
     "@pixi/filter-shockwave": "^2.7.0",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.8",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-router-dom": "^5.1.2",
     "gsap": "^2.1.2",
     "imagesloaded": "^4.1.4",
     "node-sass": "^4.13.0",
@@ -19,7 +25,8 @@
     "react-transition-group": "^4.2.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "shopify-buy": "^2.1.0"
+    "shopify-buy": "^2.1.0",
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,14 +43,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "@types/jest": "^24.0.22",
-    "@types/node": "^12.12.6",
-    "@types/reach__router": "^1.2.6",
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-redux": "^7.1.5",
-    "@types/react-router-dom": "^5.1.2",
-    "typescript": "^3.7.2"
-  }
+  "devDependencies": {}
 }
