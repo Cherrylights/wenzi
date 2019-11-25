@@ -506,9 +506,9 @@ body.carousel .TopNav {
     display: block;
     margin-bottom: 5vh;
     text-decoration: none;
-  }
-  &__link:hover {
-    color: $button-on-hover-grey;
+    &:hover {
+      color: $button-on-hover-grey;
+    }
   }
   &--open {
     z-index: 10;
@@ -1424,7 +1424,7 @@ body.carousel .TopNav {
 
   // Not Found Page
   .NotFound {
-    width: 30%;
+    width: 35%;
     max-width: 115vh;
     h1 {
       margin-top: 5rem;
