@@ -145,12 +145,12 @@ export const loadProduct = (handle: string) => {
   };
 };
 
-function setProduct(product: Product): AppActions {
+export const setProduct = (product: Product): AppActions => {
   return {
     type: LOAD_PRODUCT,
     payload: product
   };
-}
+};
 
 // *******  UNLOAD SINGLE PRODUCT  *******
 export const unloadProduct = (): AppActions => ({

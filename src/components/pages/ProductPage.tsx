@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect";
 import { withRouter, RouteComponentProps } from "react-router";
 import {
   loadProduct,
+  setProduct,
   unloadProduct,
   addToCart,
   toggleCart
@@ -22,7 +23,16 @@ type ProductPageProps = LinkStateProps &
 
 class ProductPage extends Component<ProductPageProps> {
   componentDidMount() {
-    this.props.loadProduct(this.props.match.params.handle);
+    if (this.props.products.length > 0) {
+      // Fetch Product from Local State
+      const product = this.props.products.filter(
+        product => product.handle === this.props.match.params.handle
+      )[0];
+      this.props.setProduct(product);
+    } else {
+      // Fetch Product from API Fetch
+      this.props.loadProduct(this.props.match.params.handle);
+    }
   }
 
   componentWillUnmount() {
@@ -69,6 +79,7 @@ class ProductPage extends Component<ProductPageProps> {
 }
 
 interface LinkStateProps {
+  products: Product[];
   product: Product;
   checkout: Checkout;
 }
@@ -77,6 +88,7 @@ interface LinkDispatchProps {
   loadProduct: (
     handle: string
   ) => (dispatch: Dispatch<AppActions>, getState: () => AppState) => void;
+  setProduct: (product: Product) => AppActions;
   unloadProduct: () => AppActions;
   addToCart: (
     variantId: string,
@@ -88,6 +100,7 @@ interface LinkDispatchProps {
 
 function mapStateToProps(state: AppState) {
   return {
+    products: state.products,
     product: state.product,
     checkout: state.checkout
   };
@@ -95,6 +108,7 @@ function mapStateToProps(state: AppState) {
 
 export default connect(mapStateToProps, {
   loadProduct,
+  setProduct,
   unloadProduct,
   addToCart,
   toggleCart
