@@ -307,7 +307,6 @@ figure {
     width: 100%;
     bottom: 50%;
     text-align: center;
-    transform: translateY(50%);
     z-index: 1;
     h1 {
       line-height: 1.4;
@@ -362,6 +361,7 @@ figure {
 }
 
 /*************** Top Nav ***************/
+
 .TopNav {
   position: fixed;
   top: 0;
@@ -373,7 +373,8 @@ figure {
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  // align-items: flex-end;
+  align-items: center;
   z-index: 1;
   left: 50%;
   transform: translate(-50%, 0);
@@ -405,9 +406,9 @@ body.carousel .TopNav {
   cursor: pointer;
   &__quantity-number {
     font-size: 1.4rem;
-    line-height: 1;
+    line-height: 1.2;
     color: $text-black;
-    padding: 2px 0 0;
+    // padding: 2px 0 0;
     position: absolute;
     z-index: 10;
     width: 15px;
@@ -487,7 +488,7 @@ body.carousel .TopNav {
       transform 0.5s cubic-bezier(0.66, 0.135, 0.84, 0.61);
   }
   &__header {
-    height: $navbar-height;
+    height: 45px;
   }
   &__body {
     height: calc(100vh - #{$navbar-height});
@@ -553,6 +554,32 @@ body.carousel .TopNav {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+}
+
+.home-page-mobile {
+  display: flex;
+  align-items: center;
+  .FeaturedProducts__title {
+    text-align: center;
+  }
+  .FeaturedProducts__desc {
+    text-align: center;
+  }
+  .FeaturedProducts__image img {
+    box-shadow: none;
+  }
+  .swiper-pagination {
+    position: initial;
+  }
+  .swiper-pagination-bullet {
+    width: 4px;
+    height: 4px;
+    background: $pure-black;
+  }
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 0;
+    margin-top: 20px;
+  }
 }
 
 .FeaturedProducts {
@@ -658,7 +685,8 @@ body.carousel .TopNav {
   padding: 0 5%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  // align-items: flex-start;
+  align-items: center;
   left: 50%;
   transform: translate(-50%, 0);
   .Artist,
@@ -1223,16 +1251,28 @@ body.carousel .TopNav {
     font-size: 3.6rem;
     letter-spacing: 8px;
   }
+
+  .Menu__header {
+    height: 60px;
+  }
+
   // Cart
   .Cart {
     width: 400px;
   }
   // Home page
+  .TopNav {
+    align-items: flex-end;
+  }
   .FeaturedProducts__image,
   .Product-hero__image {
     width: 62vw;
     max-width: 47vh;
   }
+  .BottomNav {
+    align-items: flex-start;
+  }
+
   // Product page
   .Product-info {
     width: 75%;
@@ -1332,6 +1372,7 @@ body.carousel .TopNav {
       width: 40%;
       left: 10%;
       text-align: left;
+      transform: translateY(50%);
     }
     &__button {
       bottom: 8%;
@@ -1581,7 +1622,7 @@ body.carousel .TopNav {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   &-enter {
     opacity: 0;
   }

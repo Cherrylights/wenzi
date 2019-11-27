@@ -17,7 +17,9 @@
     "react": "^16.8.2",
     "react-charming": "^1.1.0",
     "react-device-detect": "^1.6.2",
+    "react-div-100vh": "^0.3.4",
     "react-dom": "^16.8.2",
+    "react-id-swiper": "^2.4.0",
     "react-loading-skeleton": "^1.1.1",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
@@ -26,6 +28,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "shopify-buy": "^2.1.0",
+    "swiper": "^5.2.1",
     "typescript": "^3.7.2"
   },
   "scripts": {
