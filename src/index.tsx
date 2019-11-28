@@ -16,6 +16,11 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+console.log(
+  "%cCreated by Yikai Zhang (yikai.ca)✋, thanks for visiting!",
+  "background: #361d32; color:#edd2cb; padding: 3px 10px; border-radius: 3px;"
+);
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
