@@ -25,9 +25,6 @@ function initFilter(
   app.stage.addChild(container);
 
   // Background
-  //const background = PIXI.Sprite.fromImage("https://unsplash.it/600/?random");
-  //const background = PIXI.Sprite.fromImage("/images/1.jpg");
-
   const background = new PIXI.Sprite.from(productImage);
   container.addChild(background);
   background.x = 5;
@@ -61,6 +58,17 @@ function initFilter(
   app.stage.addChild(displacementSprite);
 
   return {
+    changeImage: function(productImage) {
+      container.removeChild(background);
+      const newImage = new PIXI.Sprite.from(productImage);
+      container.addChild(newImage);
+      newImage.x = 5;
+      newImage.y = 5;
+      newImage.scale.set(1, 1);
+      newImage.width = app.renderer.width - 10;
+      newImage.height = app.renderer.height - 10;
+      newImage.filters = [displacementFilter];
+    },
     startAnimation: function startAnimation() {
       canvas = wrapperElement.querySelector("canvas");
       raf = requestAnimationFrame(startAnimation);

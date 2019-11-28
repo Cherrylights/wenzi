@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Charming from "react-charming";
 import Skeleton from "react-loading-skeleton";
 import { TweenMax } from "gsap/TweenMax";
 import { AppState } from "../store/store";
 import { loadFeaturedProducts, updateIndex } from "../actions/actions";
-import ProductImageWithLink from "./ProductImageWithLink";
+// import ProductImageWithLink from "./ProductImageWithLink";
+import TextureDisplacement from "./TextureDisplacement";
 // Types
 import Product from "../types/Product";
 import { ThunkDispatch } from "redux-thunk";
@@ -223,10 +225,17 @@ class HomeContentDesktop extends Component<Props, HomeContentDesktopState> {
                 )}
               />
               <div className="FeaturedProducts__image" ref={this.productImage}>
-                <ProductImageWithLink
+                {/* <ProductImageWithLink
                   handle={currentProduct.handle}
                   src={currentProduct.images[0].src}
-                />
+                /> */}
+                <Link to={`/work/${currentProduct.handle}`}>
+                  <TextureDisplacement
+                    image={currentProduct.images[0].src}
+                    handle={currentProduct.handle}
+                    size="default"
+                  />
+                </Link>
               </div>
               <div className="FeaturedProducts__desc" ref={this.productDesc}>
                 <span>{currentProductMaterial}</span>

@@ -55,7 +55,12 @@ class ProductContent extends Component<ProductContentProps> {
               {/* <h1 className="Product-hero__title">{product.title}</h1> */}
               <div className="Product-hero__image">
                 {isMobile ? (
-                  <img src={product.images[0].src} alt="product" />
+                  // <img src={product.images[0].src} alt="product" />
+                  <TextureDisplacement
+                    image={product.images[0].src}
+                    handle={product.handle}
+                    size="default"
+                  />
                 ) : (
                   <div>
                     {/* <ProductOverlay product={product} /> */}

@@ -31,6 +31,12 @@ class TextureDisplacement extends Component<TextureDisplacementProps> {
     this.initFilter.startAnimation();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.image !== prevProps.image) {
+      this.initFilter.changeImage(this.props.image);
+    }
+  }
+
   componentWillUnmount() {
     this.initFilter.removeScene();
   }
