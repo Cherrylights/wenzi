@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextureDisplacement from "./TextureDisplacement";
 import Charming from "react-charming";
 import Fade from "react-reveal/Fade";
-import ProductOverlay from "./ProductOverlay";
+// import ProductOverlay from "./ProductOverlay";
 import { isMobile, isBrowser } from "react-device-detect";
 import { Link } from "react-router-dom";
 import Product from "../types/Product";
@@ -96,6 +96,13 @@ class ProductContent extends Component<ProductContentProps> {
           <div className="Product-reveal">
             {product.images.map((image, index) => {
               if (index !== 0 && index !== 1) {
+                if (
+                  product.variants[0].title.split("/").indexOf(" Square") ===
+                    -1 &&
+                  index === 2
+                ) {
+                  return;
+                }
                 return (
                   <Fade key={index}>
                     <img src={image.src} alt="product" />
