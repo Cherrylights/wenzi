@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { isMobile, isMobileOnly, isTablet } from "react-device-detect";
 // Redux
 import {
   loadProducts,
@@ -75,7 +75,7 @@ class App extends Component<Props> {
   render() {
     return (
       <BrowserRouter>
-        <div className={isMobile ? "mobile" : "desktop"}>
+        <div className={isMobile || isTablet ? "mobile" : "desktop"}>
           {isMobileOnly ? "" : <Overlay />}
           <Nav />
           <Route

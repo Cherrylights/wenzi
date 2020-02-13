@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import SmoothScroll from "../SmoothScroll";
 import CollectionsContent from "../CollectionsContent";
 import { AppState } from "../../store/store";
@@ -19,7 +19,7 @@ class CollectionsPage extends Component<LinkStateProps> {
 
     return (
       <div className="collections-page transition-item">
-        {isMobile ? (
+        {isMobile || isTablet ? (
           <CollectionsContent
             filteredCollections={filteredCollections}
             onLoad={() => {

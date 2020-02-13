@@ -626,7 +626,8 @@ body.carousel .TopNav {
     right: calc(50% - 34vh);
     transform: rotate(90deg);
     transform-origin: bottom right;
-    display: flex;
+    // display: flex;
+    display: none;
     span {
       font-weight: 400;
       color: $text-black;
@@ -818,8 +819,18 @@ body.carousel .TopNav {
   }
 }
 
+.Product-reveal {
+  img {
+    width: 80%;
+    max-width: 650px;
+    margin: 80px auto;
+    display: block;
+    box-shadow: 0 0px 20px 0 rgba(69, 79, 89, 0.1);
+  }
+}
+
 .Product-checkout {
-  width: 80%;
+  width: 75%;
   height: 100vh;
   display: flex;
   align-items: center;

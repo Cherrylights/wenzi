@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView, MobileView, TabletView } from "react-device-detect";
 import FilterDisplacement from "../FilterDisplacement";
 // import Product from "../../types/Product";
 // import { AppState } from "../../store/store";
@@ -57,6 +57,27 @@ class AllWorkPage extends Component {
             </div>
           </div>
         </MobileView>
+        <TabletView>
+          <div className="AvailableProducts">
+            <h1 className="AvailableProducts__title">All Work</h1>
+            <div className="AvailableProducts__grid">
+              {availableProducts.map(product => (
+                <div key={product.id}>
+                  <Link to={`/work/${product.handle}`}>
+                    <img
+                      src={product.images[0].src}
+                      alt="scarf"
+                      className="AvailableProducts__image"
+                    />
+                  </Link>
+                  <Link to={`/work/${product.handle}`}>
+                    <p className="AvailableProducts__name">{product.title}</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabletView>
         <BrowserView>
           <div className="AvailableProducts">
             <div className="AvailableProducts__info">
@@ -129,7 +150,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(AllWorkPage);
+export default connect(mapStateToProps, null)(AllWorkPage);

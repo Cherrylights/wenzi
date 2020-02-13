@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView, MobileView, TabletView } from "react-device-detect";
 import HomeContentDesktop from "../HomeContentDesktop";
 import HomeContentMobile from "../HomeContentMobile";
 
@@ -10,6 +10,9 @@ class HomePage extends Component {
         <BrowserView>
           <HomeContentDesktop></HomeContentDesktop>
         </BrowserView>
+        <TabletView>
+          <HomeContentMobile></HomeContentMobile>
+        </TabletView>
         <MobileView>
           <HomeContentMobile></HomeContentMobile>
         </MobileView>

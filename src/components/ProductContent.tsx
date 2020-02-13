@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextureDisplacement from "./TextureDisplacement";
 import Charming from "react-charming";
+import Fade from "react-reveal/Fade";
 import ProductOverlay from "./ProductOverlay";
 import { isMobile, isBrowser } from "react-device-detect";
 import { Link } from "react-router-dom";
@@ -54,23 +55,12 @@ class ProductContent extends Component<ProductContentProps> {
               />
               {/* <h1 className="Product-hero__title">{product.title}</h1> */}
               <div className="Product-hero__image">
-                {isMobile ? (
-                  // <img src={product.images[0].src} alt="product" />
-                  <TextureDisplacement
-                    image={product.images[0].src}
-                    handle={product.handle}
-                    size="default"
-                  />
-                ) : (
-                  <div>
-                    {/* <ProductOverlay product={product} /> */}
-                    <TextureDisplacement
-                      image={product.images[0].src}
-                      handle={product.handle}
-                      size="default"
-                    />
-                  </div>
-                )}
+                {/* <img src={product.images[0].src} alt="product" /> */}
+                <TextureDisplacement
+                  image={product.images[0].src}
+                  handle={product.handle}
+                  size="default"
+                />
                 <div style={{ height: "36px" }} />
               </div>
               <div className="Product-hero__scroll">
@@ -97,6 +87,22 @@ class ProductContent extends Component<ProductContentProps> {
             ) : (
               <img src={product.images[1].src} alt="product" />
             )}
+          </div>
+        ) : (
+          ""
+        )}
+
+        {product.hasOwnProperty("images") ? (
+          <div className="Product-reveal">
+            {product.images.map((image, index) => {
+              if (index !== 0 && index !== 1) {
+                return (
+                  <Fade key={index}>
+                    <img src={image.src} alt="product" />
+                  </Fade>
+                );
+              }
+            })}
           </div>
         ) : (
           ""

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import { connect } from "react-redux";
 import { toggleMenu, markAsLoaded } from "../actions/actions";
 import { AppActions } from "../types/actions";
@@ -142,7 +142,7 @@ class Menu extends Component<MenuProps> {
             <Link to="/works" className="Menu__link" onClick={toggleMenu}>
               Current Work
             </Link>
-            {isMobile ? null : (
+            {isMobile || isTablet ? null : (
               <Link
                 to="/collections"
                 className="Menu__link"

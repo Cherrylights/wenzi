@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import { withRouter, RouteComponentProps } from "react-router";
 import {
   loadProduct,
@@ -43,7 +43,7 @@ class ProductPage extends Component<ProductPageProps> {
     const { product, checkout, addToCart, toggleCart } = this.props;
     return (
       <div className="product-page">
-        {isMobile ? (
+        {isMobile || isTablet ? (
           <ProductContent
             product={product}
             checkout={checkout}
