@@ -12,7 +12,7 @@
     "@types/react-router-dom": "^5.1.2",
     "gsap": "^2.1.2",
     "imagesloaded": "^4.1.4",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "pixi.js": "^5.0.0-rc.2",
     "react": "^16.8.2",
     "react-charming": "^1.1.0",
