@@ -17,7 +17,7 @@ ReactDOM.render(
 );
 
 console.log(
-  "%cCreated by Yikai Zhang (yikai.ca)✋, thanks for visiting!",
+  "%cCreated by Yikai (yikai.ca)✋, thanks for visiting!",
   "background: #361d32; color:#edd2cb; padding: 3px 10px; border-radius: 3px;"
 );
 
